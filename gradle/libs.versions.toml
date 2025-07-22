@@ -1,0 +1,16 @@
+# G:/My Drive/All24/gradle/libs.versions.toml
+[versions]
+agp = "8.11.1" # Android Gradle Plugin version. You can check latest stable on Google's Maven.
+kotlin = "1.9.0" # Kotlin Gradle Plugin version. Aligned with composeOptions.kotlinCompilerExtensionVersion = "1.5.1"
+googleServices = "4.4.1"
+navigationRuntimeAndroid = "2.9.2"
+engageCore = "1.5.8" # Firebase Google Services plugin version
+
+[libraries]
+androidx-navigation-runtime-android = { group = "androidx.navigation", name = "navigation-runtime-android", version = "2.9.2" }
+engage-core = { group = "com.google.android.engage", name = "engage-core", version = "1.5.8" }
+
+[plugins]
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+googleServices = { id = "com.google.gms.google-services", version.ref = "googleServices" }
