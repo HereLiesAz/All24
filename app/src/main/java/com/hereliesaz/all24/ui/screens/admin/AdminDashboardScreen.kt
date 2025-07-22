@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.hereliesaz.all24.data.Submission
+import com.hereliesaz.all24.ui.navigation.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,7 +51,7 @@ fun AdminDashboardScreen(
             ) {
                 items(submissions) { submission ->
                     SubmissionCard(submission = submission, onClick = {
-                        // Navigate to a detail screen for approval/denial
+                        navController.navigate(Screen.AdminSubmissionDetail.createRoute(submission.id))
                     })
                 }
             }

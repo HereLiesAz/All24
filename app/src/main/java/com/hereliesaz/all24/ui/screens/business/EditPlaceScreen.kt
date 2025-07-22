@@ -48,7 +48,7 @@ class EditPlaceViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
     }
 }
 
-@OptIn(ExperimentalMaterial3ai::class)
+@OptIn(ExperimentalMaterial3ai::class, ExperimentalMaterial3Api::class)
 @Composable
 fun EditPlaceScreen(navController: NavController, viewModel: EditPlaceViewModel = viewModel()) {
     val place by viewModel.place.collectAsState()
