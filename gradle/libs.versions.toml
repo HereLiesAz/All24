@@ -1,16 +1,50 @@
 # G:/My Drive/All24/gradle/libs.versions.toml
 [versions]
-agp = "8.12.0-rc01" # Android Gradle Plugin version. You can check latest stable on Google's Maven.
-kotlin = "1.9.0" # Kotlin Gradle Plugin version. Aligned with composeOptions.kotlinCompilerExtensionVersion = "1.5.1"
-googleServices = "4.4.1"
+activityCompose = "1.12.0-alpha04"
+agp = "8.11.1" # Android Gradle Plugin version. You can check latest stable on Google's Maven.
+composeBomVersion = "2025.07.00"
+coreKtx = "1.17.0-beta01"
+espressoCore = "3.7.0-rc01"
+firebaseAuthKtx = "23.2.1"
+firebaseBom = "34.0.0"
+firebaseFirestoreKtx = "25.1.4"
+junit = "4.13.2"
+junitVersion = "1.3.0-rc01"
+kotlin = "2.2.0"
+googleServices = "4.4.3"
+lifecycleRuntimeKtx = "2.9.2"
+material3 = "1.4.0-alpha18"
+myAndroidLib = "v1.0"
 navigationRuntimeAndroid = "2.9.2"
 engageCore = "1.5.8" # Firebase Google Services plugin version
+uiTestJunit4 = "1.9.0-beta03"
+firebaseMlCommon = "22.1.2"
 
 [libraries]
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCore" }
+androidx-junit = { module = "androidx.test.ext:junit", version.ref = "junitVersion" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
 androidx-navigation-runtime-android = { group = "androidx.navigation", name = "navigation-runtime-android", version = "2.9.2" }
+androidx-ui = { module = "androidx.compose.ui:ui", version.ref = "uiTestJunit4" }
+androidx-ui-graphics = { module = "androidx.compose.ui:ui-graphics" }
+androidx-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "uiTestJunit4" }
+androidx-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "uiTestJunit4" }
+androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "uiTestJunit4" }
+androidx-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "uiTestJunit4" }
+compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBomVersion" }
 engage-core = { group = "com.google.android.engage", name = "engage-core", version = "1.5.8" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics", version = "23.0.0" }
+firebase-auth-ktx = { module = "com.google.firebase:firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-firestore-ktx = { module = "com.google.firebase:firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
+junit = { module = "junit:junit", version.ref = "junit" }
+firebase-ml-common = { group = "com.google.firebase", name = "firebase-ml-common", version.ref = "firebaseMlCommon" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
-kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 googleServices = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

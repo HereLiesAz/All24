@@ -1,7 +1,8 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("com.google.gms.google-services")
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.org.jetbrains.kotlin.android)
+    alias(libs.plugins.googleServices)
+    alias(libs.plugins.composeCompiler)
 }
 
 android {
@@ -48,47 +49,53 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
+
     packaging {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            exclude("/META-INF/AL2.0")
+            exclude("/META-INF/LGPL2.1")
         }
     }
     buildToolsVersion = "36.0.0"
     ndkVersion = "29.0.13599879 rc2"
 }
-
+composeCompiler {
+    reportsDestination = layout.buildDirectory.dir("compose_compiler")
+    stabilityConfigurationFiles = rootProject.layout.projectDirectory.file("stability_config.conf")
+}
 dependencies {
 
     // Core Android & Jetpack
-    implementation("androidx.core:core-ktx:1.17.0-beta01")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.9.2")
-    implementation("androidx.activity:activity-compose:1.12.0-alpha04")
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.activity.compose)
 
     // Jetpack Compose - M3 Expressive Design
-    implementation(platform("androidx.compose:compose-bom:2025.07.00"))
-    implementation("androidx.compose.ui:ui:1.9.0-beta03")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.9.0-beta03")
-    implementation("androidx.compose.material3:material3:1.4.0-alpha18")
+    implementation(platform(libs.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
 
     // Firebase - Bill of Materials (BoM)
-    implementation(platform("com.google.firebase:firebase-bom:34.0.0"))
+    implementation(platform(libs.firebase.bom))
 
     // Firebase Services
-    implementation("com.google.firebase:firebase-auth-ktx:23.2.1")
-    implementation("com.google.firebase:firebase-firestore-ktx:25.1.4")
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.firestore.ktx)
     implementation(libs.androidx.navigation.runtime.android)
     implementation(libs.engage.core)
+    implementation(libs.firebase.ml.common)
 
     // Testing
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.3.0-rc01")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0-rc01")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2025.07.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.9.0-beta03")
-    debugImplementation("androidx.compose.ui:ui-tooling:1.9.0-beta03")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.9.0-beta03")
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
 }

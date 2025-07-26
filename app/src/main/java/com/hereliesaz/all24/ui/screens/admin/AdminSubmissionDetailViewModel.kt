@@ -1,7 +1,8 @@
 package com.hereliesaz.all24.ui.screens.admin
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hereliesaz.all24.data.Submission
 import com.hereliesaz.all24.services.FirebaseService
@@ -16,12 +17,12 @@ data class AdminSubmissionDetailState(
 )
 
 class AdminSubmissionDetailViewModel(
-    savedStateHandle: SavedStateHandle
-) : ViewModel() {
+    application: Application,
+    savedStateHandle: SavedStateHandle,
+) : AndroidViewModel(application) {
 
     private val firebaseService = FirebaseService()
     private val submissionId: String = savedStateHandle.get<String>("submissionId")!!
-
     private val _uiState = MutableStateFlow(AdminSubmissionDetailState())
     val uiState = _uiState.asStateFlow()
 
@@ -40,9 +41,10 @@ class AdminSubmissionDetailViewModel(
         viewModelScope.launch {
             _uiState.value.submission?.let {
                 try {
-                    firebaseService.approveSubmission(it)
+                    firebaseService.approveSubmission(it, getApplication())
                 } catch (e: Exception) {
-                    // Handle error
+                    // Handle error, e.g., show a toast or update UI state
+                    _uiState.value = _uiState.value.copy(error = "Geocoding failed: ${e.message}")
                 }
             }
         }

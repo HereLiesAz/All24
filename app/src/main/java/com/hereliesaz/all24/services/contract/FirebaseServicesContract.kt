@@ -1,8 +1,8 @@
-package com.hereliesaz.all24.contract
+package com.hereliesaz.all24.services.contract
 
+import mvp.ljb.kt.contract.IModelContract
 import mvp.ljb.kt.contract.IPresenterContract
 import mvp.ljb.kt.contract.IViewContract
-import mvp.ljb.kt.contract.IModelContract
 
 /**
  * @Author Kotlin MVP Plugin

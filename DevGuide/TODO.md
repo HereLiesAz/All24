@@ -1,62 +1,96 @@
-### Phase 1: The Divine Machinery (Admin & Core Logic)
+# Development Roadmap
 
-- **Admin Workflow: The Judgment Seat**
-    - [ ] **`AdminSubmissionDetailScreen` Implementation:**
-        - [ ] Create the screen composable, accepting a `submissionId` as a navigation argument.
-        - [ ] Implement a `AdminSubmissionDetailViewModel` to fetch the specific `Submission` document from Firestore using the `submissionId`.
-        - [ ] The UI must display all fields from the `Submission` object as non-editable `Text` composables.
-        - [ ] The `address` field must be displayed as plain text. There will be no map. The admin is expected to possess the omniscience to locate it themselves.
-        - [ ] **The Bestowal of Property:**
-            - [ ] The `ViewModel` must fetch a list of all users where `role == 'business'`.
-            - [ ] The UI must contain a `DropdownMenu` (or similar selector) populated with the emails of these business-role users. This is the "Assign Owner" control.
-            - [ ] The admin must be able to select a business user from this list. The selected user's `uid` will be stored in the `ViewModel`'s state.
-    - [ ] **`AdminSubmissionDetailScreen` Verdict Logic:**
-        - [ ] Create an "Approve" `Button`. Its `onClick` lambda will trigger `viewModel.approveSubmission()`.
-        - [ ] The `approveSubmission` function must perform the following `FirebaseService` call:
-            - A `WriteBatch` operation that atomically:
-                1. Creates a new document in the `places` collection, transcribing the data from the `Submission`.
-                2. Writes the selected business user's `uid` to the new `Place`'s `ownerId` field.
-                3. Deletes the original document from the `place_submissions` collection.
-        - [ ] Create a "Deny" `Button`. Its `onClick` lambda will trigger `viewModel.denySubmission()`.
-        - [ ] The `denySubmission` function calls `firebaseService.denySubmission()`, which is a simple delete operation on the `place_submissions` document.
-        - [ ] Both approval and denial actions must update the `ViewModel` state to show a loading indicator (`isLoading`) and, upon completion, navigate back to the `AdminDashboardScreen`.
+This document outlines pending development tasks, categorized by feature set and priority.
 
-- **Admin Workflow: The Ordination Chamber**
-    - [ ] **`AdminUserManagementScreen` Implementation:**
-        - [ ] Create the screen composable.
-        - [ ] Implement a `AdminUserManagementViewModel` that streams the entire `users` collection from Firestore.
-        - [ ] The UI will be a `LazyColumn` displaying a `Card` for each `UserModel`. Each card must show the user's `email` and their current `role`.
-    - [ ] **`AdminUserManagementScreen` Role-Change Logic:**
-        - [ ] Tapping a user `Card` must open an `AlertDialog`.
-        - [ ] The dialog will display the user's email and a set of `RadioButton`s or a `DropdownMenu` to select a new role ('user', 'business', 'admin').
-        - [ ] A "Confirm" button in the dialog will trigger a `viewModel.updateUserRole(uid, newRole)` function.
-        - [ ] The `updateUserRole` function calls a new `FirebaseService` method that performs an `update` operation on the specified user document, changing the value of the `role` field.
+## Phase 1: Admin Workflow Enhancements
 
-### Phase 2: The Mortal Realm (Business & User Features)
+This phase focuses on completing the core administrative toolset for content and user management.
 
-- **Business Owner Workflow: The Counting House & Scriptorium**
-    - [ ] **`BusinessDashboardScreen` Implementation:**
-        - [ ] The `BusinessDashboardViewModel` must stream the `places` collection, using a `where("ownerId", "==", currentUser.uid)` query.
-        - [ ] The UI will be a `LazyColumn` of `Place` items owned by the current user.
-        - [ ] Tapping a `Place` item must navigate to the `EditPlaceScreen`, passing the `placeId`.
-    - [ ] **`EditPlaceScreen` Implementation:**
-        - [ ] The screen accepts a `placeId` navigation argument.
-        - [ ] The `EditPlaceViewModel` fetches the specific `Place` document.
-        - [ ] The UI displays the `name` and `description` in `OutlinedTextField` composables, bound to the `ViewModel`'s state.
-        - [ ] A "Save Changes" `Button` triggers `viewModel.saveChanges()`, which calls `firebaseService.updatePlace()` to update the document in Firestore. Upon success, it navigates back to the dashboard.
+* **Task: Complete `AdminSubmissionDetailScreen` Logic**
+    * **Objective:** To provide admins with the full capability to approve or deny submissions and
+      assign ownership.
+    * **Requirements:**
+        1. [cite_start]The `AdminSubmissionDetailViewModel` must be implemented to accept a
+           `submissionId` from `SavedStateHandle` and use it to fetch the corresponding `Submission`
+           document from Firestore[cite: 380, 116].
+        2. [cite_start]The screen's UI must render all fields from the fetched `Submission` object
+           as read-only `Text` composables[cite: 381]. [cite_start]The `address` field must be plain
+           text, requiring manual verification by the admin[cite: 382].
+        3. [cite_start]A new `FirebaseService` call must be added to fetch all users where
+           `role == 'business'`[cite: 385].
+        4. The UI must include a `DropdownMenu` or similar selector populated with the emails of
+           these business users. [cite_start]This control allows the admin to assign ownership of
+           the new `Place` before approval[cite: 385, 386]. [cite_start]The selected business user's
+           `uid` must be stored in the ViewModel's state[cite: 387].
+        5. The "Approve" button's `onClick` will trigger
+           `viewModel.approveSubmission()`. [cite_start]This function must call a `FirebaseService`
+           method that performs an atomic `WriteBatch` to create a new document in the `places`
+           collection (including the selected `ownerId`) and delete the original document from
+           `place_submissions`[cite: 389, 390, 391].
+        6. The "Deny" button's `onClick` will trigger `viewModel.denySubmission()`. [cite_start]This
+           calls a service method that performs a simple delete operation on the `place_submissions`
+           document[cite: 392].
+        7. [cite_start]Upon successful approval or denial, the `ViewModel` must trigger a navigation
+           action to return to the `AdminDashboardScreen`[cite: 393, 103].
 
-- **UI & UX Refinements: Polishing the Ghost**
-    - [ ] **`VibeScreen` Recommendation Animation:**
-        - [ ] The recommendation list must be wrapped in an `AnimatedVisibility` composable.
-        - [ ] The `visible` property will be bound to the `VibeUiState.showRecommendations` boolean.
-        - [ ] The `enter` animation will be `slideInVertically(initialOffsetY = { it }) + fadeIn()`.
-        - [ ] The `exit` animation will be `slideOutVertically(targetOffsetY = { it }) + fadeOut()`.
-    - [ ] **`VibeScreen` Conditional Icon Logic:**
-        - [ ] The bottom-left `VibeNavButton` must be a conditional composable.
-        - [ ] It will observe the `VibeViewModel.userRole` `StateFlow`.
-        - [ ] A `when` statement will render the button with the `Icons.Default.Business` icon and `Screen.BusinessDashboard` route if `role == 'business'`.
-        - [ ] Otherwise, it will render the `Icons.Default.AddBusiness` icon and `Screen.SubmitPlace` route.
-    - [ ] **Universal Error Prophecy:**
-        - [ ] Every `ViewModel` `UiState` data class must contain a nullable `error: String?` property.
-        - [ ] Every `try/catch` block that calls a `FirebaseService` write operation must update this `error` property in the `catch` block.
-        - [ ] Every screen must contain a `SnackbarHost` and a `LaunchedEffect` that observes the `error` property. If the error is not null, it will show a `Snackbar` with the error message.
+* **Task: Implement User Role Management**
+    * **Objective:** To allow admins to change the role of any user in the system.
+    * **Requirements:**
+        1. [cite_start]Create a new `AdminUserManagementScreen` and its corresponding
+           `AdminUserManagementViewModel`[cite: 395].
+        2. [cite_start]The ViewModel must stream the entire `users` collection from
+           Firestore[cite: 396].
+        3. [cite_start]The UI will be a `LazyColumn` of `Card`s, with each card displaying a user's
+           `email` and their current `role`[cite: 397].
+        4. [cite_start]Tapping a user card must open an `AlertDialog`[cite: 399].
+        5. [cite_start]The dialog must contain a set of `RadioButton`s or a dropdown to select a new
+           role from the available options (`user`, `business`, `admin`)[cite: 400].
+        6. [cite_start]A "Confirm" button in the dialog will trigger a ViewModel function
+           `updateUserRole(uid, newRole)`[cite: 401].
+        7. [cite_start]This function will call a new `FirebaseService` method that performs an
+           `update` operation on the specified user document, changing only the value of the `role`
+           field[cite: 402].
+
+## Phase 2: User-Facing Features & Refinements
+
+This phase focuses on building out features for the `business` role and improving the overall user
+experience.
+
+* **Task: Implement Business Owner Workflow**
+    * **Objective:** To allow users with the `business` role to manage the places they own.
+    * **Requirements:**
+        1. [cite_start]The `BusinessDashboardViewModel` must be implemented to stream the `places`
+           collection using a `where("ownerId", "==", currentUser.uid)` query to fetch only the
+           places owned by the currently logged-in user[cite: 403, 121].
+        2. [cite_start]The `BusinessDashboardScreen` UI will be a `LazyColumn` of the owned `Place`
+           items[cite: 404].
+        3. [cite_start]Tapping a `Place` item in the dashboard must navigate to the
+           `EditPlaceScreen`, passing the `placeId` as an argument[cite: 405].
+        4. [cite_start]The `EditPlaceScreen` and its `EditPlaceViewModel` must fetch the specified
+           `Place` document using the passed `placeId`[cite: 406, 407].
+        5. [cite_start]The UI must display the `name` and `description` of the place in
+           `OutlinedTextField`s, with their values bound to the ViewModel's state[cite: 408].
+        6. [cite_start]A "Save Changes" button must trigger a `viewModel.saveChanges()` function,
+           which calls `firebaseService.updatePlace()` to persist the changes to Firestore and then
+           navigates back to the dashboard[cite: 409, 131].
+
+* **Task: Refine UI & UX**
+    * **Objective:** To add polish and more dynamic behavior to the UI.
+    * **Requirements:**
+        1. **VibeScreen Animation:** The recommendation list must be wrapped in an
+           `AnimatedVisibility` composable. [cite_start]The `visible` property must be bound to the
+           `VibeUiState.showRecommendations` boolean[cite: 410, 411]. [cite_start]The `enter`
+           animation must be `slideInVertically` + `fadeIn`, and the `exit` animation must be
+           `slideOutVertically` + `fadeOut`[cite: 412].
+        2. **VibeScreen Conditional Navigation:** The bottom-left `VibeNavButton` must be
+           implemented as a conditional composable. [cite_start]It will observe the user's role from
+           a `StateFlow` in the `VibeViewModel`[cite: 414]. [cite_start]A `when` statement will
+           determine its icon and navigation route: `Icons.Default.Business` and
+           `Screen.BusinessDashboard` for the `business` role, and `Icons.Default.AddBusiness` and
+           `Screen.SubmitPlace` otherwise[cite: 415].
+        3. [cite_start]**Universal Error Handling:** Every `UiState` data class must include a
+           nullable `error: String?` property[cite: 417]. [cite_start]Every `try/catch` block
+           surrounding a `FirebaseService` call in the ViewModels must update this `error` property
+           in the `catch` block[cite: 418]. [cite_start]Every screen must contain a `SnackbarHost`
+           and a `LaunchedEffect` that observes the `error` property and shows a `Snackbar` with the
+           message if it is not null[cite: 419].

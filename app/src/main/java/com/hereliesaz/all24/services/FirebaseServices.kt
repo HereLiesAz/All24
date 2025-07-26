@@ -1,19 +1,19 @@
 package com.hereliesaz.all24.services
 
+import android.content.Context
+import android.location.Geocoder
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.auth
+import com.google.firebase.auth.ktx.authStateFlow
 import com.google.firebase.firestore.*
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.firestore.ktx.toObjects
-import com.google.firebase.ktx.Firebase
 import com.hereliesaz.all24.data.Place
 import com.hereliesaz.all24.data.Review
 import com.hereliesaz.all24.data.Submission
 import com.hereliesaz.all24.data.UserModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
+import java.io.IOException
 import java.util.Date
 
 class FirebaseService {
@@ -58,6 +58,10 @@ class FirebaseService {
         return db.collection("places").get().await().toObjects()
     }
 
+    suspend fun getAllReviews(): List<Review> {
+        return db.collection("reviews").get().await().toObjects()
+    }
+
     suspend fun getPlaceById(placeId: String): Place? {
         return db.collection("places").document(placeId).get().await().toObject<Place>()
     }
@@ -97,7 +101,7 @@ class FirebaseService {
 
     suspend fun verifyReview(reviewId: String, vote: String) {
         val userId = currentUser?.uid ?: throw Exception("User not authenticated")
-        val reviewRef = db.collection("reviews").doc(reviewId)
+        val reviewRef = db.collection("reviews").document(reviewId)
         db.runTransaction { transaction ->
             val fieldToUpdate = if (vote == "endorse") "endorsedBy" else "avoidedBy"
             val fieldToRemoveFrom = if (vote == "endorse") "avoidedBy" else "endorsedBy"
@@ -116,16 +120,35 @@ class FirebaseService {
         db.collection("places").document(placeId).update(mapOf("name" to name, "description" to description)).await()
     }
 
-    suspend fun approveSubmission(submission: Submission, ownerId: String? = null) {
-        val newPlaceRef = db.collection("places").doc()
-        val submissionRef = db.collection("place_submissions").doc(submission.id)
+    suspend fun approveSubmission(
+        submission: Submission,
+        context: Context,
+        ownerId: String? = null,
+    ) {
+        val newPlaceRef = db.collection("places").document()
+        val submissionRef = db.collection("place_submissions").document(submission.id)
 
-        // Note: Geocoding the address to a GeoPoint would happen here.
-        // For now, we leave location as null.
+        // Geocode the address string into a GeoPoint.
+        var location: GeoPoint? = null
+        if (Geocoder.isPresent()) {
+            try {
+                val geocoder = Geocoder(context)
+                // In a real app, you might use the newer, callback-based API for Android 13+
+                val addresses = geocoder.getFromLocationName(submission.address, 1)
+                if (addresses?.isNotEmpty() == true) {
+                    location = GeoPoint(addresses[0].latitude, addresses[0].longitude)
+                }
+            } catch (e: IOException) {
+                // Log the error or handle it as needed. For now, location remains null.
+                e.printStackTrace()
+            }
+        }
+
         val newPlace = Place(
             id = newPlaceRef.id,
             name = submission.name,
             description = submission.description,
+            location = location,
             category = submission.category,
             ownerId = ownerId
         )

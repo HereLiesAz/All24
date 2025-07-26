@@ -1,7 +1,7 @@
-package  com.hereliesaz.all24.model
+package  com.hereliesaz.all24.services.model
 
-import com.hereliesaz.all24.contract.FirebaseServicesContract
-import mvp.ljb.kt.model.BaseModel
+import com.google.firebase.ml.common.modeldownload.BaseModel
+import com.hereliesaz.all24.services.contract.FirebaseServicesContract
 
 /**
  * @Author Kotlin MVP Plugin

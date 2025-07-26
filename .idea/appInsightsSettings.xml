@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.hereliesaz.all24" />
+                  <option name="mobileSdkAppId" value="1:865243890208:android:1c7011c74681e642007245" />
+                  <option name="projectId" value="all24-8f941" />
+                  <option name="projectNumber" value="865243890208" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

@@ -1,15 +1,15 @@
-package com.hereliesaz.all24.view.act
+package com.hereliesaz.all24.services.view.act
 
-import com.hereliesaz.all24.contract.FirebaseServicesContract
-import com.hereliesaz.all24.presenter.FirebaseServicesPresenter
-import mvp.ljb.kt.act.BaseMvpActivity
 import com.hereliesaz.all24.R
+import com.hereliesaz.all24.services.contract.FirebaseServicesContract
+import com.hereliesaz.all24.services.presenter.FirebaseServicesPresenter
+import mvp.ljb.kt.act.BaseMvpActivity
 
 /**
- * @Author Kotlin MVP Plugin
- * @Date 2025/07/22
- * @Description input description
- **/
+ * @author Kotlin MVP Plugin
+ * @date 2025/07/22
+ * @description input description
+ */
 class FirebaseServicesActivity : BaseMvpActivity<FirebaseServicesContract.IPresenter>() , FirebaseServicesContract.IView {
 
     override fun registerPresenter() = FirebaseServicesPresenter::class.java

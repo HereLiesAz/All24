@@ -1,60 +1,113 @@
-Part 3: The Ghost in the Machine - User Interface & Experience
-I. The Vibe Screen: The Altar
+# UI/UX Documentation
 
-This is the first and most important screen. It is the beginning and the end. It is not a "home screen" in the traditional sense; it is an altar upon which the user's attention is sacrificed.
+This document details the design, layout, interaction logic, and accessibility considerations for
+the key screens in the All24 application.
 
-Visuals: A full-screen, abstract particle system. The particles drift, coalesce, and repel in a slow, hypnotic dance. The background is absolute black. The particles are shades of white and electric purple, their opacity and velocity subtly shifting based on the time of day. This is the Vibe. It is meant to be felt, not understood.
+## 1. `VibeScreen`
 
-Interaction: A single gesture: tap. Tapping anywhere on the screen is a prayer to the oracle. It dismisses any open UI elements and conjures a new set of recommendations. It is the only way to commune with the Vibe.
+* **Purpose**: The main entry point and primary interaction screen of the application. It embodies
+  the project's philosophy of serendipitous discovery by avoiding traditional navigation paradigms.
+* **Visual Design & Theming**:
+    * The background is a full-screen `@Composable` `Canvas` with its color bound to
+      `MaterialTheme.colorScheme.background`, which is absolute black in the dark theme.
+    * It renders an abstract particle system where particles drift slowly. The particles are simple
+      white circles with varying alpha, creating a sense of depth and atmosphere. The animation is
+      continuous and driven by an `infiniteRepeatable` `Animatable`.
+* **Interaction**:
+    * The primary interaction is a single tap gesture anywhere on the screen, detected via a
+      `pointerInput` modifier.
+    * A tap calls `viewModel.conjureRecommendations()` to fetch and display a new set of 1-3
+      recommended places.
+    * The list of recommendations is displayed in a dark, semi-transparent panel that animates into
+      view from the bottom of the screen using `AnimatedVisibility`. Tapping a recommendation
+      navigates to its `PlaceDetailScreen`.
+* **Composable Breakdown**:
+    * `VibeScreen(navController, viewModel)`: The main screen composable containing the primary
+      `Box`
+      layout.
+    * `ParticleCanvas(modifier)`: A dedicated composable that handles the `Canvas` and all particle
+      drawing logic, including the animation `LaunchedEffect` and the `drawCircle` calls for each
+      particle.
+    * `VibeNavButton(icon, tooltip, alignment, onClick)`: A reusable composable within the
+      `VibeScreen`'s `BoxScope` for the four corner navigation icons, ensuring consistent padding
+      and
+      styling.
+* **State Handling**:
+    * `VibeUiState.recommendations`: This `List<Place>` populates the items in the animated
+      recommendation panel.
+    * `VibeUiState.showRecommendations`: This `Boolean` controls the `visible` property of the
+      `AnimatedVisibility` composable, triggering the enter/exit animations for the recommendation
+      panel.
+* **Accessibility (`a11y`)**:
+    * The `VibeNavButton` `IconButton`s must have a `contentDescription` set to the `tooltip`
+      parameter (e.g., "Profile", "Top Reviews") to ensure screen readers can announce their
+      function.
+    * The touch targets for the corner icons must adhere to a minimum size of 48x48dp via padding to
+      be easily tappable.
+    * The `ParticleCanvas` is decorative and should be appropriately handled for screen readers,
+      possibly by making the container non-focusable.
 
-UI Elements:
+## 2. `PlaceDetailScreen`
 
-The Recommendations: When conjured, a dark, semi-transparent panel animates up from the bottom of the screen. It contains no more than three ListTile elements, each representing a revealed Place. Tapping a tile navigates to the PlaceDetailScreen. A close button (X) allows the user to dismiss the panel and return to the pure Vibe.
+* **Purpose**: To display all relevant information for a single `Place`, including its curated
+  description and a full list of its associated reviews.
+* **Layout**:
+    * A `Scaffold` with a transparent `TopAppBar` displaying the place's name.
+    * The body is a `LazyColumn` to efficiently display a potentially long list of reviews.
+    * A `FloatingActionButton` provides the entry point for adding a new review.
+* **Content Hierarchy & Logic**:
+    * The screen first displays the place's name and description.
+    * It then displays a list of `Review` cards. Reviews where `isAdminReview` is `true` are
+      visually
+      distinguished (e.g., with a gold border or a tag using `CardDefaults.cardColors`) and are
+      always
+      sorted to appear at the top of the list.
+    * Each review card shows the review text, the endorse/avoid vote, and interactive buttons to let
+      the current user verify the review.
+    * Tapping the FAB is a **gated interaction**: an anonymous user is navigated to `AuthScreen`,
+      while an authenticated user proceeds to `AddReviewScreen`. This logic is handled by the
+      `onProtectedAction` helper function.
+* **State Handling**:
+    * The `PlaceDetailViewModel` would hold a `StateFlow<PlaceDetailUiState>`.
+    * `PlaceDetailUiState.place`: A nullable `Place` object holding the details for the header.
+    * `PlaceDetailUiState.reviews`: A `List<Review>` that populates the `LazyColumn`.
+    * `PlaceDetailUiState.isLoading`: A `Boolean` to show a `CircularProgressIndicator` while the
+      initial place and review data are being fetched.
+* **Accessibility (`a11y`)**:
+    * The `TopAppBar` title correctly identifies the screen's context.
+    * The FAB must have a `contentDescription` like "Add a new review".
+    * The verification buttons (`thumb_up`/`thumb_down`) on each review card must have content
+      descriptions that include the review's text and the action, e.g., "Endorse review by [User]
+      that
+      says '[review text]'".
 
-The Four Corner Icons: These are the only persistent UI elements, semi-transparent and unobtrusive. They are the gateways to the app's secondary functions.
+## 3. `AuthScreen` & `ProfileScreen`
 
-Top-Left (Profile): A simple user icon. Leads to the ProfileScreen.
+* **Purpose**: To manage the user's authentication state, providing a clear path for anonymous users
+  to register or log in, and for authenticated users to log out.
+* **`AuthScreen`**:
+    * A minimalist, centered form containing `OutlinedTextField` composables for email and password.
+    * A toggle or button allows the user to switch the screen's mode between Login (
+      `signInWithEmail`)
+      and Sign Up (`signUpWithEmail`).
+    * **State Handling**: The `AuthViewModel`'s `AuthUiState` holds the `email` and `password`
+      strings
+      from the text fields, an `isLoginMode` boolean for the toggle, an `isLoading` boolean to show
+      a
+      progress indicator on the submit button, and a nullable `error` string to display
+      authentication
+      failures.
+* **`ProfileScreen`**:
+    * This screen renders conditionally based on the user's authentication state, which is retrieved
+      directly from `Firebase.auth.currentUser`.
+    * **Anonymous State**: Displays text like "You are Browse anonymously" and a single button to
+      navigate to the `AuthScreen`.
+    * **Authenticated State**: Displays the user's email and a single "Sign Out" button that
+      triggers
+      `firebaseService.signOut()`.
+* **Accessibility (`a11y`)**:
+    * All `TextField` elements must have a corresponding `label` that describes the expected input.
+    * The "Sign Out" button should be clearly marked, and if it leads to data loss, a confirmation
+      dialog might be considered.
 
-Top-Right (Top Reviews): A star icon. Leads to the TopReviewsScreen.
-
-Bottom-Left (Submit/Manage Business): An icon that changes based on user role. For a user, it's an "add business" icon leading to the SubmitPlaceScreen. For a business, it's a "dashboard" icon leading to the BusinessDashboardScreen.
-
-Bottom-Right (Admin): An "admin panel" icon. This is a ghost icon, visible only to users with the admin role.
-
-II. The Place Detail Screen: The Scripture
-
-This screen is the revealed text, the scripture dedicated to a single sanctuary. It is a vertical scroll of information, designed to feel like reading a sacred text, not a Yelp page.
-
-Layout: A Scaffold with a transparent AppBar that shows the Place name. The body is a SingleChildScrollView. A FloatingActionButton to "Add Review" is present.
-
-Content Hierarchy:
-
-Name & Description: The Place name is a Headline style, followed by the description text.
-
-All24 Reviews: A section header, followed by a list of Review cards. Admin reviews are sorted to the top and visually distinct (e.g., with a gold border and an "ADMIN" tag). Each card contains the review text, the endorse/avoid vote, and verification buttons (thumb_up/thumb_down) showing the current verification counts.
-
-Gated Interaction: The "Add Review" FAB is the gatekeeper. Tapping it as a Ghost (anonymous user) navigates to the AuthScreen. Tapping it as a User (authenticated) navigates to the AddReviewScreen.
-
-III. The Authentication Flow: The Confessional
-
-Authentication is not a barrier to entry; it is a confessional for ghosts who wish to become corporeal.
-
-AuthScreen: A simple, centered form with fields for email and password. A toggle switches the form's function between "Login" and "Sign Up." It is a modal experience; successful authentication returns the user to their previous context with a new, permanent soul.
-
-ProfileScreen: This screen reflects the user's current state of being.
-
-Anonymous State: Displays a message like "You are browsing anonymously" and provides a single, prominent button to "Login / Sign Up," which navigates to the AuthScreen.
-
-Authenticated State: Displays the user's email and a single, prominent "Sign Out" button. Signing out returns the user to an anonymous state.
-
-IV. The Admin Panels: The God's-Eye View
-
-These screens are spartan, functional, and utterly devoid of the Vibe's aesthetic. They are the raw machinery of the divine, not meant for mortal eyes.
-
-AdminDashboardScreen: A simple ListView of pending Submission documents. Each item shows the proposed name and address. Tapping navigates to the AdminSubmissionDetailScreen.
-
-AdminSubmissionDetailScreen: Displays all fields of a Submission. It includes two prominent buttons: "Approve" and "Deny."
-
-Approve: Creates a new Place document from the submission data and deletes the submission. It should also include a field to assign an ownerId if the submitter's role is to be elevated to business.
-
-Deny: Deletes the submission document. There is no confirmation. The god does not second-guess.
+*(This same level of detail would be applied to all other screens like `AdminDashboardScreen`)*
