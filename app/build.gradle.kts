@@ -43,8 +43,8 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
+    kotlin {
+        jvmToolchain(17)
     }
     buildFeatures {
         compose = true
@@ -52,8 +52,8 @@ android {
 
     packaging {
         resources {
-            exclude("/META-INF/AL2.0")
-            exclude("/META-INF/LGPL2.1")
+            excludes.add("META-INF/AL2.0") // Corrected Line 55
+            excludes.add("META-INF/LGPL2.1") // Corrected Line 56
         }
     }
     buildToolsVersion = "36.0.0"
@@ -61,7 +61,7 @@ android {
 }
 composeCompiler {
     reportsDestination = layout.buildDirectory.dir("compose_compiler")
-    stabilityConfigurationFiles = rootProject.layout.projectDirectory.file("stability_config.conf")
+    stabilityConfigurationFiles.from(rootProject.layout.projectDirectory.file("stability_config.conf"))
 }
 dependencies {
 
