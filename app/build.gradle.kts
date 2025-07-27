@@ -80,8 +80,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))
 
     // Firebase Services
-    implementation(libs.firebase.auth.ktx)
-    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.firebase.firestore)
     implementation(libs.androidx.navigation.runtime.android)
     implementation(libs.engage.core)
     implementation(libs.firebase.ml.common)
@@ -97,4 +96,12 @@ dependencies {
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
+    implementation(libs.firebase.auth)
+
+    implementation(libs.google.api.client.android)
+    implementation(libs.google.sheets.api)
+
+    // --- NEW: Google Sign-In (OAuth) Dependency ---
+    implementation(libs.google.play.services.auth)
+
 }

@@ -19,6 +19,9 @@ navigationRuntimeAndroid = "2.9.2"
 engageCore = "1.5.8" # Firebase Google Services plugin version
 uiTestJunit4 = "1.9.0-beta03"
 firebaseMlCommon = "22.1.2"
+kotlinMvp = "1.4.2" # <--- ADD THIS LINE
+
+
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
@@ -37,11 +40,15 @@ androidx-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBomVersion" }
 engage-core = { group = "com.google.android.engage", name = "engage-core", version = "1.5.8" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics", version = "23.0.0" }
-firebase-auth-ktx = { module = "com.google.firebase:firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
+firebase-auth = { module = "com.google.firebase:firebase-auth", version.ref = "firebaseAuthKtx" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
-firebase-firestore-ktx = { module = "com.google.firebase:firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
+firebase-firestore = { module = "com.google.firebase:firebase-firestore", version = "26.0.0" }
 junit = { module = "junit:junit", version.ref = "junit" }
 firebase-ml-common = { group = "com.google.firebase", name = "firebase-ml-common", version.ref = "firebaseMlCommon" }
+google-api-client-android = { group = "com.google.api-client", name = "google-api-client-android", version = "2.8.0" }
+google-sheets-api = { group = "com.google.apis", name = "google-api-services-sheets", version = "v4-rev20250616-2.0.0" }
+google-play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version = "21.4.0" }
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

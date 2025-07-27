@@ -1,34 +1,48 @@
 package com.hereliesaz.all24.ui.screens
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import com.hereliesaz.all24.services.FirebaseService
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.hereliesaz.all24.ui.navigation.Screen
-import kotlinx.coroutines.launch
 
 @Composable
-fun ProfileScreen(navController: NavController) {
-    val user = Firebase.auth.currentUser
-    val scope = rememberCoroutineScope()
-    val firebaseService = FirebaseService()
+fun ProfileScreen(
+    navController: NavController,
+    googleSignInClient: GoogleSignInClient,
+) {
+    // We check the user's current state on composition.
+    val account: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(LocalContext.current)
+
+    val signOut = {
+        googleSignInClient.signOut().addOnCompleteListener {
+            // Force recomposition by navigating. A more robust solution might use a shared ViewModel or state holder.
+            navController.navigate(Screen.Profile.route) {
+                popUpTo(navController.graph.startDestinationId)
+                launchSingleTop = true
+            }
+        }
+    }
 
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Profile") },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.Transparent
-                )
-            )
-        }
+        topBar = { TopAppBar(title = { Text("Your State of Being") }) }
     ) { padding ->
         Column(
             modifier = Modifier
@@ -38,29 +52,22 @@ fun ProfileScreen(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            if (user != null && !user.isAnonymous) {
+            if (account != null) {
                 // Authenticated User View
                 Text("Signed in as:")
                 Spacer(Modifier.height(8.dp))
-                Text(user.email ?: "N/A", style = MaterialTheme.typography.titleLarge)
+                Text(account.displayName ?: "N/A", style = MaterialTheme.typography.titleLarge)
+                Text(account.email ?: "N/A", style = MaterialTheme.typography.bodyMedium)
                 Spacer(Modifier.height(32.dp))
                 Button(
-                    onClick = {
-                        scope.launch {
-                            firebaseService.signOut()
-                            // Navigate back to Vibe, which will be the new 'home'
-                            navController.navigate(Screen.Vibe.route) {
-                                popUpTo(Screen.Vibe.route) { inclusive = true }
-                            }
-                        }
-                    },
+                    onClick = { signOut() },
                     colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)
                 ) {
-                    Text("Sign Out")
+                    Text("Return to Ghost")
                 }
             } else {
-                // Anonymous User View
-                Text("You are browsing anonymously.")
+                // Anonymous Ghost View
+                Text("You are a ghost, a silent observer.")
                 Spacer(Modifier.height(16.dp))
                 Button(onClick = { navController.navigate(Screen.Auth.route) }) {
                     Text("Login / Sign Up")

@@ -5,13 +5,13 @@ import android.location.Geocoder
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
-import com.google.firebase.auth.ktx.authStateFlow
 import com.google.firebase.firestore.*
 import com.hereliesaz.all24.data.Place
 import com.hereliesaz.all24.data.Review
 import com.hereliesaz.all24.data.Submission
 import com.hereliesaz.all24.data.UserModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
 import java.io.IOException
 import java.util.Date
@@ -22,7 +22,7 @@ class FirebaseService {
     private val db: FirebaseFirestore = Firebase.firestore
 
     val currentUser get() = auth.currentUser
-    val authStateChanges = auth.authStateFlow()
+    val authStateChanges = auth.authFlow()
 
     // --- Auth & User Functions ---
     suspend fun signInAnonymously() {
