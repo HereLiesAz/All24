@@ -4,9 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hereliesaz.all24.data.Place
 import com.hereliesaz.all24.data.Review
-import com.hereliesaz.all24.services.FirebaseService
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
+import com.hereliesaz.all24.services.SheetsService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -16,14 +14,14 @@ import kotlin.math.min
 import kotlin.random.Random
 
 data class VibeUiState(
-    // The list now holds a Place and its most influential Review
     val recommendations: List<Pair<Place, Review?>> = emptyList(),
     val showRecommendations: Boolean = false,
+    val error: String? = null,
 )
 
 class VibeViewModel : ViewModel() {
 
-    private val firebaseService = FirebaseService()
+    private val sheetsService = SheetsService()
 
     private val _uiState = MutableStateFlow(VibeUiState())
     val uiState = _uiState.asStateFlow()
@@ -31,24 +29,26 @@ class VibeViewModel : ViewModel() {
     fun conjureRecommendations() {
         viewModelScope.launch {
             try {
-                val placesDeferred = async { firebaseService.getPlaces() }
-                val reviewsDeferred = async { firebaseService.getAllReviews() }
-                val (places, allReviews) = awaitAll(placesDeferred, reviewsDeferred)
+                val places = sheetsService.getPlaces()
+                val allReviews = sheetsService.getAllReviews()
 
-                if ((places as List<Place>).isNotEmpty()) {
-                    val recommendations =
-                        getWeightedRandomPlaces(places, allReviews as List<Review>)
+                if (places.isNotEmpty()) {
+                    val recommendations = getWeightedRandomPlaces(places, allReviews)
                     _uiState.value = _uiState.value.copy(
                         recommendations = recommendations,
-                        showRecommendations = true
+                        showRecommendations = true,
+                        error = null
                     )
                 }
             } catch (e: Exception) {
-                println("Failed to conjure recommendations: ${e.message}")
+                e.printStackTrace()
+                _uiState.value =
+                    _uiState.value.copy(error = "The spirits (or Google's API) are not responding.")
             }
         }
     }
 
+    // This logic remains, a ghost of the old machine's intelligence.
     private fun getWeightedRandomPlaces(
         places: List<Place>,
         reviews: List<Review>,
@@ -120,6 +120,7 @@ class VibeViewModel : ViewModel() {
         }
         return recommendations
     }
+
 
     fun hideRecommendations() {
         _uiState.value = _uiState.value.copy(showRecommendations = false)

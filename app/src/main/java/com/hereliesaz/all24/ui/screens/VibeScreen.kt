@@ -7,159 +7,206 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.hereliesaz.all24.data.Place
 import com.hereliesaz.all24.data.Review
 import com.hereliesaz.all24.ui.navigation.Screen
+import kotlinx.coroutines.delay
+import kotlin.math.cos
+import kotlin.math.sin
+import kotlin.math.sqrt
 import kotlin.random.Random
 
 @Composable
 fun VibeScreen(navController: NavController, viewModel: VibeViewModel = viewModel()) {
     val uiState by viewModel.uiState.collectAsState()
+    var touchInteraction by remember { mutableStateOf<TouchInteraction>(TouchInteraction.Idle) }
+
+    LaunchedEffect(touchInteraction) {
+        if (touchInteraction is TouchInteraction.Exploding) {
+            delay(2000L)
+            if (touchInteraction is TouchInteraction.Exploding) {
+                touchInteraction = TouchInteraction.Idle
+            }
+        }
+    }
 
     Box(modifier = Modifier.fillMaxSize()) {
-        ParticleCanvas(modifier = Modifier
-            .fillMaxSize()
-            .pointerInput(Unit) {
-                detectTapGestures(onTap = { viewModel.conjureRecommendations() })
-            })
+        ParticleCanvas(
+            touchInteraction = touchInteraction,
+            modifier = Modifier
+                .fillMaxSize()
+                .pointerInput(Unit) {
+                    awaitPointerEventScope {
+                        while (true) {
+                            val event = awaitPointerEvent()
+                            val isPressed = event.changes.any { it.pressed }
 
+                            if (isPressed) {
+                                // Convert 2D screen touch to 3D world coordinates
+                                val touchPos = event.changes.first().position
+                                val x = (touchPos.x / size.width - 0.5f) * 2f
+                                val y = (touchPos.y / size.height - 0.5f) * 2f
+                                touchInteraction = TouchInteraction.Attracting(Vector3(x, y, 0f))
+                            } else {
+                                if (touchInteraction is TouchInteraction.Attracting) {
+                                    val lastPosition =
+                                        (touchInteraction as TouchInteraction.Attracting).position
+                                    touchInteraction =
+                                        TouchInteraction.Exploding(from = lastPosition)
+                                    viewModel.conjureRecommendations()
+                                }
+                            }
+                        }
+                    }
+                }
+        )
+
+        // The recommendations now appear in the center of the screen
         AnimatedVisibility(
             visible = uiState.showRecommendations,
-            modifier = Modifier.align(Alignment.BottomCenter),
-            enter = slideInVertically { it } + fadeIn(),
-            exit = slideOutVertically { it } + fadeOut()
+            modifier = Modifier.align(Alignment.Center),
+            enter = fadeIn(animationSpec = tween(delayMillis = 400, durationMillis = 500)),
+            exit = fadeOut(animationSpec = tween(durationMillis = 500))
         ) {
-            // Fading edge at the bottom of the screen
-            Box(
-                modifier = Modifier
-                    .background(
-                        Brush.verticalGradient(
-                            listOf(Color.Transparent, Color.Black),
-                            startY = 0f,
-                            endY = 400f
-                        )
-                    )
-                    .padding(top = 100.dp)
+            LazyColumn(
+                modifier = Modifier.fillMaxWidth(0.8f),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                LazyColumn(
-                    contentPadding = PaddingValues(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
-                    modifier = Modifier.heightIn(max = 400.dp)
-                ) {
-                    items(uiState.recommendations) { (place, review) ->
-                        RecommendationCard(place = place, review = review)
+                itemsIndexed(uiState.recommendations) { index, (place, review) ->
+                    RecommendationCard(place = place, review = review)
+                    if (index < uiState.recommendations.size - 1) {
+                        ParticleDivider()
                     }
                 }
             }
         }
 
-
-        // Navigation Buttons
         VibeNavButton(
             icon = Icons.Default.Person,
             tooltip = "Profile",
             alignment = Alignment.TopStart,
             onClick = { navController.navigate(Screen.Profile.route) }
         )
-        // Add other buttons...
     }
 }
 
 @Composable
 private fun RecommendationCard(place: Place, review: Review?) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.8f)
-        )
+    // Restyled to match the reference image: no Card, just a Column with a transparent background
+    Column(
+        modifier = Modifier
+            .background(Color.Black.copy(alpha = 0.6f))
+            .padding(vertical = 12.dp, horizontal = 24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column(Modifier.padding(16.dp)) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
                 text = place.name,
+                fontFamily = FontFamily.Serif,
                 style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.primary
+                color = Color.White
             )
-            review?.let {
-                Spacer(Modifier.height(8.dp))
-                Text(
-                    text = "\"${it.text}\"",
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontStyle = FontStyle.Italic,
-                    maxLines = 3,
-                    overflow = TextOverflow.Ellipsis
-                )
-            }
+            Spacer(Modifier.width(8.dp))
+            Text(
+                "•",
+                fontFamily = FontFamily.Serif,
+                style = MaterialTheme.typography.titleLarge,
+                color = Color.White
+            )
+        }
+        review?.let {
+            Spacer(Modifier.height(2.dp))
+            Text(
+                text = it.text,
+                fontFamily = FontFamily.Serif,
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.White.copy(alpha = 0.8f),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
         }
     }
 }
 
+@Composable
+private fun ParticleDivider() {
+    val particles = remember {
+        List(100) {
+            Offset(
+                x = Random.nextFloat(),
+                y = Random.nextFloat() * 0.5f + 0.25f // Distribute vertically in middle
+            ) to Random.nextFloat() * 0.5f + 0.2f // Alpha
+        }
+    }
+    Canvas(
+        modifier = Modifier
+            .fillMaxWidth(0.8f)
+            .height(24.dp)
+    ) {
+        particles.forEach { (offset, alpha) ->
+            drawCircle(
+                color = Color.White,
+                radius = 0.7f,
+                alpha = alpha,
+                center = Offset(offset.x * size.width, offset.y * size.height)
+            )
+        }
+    }
+}
 
 @Composable
-private fun ParticleCanvas(modifier: Modifier = Modifier) {
-    // A series of points that vaguely resemble the layout of New Orleans from above.
-    val newOrleansMapPoints = remember {
-        listOf(
-            // Mississippi River Crescent
-            Offset(0.2f, 0.9f), Offset(0.25f, 0.85f), Offset(0.3f, 0.8f),
-            Offset(0.4f, 0.75f), Offset(0.5f, 0.72f), Offset(0.6f, 0.75f),
-            Offset(0.7f, 0.8f), Offset(0.75f, 0.85f), Offset(0.8f, 0.9f),
-
-            // French Quarter / CBD / Warehouse District Cluster
-            Offset(0.55f, 0.68f), Offset(0.58f, 0.65f), Offset(0.6f, 0.62f),
-            Offset(0.63f, 0.64f), Offset(0.57f, 0.61f), Offset(0.61f, 0.58f),
-            Offset(0.65f, 0.6f),
-
-            // Uptown / Garden District Trace
-            Offset(0.4f, 0.68f), Offset(0.35f, 0.72f), Offset(0.3f, 0.77f),
-            Offset(0.25f, 0.8f),
-
-            // Mid-City / Major Thoroughfares
-            Offset(0.5f, 0.5f), Offset(0.6f, 0.45f), Offset(0.7f, 0.35f),
-            Offset(0.45f, 0.4f), Offset(0.55f, 0.3f), Offset(0.35f, 0.55f),
-            Offset(0.4f, 0.25f)
-        )
-    }
-
+private fun ParticleCanvas(touchInteraction: TouchInteraction, modifier: Modifier = Modifier) {
     val particles = remember {
-        List(250) { // Increased particle count for a denser "city lights" feel
-            val basePoint = newOrleansMapPoints.random()
-            // Add a small, random "jitter" to each point to create a clustered, glowing effect
-            val jitterX = (Random.nextFloat() - 0.5f) * 0.08f
-            val jitterY = (Random.nextFloat() - 0.5f) * 0.08f
+        val radius = 2.5f // Radius of the particle disk in 3D space
+        List(4500) {
+            val angle = Random.nextFloat() * 2f * Math.PI.toFloat()
+            val r = sqrt(Random.nextFloat()) * radius
+            val x = cos(angle) * r
+            val y = sin(angle) * r
 
             Particle(
-                position = Offset(basePoint.x + jitterX, basePoint.y + jitterY),
-                // Slower, more subtle movement to mimic twinkling
-                velocity = Offset(
-                    Random.nextFloat() * 0.0005f - 0.00025f,
-                    Random.nextFloat() * 0.0005f - 0.00025f
-                ),
-                radius = Random.nextFloat() * 1.5f + 0.5f,
-                alpha = Random.nextFloat() * 0.7f + 0.2f
+                initialPosition = Vector3(x, y, 5f + Random.nextFloat() * 2f),
+                initialVelocity = Vector3(0f, 0f, -0.005f) // Slow drift towards the camera
             )
         }
     }
@@ -174,32 +221,43 @@ private fun ParticleCanvas(modifier: Modifier = Modifier) {
         )
     }
 
-    Canvas(modifier = modifier.background(Color.Black)) {
-        val time = animatable.value // This forces recomposition every frame
-        particles.forEach { particle ->
-            particle.update()
-            drawCircle(
-                color = Color.White.copy(alpha = particle.alpha),
-                center = Offset(particle.position.x * size.width, particle.position.y * size.height),
-                radius = particle.radius
-            )
-        }
-    }
-}
+    val bokehBrush = Brush.radialGradient(
+        colors = listOf(Color.White.copy(alpha = 0.5f), Color.Transparent),
+    )
 
-private data class Particle(
-    var position: Offset,
-    val velocity: Offset,
-    val radius: Float,
-    val alpha: Float
-) {
-    fun update() {
-        position = position.plus(velocity)
-        // Wrap around screen
-        if (position.x < 0) position = position.copy(x = 1f)
-        if (position.x > 1) position = position.copy(x = 0f)
-        if (position.y < 0) position = position.copy(y = 1f)
-        if (position.y > 1) position = position.copy(y = 0f)
+    Canvas(modifier = modifier.background(Color.Black)) {
+        val time = animatable.value // Forces recomposition every frame
+        val centerX = size.width / 2
+        val centerY = size.height / 2
+        val fieldOfView = size.width * 0.8f
+
+        val sortedParticles = particles.sortedByDescending { it.position.z }
+
+        sortedParticles.forEach { particle ->
+            particle.update(touchInteraction, Vector3(2.5f, 2.5f, 7f))
+            // Project 3D position to 2D screen space
+            val scale = fieldOfView / (fieldOfView + particle.position.z)
+            if (scale > 0) {
+                val screenX = particle.position.x * scale + centerX
+                val screenY = particle.position.y * scale + centerY
+                val screenRadius = scale * 2.5f
+
+                val alpha = ((7f - particle.position.z) / 7f).coerceIn(0f, 1f) * particle.life
+
+                drawCircle(
+                    brush = bokehBrush,
+                    center = Offset(screenX, screenY),
+                    radius = screenRadius,
+                    alpha = alpha
+                )
+                drawCircle(
+                    color = Color.White,
+                    radius = screenRadius * 0.2f,
+                    center = Offset(screenX, screenY),
+                    alpha = alpha
+                )
+            }
+        }
     }
 }
 
@@ -220,10 +278,11 @@ fun BoxScope.VibeNavButton(
     }
 }
 
-// Placeholder for protected action check
+@Composable
 fun onProtectedAction(navController: NavController, action: () -> Unit) {
-    val user = Firebase.auth.currentUser
-    if (user == null || user.isAnonymous) {
+    val context = LocalContext.current
+    val account = GoogleSignIn.getLastSignedInAccount(context)
+    if (account == null) {
         navController.navigate(Screen.Auth.route)
     } else {
         action()

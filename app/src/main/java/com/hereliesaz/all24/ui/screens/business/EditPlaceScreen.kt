@@ -1,8 +1,19 @@
 package com.hereliesaz.all24.ui.screens.business
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -12,13 +23,13 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.hereliesaz.all24.data.Place
-import com.hereliesaz.all24.services.FirebaseService
+import com.hereliesaz.all24.services.SheetsService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class EditPlaceViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
-    private val firebaseService = FirebaseService()
+    private val sheetsService = SheetsService()
     private val placeId: String = savedStateHandle.get<String>("placeId")!!
 
     private val _place = MutableStateFlow<Place?>(null)
@@ -26,7 +37,8 @@ class EditPlaceViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
 
     init {
         viewModelScope.launch {
-            _place.value = firebaseService.getPlaceById(placeId)
+            // This logic needs to be adapted for SheetsService
+            // _place.value = sheetsService.getPlaceById(placeId)
         }
     }
 
@@ -42,13 +54,14 @@ class EditPlaceViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
         viewModelScope.launch {
             val currentPlace = _place.value
             if (currentPlace != null) {
-                firebaseService.updatePlace(placeId, currentPlace.name, currentPlace.description)
+                // This would now call a proxy function in SheetsService
+                // sheetsService.updatePlace(placeId, currentPlace.name, currentPlace.description)
             }
         }
     }
 }
 
-@OptIn(ExperimentalMaterial3ai::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditPlaceScreen(navController: NavController, viewModel: EditPlaceViewModel = viewModel()) {
     val place by viewModel.place.collectAsState()
@@ -62,7 +75,9 @@ fun EditPlaceScreen(navController: NavController, viewModel: EditPlaceViewModel 
         }
     ) { padding ->
         place?.let {
-            Column(modifier = Modifier.padding(padding).padding(16.dp)) {
+            Column(modifier = Modifier
+                .padding(padding)
+                .padding(16.dp)) {
                 OutlinedTextField(
                     value = it.name,
                     onValueChange = viewModel::onNameChange,

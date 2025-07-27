@@ -1,34 +1,42 @@
 package com.hereliesaz.all24.ui.screens.business
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.hereliesaz.all24.data.Place
-import com.hereliesaz.all24.services.FirebaseService
-import kotlinx.coroutines.flow.SharingStarted
+import com.hereliesaz.all24.services.SheetsService
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 
 class BusinessDashboardViewModel : ViewModel() {
-    private val firebaseService = FirebaseService()
-    private val userId = Firebase.auth.currentUser!!.uid
+    private val sheetsService = SheetsService()
 
-    val ownedPlaces: StateFlow<List<Place>> = firebaseService.getPlacesForOwnerStream(userId)
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = emptyList()
-        )
+    private val _ownedPlaces = MutableStateFlow<List<Place>>(emptyList())
+    val ownedPlaces: StateFlow<List<Place>> = _ownedPlaces.asStateFlow()
+
+    fun fetchOwnedPlaces(ownerId: String) {
+        viewModelScope.launch {
+            // _ownedPlaces.value = sheetsService.getPlacesForOwner(ownerId)
+        }
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -39,6 +47,11 @@ fun BusinessDashboardScreen(
 ) {
     val places by viewModel.ownedPlaces.collectAsState()
 
+    // You would need to get the current user's ID from Google Sign-In to pass to the ViewModel
+    // LaunchedEffect(Unit) {
+    //     viewModel.fetchOwnedPlaces("current_user_id")
+    // }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -47,12 +60,12 @@ fun BusinessDashboardScreen(
             )
         }
     ) { padding ->
-        LazyColumn(modifier = androidx.compose.ui.Modifier.padding(padding)) {
+        LazyColumn(modifier = Modifier.padding(padding)) {
             items(places) { place ->
                 ListItem(
                     headlineContent = { Text(place.name) },
                     supportingContent = { Text(place.description) },
-                    modifier = androidx.compose.ui.Modifier.clickable {
+                    modifier = Modifier.clickable {
                         // Navigate to an edit screen
                     }
                 )

@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -21,6 +22,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.common.api.ApiException
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AuthScreen(
     navController: NavController,
@@ -31,14 +33,11 @@ fun AuthScreen(
     ) { result ->
         val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
         try {
-            // Successful sign-in. The account is now globally available via GoogleSignIn.getLastSignedInAccount().
             val account = task.getResult(ApiException::class.java)
             if (account != null) {
-                // The ritual is complete. Pop back to the previous screen.
                 navController.popBackStack()
             }
         } catch (e: ApiException) {
-            // The spirits are displeased. Or the network is down.
             e.printStackTrace()
         }
     }

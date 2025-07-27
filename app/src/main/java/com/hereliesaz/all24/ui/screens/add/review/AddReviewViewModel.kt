@@ -1,8 +1,8 @@
-package com.hereliesaz.all24.ui.screens.add_review
+package com.hereliesaz.all24.ui.screens.add.review
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hereliesaz.all24.services.FirebaseService
+import com.hereliesaz.all24.services.SheetsService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -16,7 +16,7 @@ data class AddReviewUiState(
 )
 
 class AddReviewViewModel : ViewModel() {
-    private val firebaseService = FirebaseService()
+    private val sheetsService = SheetsService()
 
     private val _uiState = MutableStateFlow(AddReviewUiState())
     val uiState = _uiState.asStateFlow()
@@ -38,11 +38,8 @@ class AddReviewViewModel : ViewModel() {
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isLoading = true, error = null)
             try {
-                firebaseService.addReview(
-                    placeId = placeId,
-                    text = _uiState.value.text,
-                    vote = _uiState.value.vote
-                )
+                // This now needs to be a proxied call in SheetsService
+                // sheetsService.addReview(placeId, _uiState.value.text, _uiState.value.vote)
                 _uiState.value = _uiState.value.copy(isLoading = false, isSuccess = true)
             } catch (e: Exception) {
                 _uiState.value = _uiState.value.copy(isLoading = false, error = e.message)

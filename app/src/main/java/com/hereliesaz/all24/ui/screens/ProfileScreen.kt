@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -23,17 +24,16 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.hereliesaz.all24.ui.navigation.Screen
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreen(
     navController: NavController,
     googleSignInClient: GoogleSignInClient,
 ) {
-    // We check the user's current state on composition.
     val account: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(LocalContext.current)
 
     val signOut = {
         googleSignInClient.signOut().addOnCompleteListener {
-            // Force recomposition by navigating. A more robust solution might use a shared ViewModel or state holder.
             navController.navigate(Screen.Profile.route) {
                 popUpTo(navController.graph.startDestinationId)
                 launchSingleTop = true
@@ -53,7 +53,6 @@ fun ProfileScreen(
             verticalArrangement = Arrangement.Center
         ) {
             if (account != null) {
-                // Authenticated User View
                 Text("Signed in as:")
                 Spacer(Modifier.height(8.dp))
                 Text(account.displayName ?: "N/A", style = MaterialTheme.typography.titleLarge)
@@ -66,7 +65,6 @@ fun ProfileScreen(
                     Text("Return to Ghost")
                 }
             } else {
-                // Anonymous Ghost View
                 Text("You are a ghost, a silent observer.")
                 Spacer(Modifier.height(16.dp))
                 Button(onClick = { navController.navigate(Screen.Auth.route) }) {

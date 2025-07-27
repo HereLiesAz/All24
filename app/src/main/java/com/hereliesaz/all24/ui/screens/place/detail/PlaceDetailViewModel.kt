@@ -1,23 +1,52 @@
-package com.hereliesaz.all24.ui.screens.place_detail
+package com.hereliesaz.all24.ui.screens.place.detail
 
-import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
-import androidx.navigation.NavController
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.hereliesaz.all24.data.Place
+import com.hereliesaz.all24.data.Review
+import com.hereliesaz.all24.services.SheetsService
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun PlaceDetailScreen(navController: NavController, placeId: String?) {
-    // This is a placeholder screen.
-    // A ViewModel would be created to fetch place and review details using the placeId.
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Place Details") },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
-            )
+data class PlaceDetailUiState(
+    val place: Place? = null,
+    val reviews: List<Review> = emptyList(),
+    val isLoading: Boolean = true,
+    val error: String? = null,
+)
+
+class PlaceDetailViewModel(
+    savedStateHandle: SavedStateHandle,
+) : ViewModel() {
+
+    private val placeId: String = savedStateHandle.get<String>("placeId")!!
+    private val sheetsService = SheetsService()
+
+    private val _uiState = MutableStateFlow(PlaceDetailUiState())
+    val uiState = _uiState.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            try {
+                // In a Sheets-based world, we fetch everything at once.
+                val allPlaces = sheetsService.getPlaces()
+                val allReviews = sheetsService.getAllReviews()
+
+                val place = allPlaces.find { it.id == placeId }
+                val reviews = allReviews.filter { it.placeId == placeId }
+
+                _uiState.value = _uiState.value.copy(
+                    place = place,
+                    reviews = reviews,
+                    isLoading = false
+                )
+            } catch (e: Exception) {
+                _uiState.value = _uiState.value.copy(isLoading = false, error = e.message)
+            }
         }
-    ) { padding ->
-        Text("Details for place ID: $placeId", modifier = androidx.compose.ui.Modifier.padding(padding))
     }
+
+    // Add functions for verifying reviews, etc., which would call the SheetsService proxy.
 }

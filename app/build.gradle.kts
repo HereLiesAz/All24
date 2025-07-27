@@ -1,3 +1,16 @@
+import java.io.FileInputStream
+import java.util.Properties
+
+val localProperties = Properties().apply {
+    val localPropertiesFile = project.rootProject.file("local.properties")
+    if (localPropertiesFile.exists()) {
+        load(FileInputStream(localPropertiesFile))
+    } else {
+        // Optional: Log a warning or throw an error if local.properties is missing
+        println("Warning: local.properties file not found at ${localPropertiesFile.absolutePath}")
+    }
+}
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.org.jetbrains.kotlin.android)
@@ -8,10 +21,11 @@ plugins {
 android {
     signingConfigs {
         getByName("debug") {
-            storeFile = file("G:\\My Drive\\az_apk_keystore.jks")
-            storePassword = "18187077190901818"
-            keyAlias = "key0"
-            keyPassword = "18187077190901818"
+            // Read the keystore configuration securely from local.properties
+            storeFile = file(localProperties.getProperty("KEYSTORE_FILE"))
+            storePassword = localProperties.getProperty("KEYSTORE_PASSWORD")
+            keyAlias = localProperties.getProperty("KEY_ALIAS")
+            keyPassword = localProperties.getProperty("KEY_PASSWORD")
         }
     }
     namespace = "com.hereliesaz.all24"
@@ -28,6 +42,23 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        buildConfigField(
+            "String",
+            "SHEETS_API_KEY",
+            "\"${localProperties.getProperty("SHEETS_API_KEY")}\""
+        )
+        buildConfigField(
+            "String",
+            "SPREADSHEET_ID",
+            "\"${localProperties.getProperty("SPREADSHEET_ID")}\""
+        )
+        buildConfigField(
+            "String",
+            "APPS_SCRIPT_URL",
+            "\"${localProperties.getProperty("APPS_SCRIPT_URL")}\""
+        )
+
+
     }
 
     buildTypes {
@@ -37,6 +68,22 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField(
+                "String",
+                "SHEETS_API_KEY",
+                "\"${localProperties.getProperty("SHEETS_API_KEY")}\""
+            )
+            buildConfigField(
+                "String",
+                "SPREADSHEET_ID",
+                "\"${localProperties.getProperty("SPREADSHEET_ID")}\""
+            )
+            buildConfigField(
+                "String",
+                "APPS_SCRIPT_URL",
+                "\"${localProperties.getProperty("APPS_SCRIPT_URL")}\""
+            )
+
         }
     }
     compileOptions {
@@ -48,12 +95,16 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
+
     }
 
     packaging {
         resources {
-            excludes.add("META-INF/AL2.0") // Corrected Line 55
-            excludes.add("META-INF/LGPL2.1") // Corrected Line 56
+            resources.excludes += "META-INF/INDEX.LIST"
+            excludes.add("META-INF/DEPENDENCIES")
+            excludes.add("META-INF/AL2.0")
+            excludes.add("META-INF/LGPL2.1")
         }
     }
     buildToolsVersion = "36.0.0"
@@ -103,5 +154,8 @@ dependencies {
 
     // --- NEW: Google Sign-In (OAuth) Dependency ---
     implementation(libs.google.play.services.auth)
+
+    implementation(libs.androidx.navigation.compose) // Correct navigation dependency
+    implementation(libs.materialIconsExtended) // Add this line
 
 }

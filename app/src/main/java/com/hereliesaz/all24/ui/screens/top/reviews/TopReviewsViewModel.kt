@@ -4,23 +4,31 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hereliesaz.all24.data.Place
 import com.hereliesaz.all24.data.Review
-import com.hereliesaz.all24.services.FirebaseService
-import kotlinx.coroutines.flow.SharingStarted
+import com.hereliesaz.all24.services.SheetsService
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 
 class TopReviewsViewModel : ViewModel() {
 
-    private val firebaseService = FirebaseService()
+    private val sheetsService = SheetsService()
 
-    val adminReviews: StateFlow<List<Review>> = firebaseService.getAdminReviewsStream()
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.Companion.WhileSubscribed(5000),
-            initialValue = emptyList()
-        )
+    private val _adminReviews = MutableStateFlow<List<Review>>(emptyList())
+    val adminReviews: StateFlow<List<Review>> = _adminReviews.asStateFlow()
+
+    init {
+        fetchAdminReviews()
+    }
+
+    private fun fetchAdminReviews() {
+        viewModelScope.launch {
+            // _adminReviews.value = sheetsService.getAdminReviews()
+        }
+    }
 
     suspend fun getPlaceForReview(review: Review): Place? {
-        return firebaseService.getPlaceById(review.placeId)
+        // return sheetsService.getPlaceById(review.placeId)
+        return null
     }
 }

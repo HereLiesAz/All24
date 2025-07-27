@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.hereliesaz.all24.data.Submission
-import com.hereliesaz.all24.services.FirebaseService
+import com.hereliesaz.all24.services.SheetsService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -21,7 +21,7 @@ class AdminSubmissionDetailViewModel(
     savedStateHandle: SavedStateHandle,
 ) : AndroidViewModel(application) {
 
-    private val firebaseService = FirebaseService()
+    private val sheetsService = SheetsService()
     private val submissionId: String = savedStateHandle.get<String>("submissionId")!!
     private val _uiState = MutableStateFlow(AdminSubmissionDetailState())
     val uiState = _uiState.asStateFlow()
@@ -29,8 +29,8 @@ class AdminSubmissionDetailViewModel(
     init {
         viewModelScope.launch {
             try {
-                val submission = firebaseService.getSubmissionById(submissionId)
-                _uiState.value = _uiState.value.copy(submission = submission, isLoading = false)
+                // val submission = sheetsService.getSubmissionById(submissionId)
+                // _uiState.value = _uiState.value.copy(submission = submission, isLoading = false)
             } catch (e: Exception) {
                 _uiState.value = _uiState.value.copy(error = e.message, isLoading = false)
             }
@@ -41,10 +41,9 @@ class AdminSubmissionDetailViewModel(
         viewModelScope.launch {
             _uiState.value.submission?.let {
                 try {
-                    firebaseService.approveSubmission(it, getApplication())
+                    // sheetsService.approveSubmission(it, getApplication())
                 } catch (e: Exception) {
-                    // Handle error, e.g., show a toast or update UI state
-                    _uiState.value = _uiState.value.copy(error = "Geocoding failed: ${e.message}")
+                    _uiState.value = _uiState.value.copy(error = "Action failed: ${e.message}")
                 }
             }
         }
@@ -53,7 +52,7 @@ class AdminSubmissionDetailViewModel(
     fun deny() {
         viewModelScope.launch {
             try {
-                firebaseService.denySubmission(submissionId)
+                // sheetsService.denySubmission(submissionId)
             } catch (e: Exception) {
                 // Handle error
             }

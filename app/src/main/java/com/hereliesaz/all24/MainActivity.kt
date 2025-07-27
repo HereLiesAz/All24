@@ -6,43 +6,38 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.hereliesaz.all24.ui.navigation.AppNavigation
 import com.hereliesaz.all24.ui.theme.All24Theme
 
 class MainActivity : ComponentActivity() {
+
+    lateinit var googleSignInClient: GoogleSignInClient
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Configure Google Sign-In
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken("944329350333-lmqcgnhpsi1cd0noj0o4nf9ejaj707u6.apps.googleusercontent.com") // You get this from your Google Cloud console
+            .requestEmail()
+            .build()
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
+
+
         setContent {
             All24Theme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    // This will be replaced by the main navigation logic.
-                    // For now, it's a placeholder.
-                    Greeting("Android")
+                    // Pass the client to the navigation host
+                    AppNavigation(googleSignInClient)
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    All24Theme {
-        Greeting("Android")
     }
 }

@@ -1,8 +1,10 @@
-package com.hereliesaz.all24.ui.screens.submit_place
+package com.hereliesaz.all24.ui.screens.submit.place
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hereliesaz.all24.services.FirebaseService
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.hereliesaz.all24.services.SheetsService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -18,7 +20,7 @@ data class SubmitPlaceUiState(
 )
 
 class SubmitPlaceViewModel : ViewModel() {
-    private val firebaseService = FirebaseService()
+    private val sheetsService = SheetsService()
 
     private val _uiState = MutableStateFlow(SubmitPlaceUiState())
     val uiState = _uiState.asStateFlow()
@@ -39,7 +41,15 @@ class SubmitPlaceViewModel : ViewModel() {
         _uiState.value = _uiState.value.copy(category = category)
     }
 
-    fun submit() {
+    fun submit(context: Context) {
+        val account = GoogleSignIn.getLastSignedInAccount(context)
+        if (account == null || account.idToken == null) {
+            _uiState.value =
+                _uiState.value.copy(error = "Authentication error. Please sign in again.")
+            return
+        }
+        val idToken = account.idToken!!
+
         if (_uiState.value.name.isBlank() || _uiState.value.description.isBlank() || _uiState.value.address.isBlank()) {
             _uiState.value = _uiState.value.copy(error = "All fields are required.")
             return
@@ -48,7 +58,8 @@ class SubmitPlaceViewModel : ViewModel() {
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isLoading = true, error = null)
             try {
-                firebaseService.submitPlace(
+                sheetsService.submitPlace(
+                    idToken = idToken,
                     name = _uiState.value.name,
                     description = _uiState.value.description,
                     address = _uiState.value.address,
