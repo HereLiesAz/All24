@@ -5,21 +5,20 @@ agp = "8.12.0-rc01" # Android Gradle Plugin version. You can check latest stable
 composeBomVersion = "2025.07.00"
 coreKtx = "1.17.0-beta01"
 espressoCore = "3.7.0-rc01"
-firebaseAuthKtx = "23.2.1"
+firebaseAuthKtx = "24.0.0"
 firebaseBom = "34.0.0"
-firebaseFirestoreKtx = "25.1.4"
 junit = "4.13.2"
 junitVersion = "1.3.0-rc01"
 kotlin = "2.2.0"
 googleServices = "4.4.3"
 lifecycleRuntimeKtx = "2.9.2"
 material3 = "1.4.0-alpha18"
-myAndroidLib = "v1.0"
 navigationRuntimeAndroid = "2.9.2"
-engageCore = "1.5.8" # Firebase Google Services plugin version
+quarks = "1.0.0-alpha02"
 uiTestJunit4 = "1.9.0-beta03"
 firebaseMlCommon = "22.1.2"
-kotlinMvp = "1.4.2" # <--- ADD THIS LINE
+uiGraphics = "1.8.3" # <--- ADD THIS LINE
+parabolic-motion-animation = "v1.2"
 
 
 [libraries]
@@ -48,7 +47,10 @@ google-api-client-android = { group = "com.google.api-client", name = "google-ap
 google-sheets-api = { group = "com.google.apis", name = "google-api-services-sheets", version = "v4-rev20250616-2.0.0" }
 google-play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version = "21.4.0" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationRuntimeAndroid" }
-materialIconsExtended = { group = "androidx.compose.material", name = "material-icons-extended" } # Add this line
+materialIconsExtended = { group = "androidx.compose.material", name = "material-icons-extended" }
+quarks = { module = "me.nikhilchaudhari:quarks", version.ref = "quarks" }
+ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics", version.ref = "uiGraphics" } # Add this line
+parabolic-motion-animation = { group = "com.github.prathamesh-sonpatki", name = "Parabolic-Motion-Animation-in-Jetpack-Compose", version.ref = "parabolic-motion-animation" }
 
 
 

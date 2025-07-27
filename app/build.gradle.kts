@@ -135,6 +135,7 @@ dependencies {
     implementation(libs.androidx.navigation.runtime.android)
     implementation(libs.engage.core)
     implementation(libs.firebase.ml.common)
+    implementation(libs.ui.graphics)
 
     // Testing
     testImplementation(libs.junit)
@@ -157,5 +158,8 @@ dependencies {
 
     implementation(libs.androidx.navigation.compose) // Correct navigation dependency
     implementation(libs.materialIconsExtended) // Add this line
+    implementation(libs.quarks)
+    implementation(libs.parabolic.motion.animation)
+
 
 }
