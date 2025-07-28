@@ -5,46 +5,65 @@ package com.hereliesaz.all24.ui.screens.place.detail
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.hereliesaz.all24.ui.screens.carousel.MainCarouselViewModel
 
 @Composable
 fun PlaceDetailScreen(
-    placeId: String?,
     sharedTransitionScope: SharedTransitionScope,
     animatedVisibilityScope: AnimatedVisibilityScope,
+    viewModel: PlaceDetailViewModel = viewModel(),
 ) {
-    val viewModel: MainCarouselViewModel = viewModel()
-    val place = viewModel.uiState.value.placesByCategories.values
-        .flatten()
-        .find { it.id == placeId }
+    val uiState by viewModel.uiState.collectAsState()
 
     with(sharedTransitionScope) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
-        ) {
-            Text(
-                modifier = Modifier.sharedElement(
-                    rememberSharedContentState(key = "title/$placeId"),
-                    animatedVisibilityScope = animatedVisibilityScope
-                ),
-                text = place?.name ?: "Place Not Found",
-                style = MaterialTheme.typography.headlineMedium
-            )
-            Text(
-                text = place?.description ?: "No description available.",
-                modifier = Modifier.padding(top = 8.dp)
-            )
+        when {
+            uiState.isLoading -> {
+                Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator()
+                }
+            }
+
+            uiState.error != null -> {
+                Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Text(uiState.error ?: "An unknown error occurred.")
+                }
+            }
+
+            uiState.place != null -> {
+                val place = uiState.place!!
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp)
+                ) {
+                    Text(
+                        modifier = Modifier.sharedElement(
+                            rememberSharedContentState(key = "title/${place.id}"),
+                            animatedVisibilityScope = animatedVisibilityScope
+                        ),
+                        text = place.name,
+                        style = MaterialTheme.typography.headlineMedium
+                    )
+                    Text(
+                        text = place.description,
+                        modifier = Modifier.padding(top = 8.dp)
+                    )
+                    // TODO: Display reviews from uiState.reviews
+                }
+            }
         }
     }
 }

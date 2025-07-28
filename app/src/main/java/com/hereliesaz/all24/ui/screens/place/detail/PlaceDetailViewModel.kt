@@ -21,7 +21,7 @@ class PlaceDetailViewModel(
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
-    private val placeId: String = savedStateHandle.get<String>("placeId")!!
+    private val placeId: String = checkNotNull(savedStateHandle["placeId"])
     private val sheetsService = SheetsService()
 
     private val _uiState = MutableStateFlow(PlaceDetailUiState())
@@ -35,13 +35,20 @@ class PlaceDetailViewModel(
                 val allReviews = sheetsService.getAllReviews()
 
                 val place = allPlaces.find { it.id == placeId }
-                val reviews = allReviews.filter { it.placeId == placeId }
+                if (place != null) {
+                    val reviews = allReviews.filter { it.placeId == placeId }
 
-                _uiState.value = _uiState.value.copy(
-                    place = place,
-                    reviews = reviews,
-                    isLoading = false
-                )
+                    _uiState.value = _uiState.value.copy(
+                        place = place,
+                        reviews = reviews,
+                        isLoading = false
+                    )
+                } else {
+                    _uiState.value = _uiState.value.copy(
+                        isLoading = false,
+                        error = "Place not found."
+                    )
+                }
             } catch (e: Exception) {
                 _uiState.value = _uiState.value.copy(isLoading = false, error = e.message)
             }

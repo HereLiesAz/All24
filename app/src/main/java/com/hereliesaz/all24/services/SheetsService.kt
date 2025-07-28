@@ -1,103 +1,80 @@
 package com.hereliesaz.all24.services
 
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.hereliesaz.all24.BuildConfig
 import com.hereliesaz.all24.data.Place
 import com.hereliesaz.all24.data.Review
+import com.hereliesaz.all24.data.Submission
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.util.Date
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.io.OutputStreamWriter
+import java.net.HttpURLConnection
+import java.net.URL
 
 class SheetsService {
 
-    // --- MOCK DATA ---
-    private val mockPlaces = listOf(
-        Place(
-            id = "place_01",
-            name = "The Serpent's Coil",
-            description = "A dimly lit bar known for its potent cocktails and whispered secrets.",
-            category = "bar",
-            tags = listOf("24-Hour Bars", "Happy Hours")
-        ),
-        Place(
-            id = "place_02",
-            name = "Eulalie's Absinthe House",
-            description = "Green light spills from the windows of this timeless establishment.",
-            category = "bar",
-            tags = listOf("24-Hour Bars")
-        ),
-        Place(
-            id = "place_03",
-            name = "The Gilded Cage",
-            description = "Once an opulent theater, now a sprawling, decadent nightclub.",
-            category = "club",
-            tags = listOf("Events", "Happy Hours")
-        ),
-        Place(
-            id = "place_04",
-            name = "Midnight Grub",
-            description = "The best post-bar food you can find.",
-            category = "food",
-            tags = listOf("Late-Night Food")
-        ),
-        Place(
-            id = "place_05",
-            name = "The Wandering Chef",
-            description = "A new menu and location every week.",
-            category = "food",
-            tags = listOf("Pop-ups", "Late-Night Food")
-        )
-    )
+    private val gson = Gson()
 
-    private val mockReviews = listOf(
-        Review(
-            id = "review_01",
-            placeId = "place_01",
-            userId = "user_a",
-            text = "The Sazerac here is a religious experience.",
-            vote = "endorse",
-            timestamp = Date()
-        ),
-        Review(
-            id = "review_02",
-            placeId = "place_02",
-            userId = "user_b",
-            text = "Felt like I was stepping into another century. The green fairy is real.",
-            vote = "endorse",
-            timestamp = Date()
-        ),
-        Review(
-            id = "review_03",
-            placeId = "place_01",
-            userId = "user_c",
-            text = "Too dark, and the bartender stared at me funny.",
-            vote = "avoid",
-            timestamp = Date()
-        )
-    )
-    // --- END MOCK DATA ---
+    // Base URL for read operations from the Google Apps Script
+    private val appsScriptUrl = BuildConfig.APPS_SCRIPT_URL
 
+    // URL for the secure 'submitPlace' Google Cloud Function
+    // NOTE: This assumes the Cloud Function URL is stored in the same buildConfigField.
+    // You might want to create a separate one for clarity (e.g., CLOUD_FUNCTION_URL).
+    private val submitPlaceUrl = BuildConfig.APPS_SCRIPT_URL
+
+
+    private suspend inline fun <reified T> fetchData(sheetName: String): T {
+        val urlString = "$appsScriptUrl?sheet=$sheetName"
+        val url = URL(urlString)
+        val connection = url.openConnection() as HttpURLConnection
+        connection.requestMethod = "GET"
+
+        if (connection.responseCode == HttpURLConnection.HTTP_OK) {
+            val reader = BufferedReader(InputStreamReader(connection.inputStream))
+            val response = reader.readText()
+            reader.close()
+            // Use TypeToken to handle generic list parsing with Gson
+            val type = object : TypeToken<T>() {}.type
+            return gson.fromJson(response, type)
+        } else {
+            throw Exception("Failed to fetch data from $sheetName. HTTP Error: ${connection.responseCode}")
+        }
+    }
 
     // --- Read Functions ---
     suspend fun getPlaces(): List<Place> {
         return withContext(Dispatchers.IO) {
-            // Return the mock data instead of making a network call.
-            mockPlaces
+            try {
+                fetchData<List<Place>>("places")
+            } catch (e: Exception) {
+                println("Error fetching places: ${e.message}")
+                emptyList()
+            }
         }
     }
 
     suspend fun getAllReviews(): List<Review> {
         return withContext(Dispatchers.IO) {
-            // Return the mock data.
-            mockReviews
+            try {
+                fetchData<List<Review>>("reviews")
+            } catch (e: Exception) {
+                println("Error fetching reviews: ${e.message}")
+                emptyList()
+            }
         }
     }
 
-    suspend fun getSubmissions(): List<com.hereliesaz.all24.data.Submission> {
+    suspend fun getSubmissions(): List<Submission> {
+        // This assumes you have an Apps Script part for this or a secure Cloud Function
         return emptyList()
     }
 
 
     // --- Write Functions ---
-    // The write functions remain placeholders for your real implementation.
     suspend fun submitPlace(
         idToken: String,
         name: String,
@@ -105,6 +82,42 @@ class SheetsService {
         address: String,
         category: String,
     ) {
-        println("Pretending to submit place: $name")
+        return withContext(Dispatchers.IO) {
+            val url = URL(submitPlaceUrl) // This should be your Cloud Function URL
+            val connection = url.openConnection() as HttpURLConnection
+            connection.requestMethod = "POST"
+            connection.doOutput = true
+            connection.setRequestProperty("Content-Type", "application/json")
+            connection.setRequestProperty("Authorization", "Bearer $idToken")
+
+            val jsonPayload = """
+                {
+                    "name": "$name",
+                    "description": "$description",
+                    "address": "$address",
+                    "category": "$category"
+                }
+            """.trimIndent()
+
+            val writer = OutputStreamWriter(connection.outputStream)
+            writer.write(jsonPayload)
+            writer.flush()
+            writer.close()
+
+            val responseCode = connection.responseCode
+            if (responseCode != HttpURLConnection.HTTP_OK) {
+                val errorReader = BufferedReader(InputStreamReader(connection.errorStream))
+                val errorResponse = errorReader.readText()
+                errorReader.close()
+                throw Exception("Submission failed. HTTP Error: $responseCode. Message: $errorResponse")
+            }
+        }
+    }
+
+    suspend fun addReview(placeId: String, text: String, vote: String, idToken: String) {
+        // TODO: Implement the backend Cloud Function for adding a review.
+        // This function would be very similar to submitPlace, requiring an idToken.
+        println("Review submission for $placeId is not yet implemented on the backend.")
+        // For now, we simulate success without doing anything.
     }
 }

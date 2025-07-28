@@ -1,5 +1,7 @@
 package com.hereliesaz.all24.ui.navigation
 
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -17,9 +19,8 @@ import com.hereliesaz.all24.ui.screens.business.BusinessDashboardScreen
 import com.hereliesaz.all24.ui.screens.business.EditPlaceScreen
 import com.hereliesaz.all24.ui.screens.carousel.MainCarouselScreen
 import com.hereliesaz.all24.ui.screens.place.detail.PlaceDetailScreen
-import com.hereliesaz.all24.ui.screens.place.list.PlaceListScreen
 import com.hereliesaz.all24.ui.screens.submit.place.SubmitPlaceScreen
-import androidx.compose.runtime.Composableimport com.hereliesaz.all24.ui.screens.top.reviews.TopReviewsScreen
+import com.hereliesaz.all24.ui.screens.top.reviews.TopReviewsScreen
 
 
 sealed class Screen(val route: String) {
@@ -46,82 +47,94 @@ sealed class Screen(val route: String) {
     }
 }
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun AppNavigation(googleSignInClient: GoogleSignInClient) {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Screen.MainCarousel.route) {
+    SharedTransitionLayout {
+        NavHost(navController = navController, startDestination = Screen.MainCarousel.route) {
 
-        composable(Screen.MainCarousel.route) {
-            MainCarouselScreen(navController)
-        }
+            composable(Screen.MainCarousel.route) {
+                MainCarouselScreen(
+                    navController = navController,
+                    sharedTransitionScope = this@SharedTransitionLayout,
+                    animatedVisibilityScope = this
+                )
+            }
 
-        composable(Screen.PlacesList.route) {
-            PlacesListScreen(navController)
-        }
+            composable(Screen.PlacesList.route) {
+                PlacesListScreen(navController)
+            }
 
-        composable(Screen.Vibe.route) {
-            VibeScreen(navController)
-        }
+            composable(Screen.Vibe.route) {
+                VibeScreen(navController)
+            }
 
-        composable(Screen.Auth.route) {
-            AuthScreen(
-                navController = navController,
-                googleSignInClient = googleSignInClient
-            )
-        }
+            composable(Screen.Auth.route) {
+                AuthScreen(
+                    navController = navController,
+                    googleSignInClient = googleSignInClient
+                )
+            }
 
-        composable(Screen.Profile.route) {
-            ProfileScreen(
-                navController = navController,
-                googleSignInClient = googleSignInClient
-            )
-        }
+            composable(Screen.Profile.route) {
+                ProfileScreen(
+                    navController = navController,
+                    googleSignInClient = googleSignInClient
+                )
+            }
 
-        composable(Screen.TopReviews.route) {
-            TopReviewsScreen(navController)
-        }
+            composable(Screen.TopReviews.route) {
+                TopReviewsScreen(navController)
+            }
 
-        composable(Screen.SubmitPlace.route) {
-            SubmitPlaceScreen(navController)
-        }
+            composable(Screen.SubmitPlace.route) {
+                SubmitPlaceScreen(navController)
+            }
 
-        composable(Screen.AdminDashboard.route) {
-            AdminDashboardScreen(navController)
-        }
+            composable(Screen.AdminDashboard.route) {
+                AdminDashboardScreen(navController)
+            }
 
-        composable(Screen.BusinessDashboard.route) {
-            BusinessDashboardScreen(navController)
-        }
+            composable(Screen.BusinessDashboard.route) {
+                BusinessDashboardScreen(navController)
+            }
 
-        composable(
-            route = Screen.AdminSubmissionDetail.route,
-            arguments = listOf(navArgument("submissionId") { type = NavType.StringType })
-        ) {
-            AdminSubmissionDetailScreen(navController)
-        }
+            composable(
+                route = Screen.AdminSubmissionDetail.route,
+                arguments = listOf(navArgument("submissionId") { type = NavType.StringType })
+            ) {
+                AdminSubmissionDetailScreen(navController)
+            }
 
-        composable(
-            route = Screen.PlaceDetail.route,
-            arguments = listOf(navArgument("placeId") { type = NavType.StringType })
-        ) { backStackEntry ->
-            PlaceDetailScreen(navController, backStackEntry.arguments?.getString("placeId"))
-        }
+            composable(
+                route = Screen.PlaceDetail.route,
+                arguments = listOf(navArgument("placeId") {
+                    type = NavType.StringType
+                }) // Argument is non-nullable
+            ) {
+                PlaceDetailScreen(
+                    sharedTransitionScope = this@SharedTransitionLayout,
+                    animatedVisibilityScope = this
+                )
+            }
 
 
 
-        composable(
-            route = Screen.AddReview.route,
-            arguments = listOf(navArgument("placeId") { type = NavType.StringType })
-        ) { backStackEntry ->
-            AddReviewScreen(navController, backStackEntry.arguments?.getString("placeId")!!)
-        }
+            composable(
+                route = Screen.AddReview.route,
+                arguments = listOf(navArgument("placeId") { type = NavType.StringType })
+            ) { backStackEntry ->
+                AddReviewScreen(navController, backStackEntry.arguments?.getString("placeId")!!)
+            }
 
-        composable(
-            route = Screen.EditPlace.route,
-            arguments = listOf(navArgument("placeId") { type = NavType.StringType })
-        ) {
-            EditPlaceScreen(navController)
+            composable(
+                route = Screen.EditPlace.route,
+                arguments = listOf(navArgument("placeId") { type = NavType.StringType })
+            ) {
+                EditPlaceScreen(navController)
+            }
         }
     }
 }

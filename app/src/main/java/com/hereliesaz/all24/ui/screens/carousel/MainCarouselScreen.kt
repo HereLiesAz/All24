@@ -1,48 +1,48 @@
-@file:OptIn(ExperimentalFoundationApi::class, ExperimentalSharedTransitionApi::class)
+@file:OptIn(
+    ExperimentalFoundationApi::class, ExperimentalSharedTransitionApi::class,
+    ExperimentalMaterial3Api::class
+)
 
 package com.hereliesaz.all24.ui.screens.carousel
 
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.PageSize
-import androidx.compose.foundation.pager.VerticalPager
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
+import androidx.compose.material3.carousel.HorizontalMultiBrowseCarousel
+import androidx.compose.material3.carousel.rememberCarouselState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clipToBounds
-import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.util.lerp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.hereliesaz.all24.data.Place
 import com.hereliesaz.all24.ui.navigation.Screen
-import kotlin.math.absoluteValue
+import com.hereliesaz.verticalcarousel.component.VerticalMultiBrowseCarousel
+import kotlin.math.abs
+import com.hereliesaz.verticalcarousel.state.rememberCarouselState as rememberVerticalCarouselState
 
-const val FAKE_INFINITE_PAGE_COUNT = 10000
 
 @Composable
 fun MainCarouselScreen(
@@ -61,17 +61,14 @@ fun MainCarouselScreen(
         val categories = uiState.categories
         val placesByCategories = uiState.placesByCategories
 
-        val verticalPagerState = rememberPagerState(
-            initialPage = FAKE_INFINITE_PAGE_COUNT / 2,
-            pageCount = { FAKE_INFINITE_PAGE_COUNT }
-        )
+        val verticalCarouselState = rememberVerticalCarouselState(itemCount = { categories.size })
 
-        VerticalPager(
-            state = verticalPagerState,
+        VerticalMultiBrowseCarousel(
+            state = verticalCarouselState,
             modifier = Modifier.fillMaxSize(),
-            pageSize = PageSize.Fill,
-        ) { page ->
-            val categoryIndex = page % categories.size
+            preferredItemHeight = 450.dp,
+            itemSpacing = 16.dp,
+        ) { categoryIndex ->
             val category = categories[categoryIndex]
             val places = placesByCategories[category] ?: emptyList()
 
@@ -96,66 +93,47 @@ fun CategoryView(
     sharedTransitionScope: SharedTransitionScope,
     animatedVisibilityScope: AnimatedVisibilityScope,
 ) {
-    val horizontalPagerState = rememberPagerState(
-        initialPage = if (places.isEmpty()) 0 else FAKE_INFINITE_PAGE_COUNT / 2,
-        pageCount = { if (places.isEmpty()) 1 else FAKE_INFINITE_PAGE_COUNT }
-    )
-
     with(sharedTransitionScope) {
+        var horizontalDragInProgress by remember { mutableStateOf(false) }
+
         Box(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                // The parent Box will only respond to vertical drags.
+                // If a horizontal drag is detected, this pointerInput does nothing,
+                // allowing the gesture to be handled by its children.
+                .pointerInput(Unit) {
+                    detectDragGestures { change, dragAmount ->
+                        change.consume()
+                        if (abs(dragAmount.x) < abs(dragAmount.y)) {
+                            // This is a vertical drag, but we cannot manually control
+                            // the parent, so we do nothing here. The parent's own
+                            // handler will deal with it if the child doesn't.
+                        } else {
+                            // This is a horizontal drag.
+                        }
+                    }
+                },
             contentAlignment = Alignment.Center
         ) {
             if (places.isEmpty()) {
                 Text("Nothing to see here... yet.")
             } else {
-                HorizontalPager(
-                    state = horizontalPagerState,
+                HorizontalMultiBrowseCarousel(
+                    state = rememberCarouselState { places.size },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(250.dp)
-                        .clipToBounds(),
-                    pageSize = PageSize.Fixed(300.dp),
+                        .height(250.dp),
+                    preferredItemWidth = 186.dp,
+                    itemSpacing = 8.dp,
                     contentPadding = PaddingValues(horizontal = 16.dp),
-                    pageSpacing = 8.dp
-                ) { page ->
-                    val placeIndex = page % places.size
+                ) { placeIndex ->
                     val place = places[placeIndex]
-                    val pageOffset =
-                        ((horizontalPagerState.currentPage - page) + horizontalPagerState.currentPageOffsetFraction)
-                    val translationX = lerp(
-                        start = 0f,
-                        stop = 150f,
-                        fraction = (pageOffset - 1).coerceIn(-1f, 0f) + 1
-                    ) + lerp(
-                        start = 0f,
-                        stop = -300f,
-                        fraction = pageOffset.coerceIn(0f, 1f)
-                    )
-                    val scaleY = lerp(1f, 0.8f, pageOffset.absoluteValue)
-                    val alpha = lerp(1f, 0.2f, pageOffset.absoluteValue.coerceIn(0f, 2f))
-                    val interactionSource = remember { MutableInteractionSource() }
-                    val isPressed by interactionSource.collectIsPressedAsState()
-                    val pressScale by animateFloatAsState(
-                        if (isPressed) 0.95f else 1f,
-                        label = "pressScale"
-                    )
-
                     Card(
                         modifier = Modifier
                             .fillMaxSize()
-                            .graphicsLayer {
-                                this.translationX = translationX
-                                this.scaleY = scaleY
-                                this.alpha = alpha
-                                this.scaleX = pressScale
-                                this.scaleY *= pressScale // Combine scales
-                            }
-                            .clickable(
-                                interactionSource = interactionSource,
-                                indication = null,
-                                onClick = { onPlaceClicked(place) }
-                            )
+                            .clickable { onPlaceClicked(place) }
+                            .maskClip(androidx.compose.material3.MaterialTheme.shapes.medium)
                     ) {
                         Box(
                             modifier = Modifier.fillMaxSize(),
@@ -177,7 +155,7 @@ fun CategoryView(
             }
             Text(
                 text = category,
-                style = MaterialTheme.typography.headlineSmall,
+                style = androidx.compose.material3.MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier
                     .align(Alignment.TopCenter)

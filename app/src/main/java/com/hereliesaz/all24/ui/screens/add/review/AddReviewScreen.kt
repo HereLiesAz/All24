@@ -21,6 +21,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -33,6 +34,7 @@ fun AddReviewScreen(
     viewModel: AddReviewViewModel = viewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val context = LocalContext.current
 
     LaunchedEffect(uiState.isSuccess) {
         if (uiState.isSuccess) {
@@ -65,7 +67,7 @@ fun AddReviewScreen(
             // Add Endorse/Avoid toggle here
             Spacer(Modifier.height(16.dp))
             Button(
-                onClick = { viewModel.submitReview(placeId) },
+                onClick = { viewModel.submitReview(placeId, context) },
                 modifier = Modifier.fillMaxWidth(),
                 enabled = !uiState.isLoading
             ) {

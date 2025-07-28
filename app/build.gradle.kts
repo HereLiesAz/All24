@@ -162,6 +162,10 @@ dependencies {
     implementation(libs.material) // Assuming libs.material = "com.google.android.material:material:1.12.0"
     implementation(libs.androidx.core.ktx)
 
+    implementation(libs.verticalcarousel)
+    implementation(libs.gson)
+
+
 
 
 }
