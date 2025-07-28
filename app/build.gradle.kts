@@ -136,6 +136,7 @@ dependencies {
     implementation(libs.engage.core)
     implementation(libs.firebase.ml.common)
     implementation(libs.ui.graphics)
+    implementation(libs.androidx.recyclerview)
 
     // Testing
     testImplementation(libs.junit)
@@ -157,9 +158,10 @@ dependencies {
     implementation(libs.google.play.services.auth)
 
     implementation(libs.androidx.navigation.compose) // Correct navigation dependency
-    implementation(libs.materialIconsExtended) // Add this line
-    implementation(libs.quarks)
-    implementation(libs.parabolic.motion.animation)
+    implementation(libs.materialIconsExtended)
+    implementation(libs.material) // Assuming libs.material = "com.google.android.material:material:1.12.0"
+    implementation(libs.androidx.core.ktx)
+
 
 
 }

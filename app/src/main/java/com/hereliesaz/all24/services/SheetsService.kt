@@ -9,25 +9,41 @@ import java.util.Date
 class SheetsService {
 
     // --- MOCK DATA ---
-    // This is a temporary, hardcoded list to simulate a real backend response.
     private val mockPlaces = listOf(
         Place(
             id = "place_01",
             name = "The Serpent's Coil",
             description = "A dimly lit bar known for its potent cocktails and whispered secrets.",
-            category = "bar"
+            category = "bar",
+            tags = listOf("24-Hour Bars", "Happy Hours")
         ),
         Place(
             id = "place_02",
             name = "Eulalie's Absinthe House",
             description = "Green light spills from the windows of this timeless establishment.",
-            category = "bar"
+            category = "bar",
+            tags = listOf("24-Hour Bars")
         ),
         Place(
             id = "place_03",
             name = "The Gilded Cage",
             description = "Once an opulent theater, now a sprawling, decadent nightclub.",
-            category = "club"
+            category = "club",
+            tags = listOf("Events", "Happy Hours")
+        ),
+        Place(
+            id = "place_04",
+            name = "Midnight Grub",
+            description = "The best post-bar food you can find.",
+            category = "food",
+            tags = listOf("Late-Night Food")
+        ),
+        Place(
+            id = "place_05",
+            name = "The Wandering Chef",
+            description = "A new menu and location every week.",
+            category = "food",
+            tags = listOf("Pop-ups", "Late-Night Food")
         )
     )
 

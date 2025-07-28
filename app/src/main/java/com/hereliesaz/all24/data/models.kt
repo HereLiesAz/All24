@@ -17,7 +17,8 @@ data class Place(
     val description: String = "",
     val location: GeoPoint? = null,
     val category: String = "bar",
-    val ownerId: String? = null
+    val ownerId: String? = null,
+    val tags: List<String> = emptyList(), // New field for categorization
 )
 
 data class Review(

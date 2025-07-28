@@ -1,6 +1,7 @@
 package com.hereliesaz.all24.ui.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -9,18 +10,21 @@ import androidx.navigation.navArgument
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.hereliesaz.all24.ui.auth.AuthScreen
 import com.hereliesaz.all24.ui.screens.ProfileScreen
-import com.hereliesaz.all24.ui.screens.VibeScreen
 import com.hereliesaz.all24.ui.screens.add.review.AddReviewScreen
 import com.hereliesaz.all24.ui.screens.admin.AdminDashboardScreen
 import com.hereliesaz.all24.ui.screens.admin.AdminSubmissionDetailScreen
 import com.hereliesaz.all24.ui.screens.business.BusinessDashboardScreen
 import com.hereliesaz.all24.ui.screens.business.EditPlaceScreen
+import com.hereliesaz.all24.ui.screens.carousel.MainCarouselScreen
 import com.hereliesaz.all24.ui.screens.place.detail.PlaceDetailScreen
+import com.hereliesaz.all24.ui.screens.place.list.PlaceListScreen
 import com.hereliesaz.all24.ui.screens.submit.place.SubmitPlaceScreen
-import com.hereliesaz.all24.ui.screens.top.reviews.TopReviewsScreen
+import androidx.compose.runtime.Composableimport com.hereliesaz.all24.ui.screens.top.reviews.TopReviewsScreen
 
 
 sealed class Screen(val route: String) {
+    object MainCarousel : Screen("main_carousel") // The new entry point
+    object PlacesList : Screen("places_list")
     object Vibe : Screen("vibe")
     object Auth : Screen("auth")
     object Profile : Screen("profile")
@@ -46,7 +50,15 @@ sealed class Screen(val route: String) {
 fun AppNavigation(googleSignInClient: GoogleSignInClient) {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Screen.Vibe.route) {
+    NavHost(navController = navController, startDestination = Screen.MainCarousel.route) {
+
+        composable(Screen.MainCarousel.route) {
+            MainCarouselScreen(navController)
+        }
+
+        composable(Screen.PlacesList.route) {
+            PlacesListScreen(navController)
+        }
 
         composable(Screen.Vibe.route) {
             VibeScreen(navController)
@@ -96,6 +108,8 @@ fun AppNavigation(googleSignInClient: GoogleSignInClient) {
             PlaceDetailScreen(navController, backStackEntry.arguments?.getString("placeId"))
         }
 
+
+
         composable(
             route = Screen.AddReview.route,
             arguments = listOf(navArgument("placeId") { type = NavType.StringType })
@@ -110,4 +124,14 @@ fun AppNavigation(googleSignInClient: GoogleSignInClient) {
             EditPlaceScreen(navController)
         }
     }
+}
+
+@Composable
+fun VibeScreen(x0: NavHostController) {
+    TODO("Not yet implemented")
+}
+
+@Composable
+fun PlacesListScreen(x0: NavHostController) {
+    TODO("Not yet implemented")
 }

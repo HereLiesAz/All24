@@ -1,68 +1,34 @@
 # Deconstructing M3: A Manifesto on Expressive Design
 
-## 1. Introduction: The System as a Ghost in the Machine
+## 1. Introduction: The System as a Language
 
-A design system is typically a cage, a set of well-meaning but ultimately restrictive rules intended
-to enforce consistency across a product. It promises harmony but often delivers homogeneity, sanding
-away the unique edges of an application until it feels indistinguishable from its peers. For the
-All24 project—an application founded on the annihilation of convention—the adoption of a system as
-comprehensive as Google's Material Design 3 (M3) seems paradoxical.
-
-It is not. We do not *adopt* M3; we haunt it. We treat it as a ghost in our machine—a set of
-underlying principles, well-researched defaults, and powerful Jetpack Compose components that we can
-either command, subvert, or ignore entirely to serve our primary philosophical purpose. M3
-Expressive is not a rulebook to be followed but a rich language to be spoken, and at times, to be
-argued with. The research from Google's design team validates this approach, noting that "expressive
-design makes you feel something" and is strongly preferred by users, especially younger demographics
-who value unique brand identities. All24 leverages this by using M3 Expressive's toolkit not for
-generic "delight," but to create a specific, opinionated, and often dissonant atmosphere.
+For the All24 project, we treat Google's Material Design 3 (M3) not as a restrictive rulebook, but
+as a rich design language. M3 Expressive is the practice of using that language to create a unique,
+branded, and atmospheric application. We use M3's foundational components and motion system to build
+an interface that feels tangible, fluid, and alive.
 
 This document deconstructs how we leverage the "fundamental parts of expressive design"—color,
-shape, size, and motion—to build the application's core duality: the deep, immersive, and almost
-sacred "Vibe World," contrasted with the clean, functional, and deliberately mundane "System World"
-of its secondary screens.
+shape, size, and motion—to build the application's core interface.
 
-## 2. Foundational Element I: A Tale of Two Color Systems
+## 2. Foundational Element: Motion as Narrative and Physics
 
-Material 3 Expressive's most prominent feature is its rich, nuanced, and dynamic approach to color.
-It provides a sophisticated system for generating tonal palettes and applying them with semantic
-meaning. All24 embraces this system's power by applying it inconsistently on purpose, creating a
-clear narrative division within the app.
+In All24, motion is not decorative; it is the primary language for communicating with the user. Our
+implementation of M3 Expressive motion focuses on two key areas:
 
-* **The System World: Embracing Dynamic Harmony:** Screens that are purely functional—the Admin
-  Panels, the Submission Forms (`SubmitPlaceScreen.kt`), the `ProfileScreen.kt`, and the
-  Authentication flow (`AuthScreen.kt`)—are allowed to fully embrace M3's dynamic color. The
-  `All24Theme` composable in `app/src/main/java/com/hereliesaz/all24/ui/theme/Theme.kt` contains the
-  logic that, on Android 12+ devices, calls `dynamicDarkColorScheme(context)` or
-  `dynamicLightColorScheme(context)` . This populates the M3 `ColorScheme` with colors extracted
-  from the user's device wallpaper.
-    * **Narrative Purpose:** This decision serves a critical narrative goal. By allowing these
-      utilitarian screens to reflect the user's personal device theme, we visually and thematically
-      tether them to the mundane world of the operating system. An admin approving a submission sees
-      their personal colors in the buttons and text fields, a constant subconscious reminder that
-      they are performing a task in a tool, not inhabiting a separate world. This aligns with the M3
-      Expressive tactic to "use contrast between primary, secondary, and tertiary color roles to
-      prioritize actions and simplify navigation"; here, the contrast is between the entire "System
-      World" and the "Vibe World."
+* **Physics-Based Carousel Motion:** The core of the app's interaction is the multi-browse carousel.
+  We use the official `com.google.android.material.carousel.CarouselLayoutManager` from the Material
+  Components library. This component has a sophisticated, physics-based scrolling and flinging
+  model. The way items mask, scale, and settle into place provides a tangible and satisfying feel
+  that is central to the app's user experience.
 
-* **The Vibe World: A Deliberate Rejection of Harmony:** The `VibeScreen.kt`, the application's
-  altar, actively and aggressively rejects dynamic color. Its foundational elements are immutable
-  and opinionated.
-    * **Absolute Black:** The screen's background is hardcoded to `Color.Black` within the
-      `ParticleCanvas` composable , overriding the `MaterialTheme.colorScheme.background` provided
-      by the theme. This is a direct subversion of M3's surface tonality system, which recommends
-      using subtle tones of the primary color on surfaces to create a sense of depth. We reject this
-      depth in favor of an absolute void.
-    * **Stark Contrast:** All interactive elements within the Vibe world, such as the
-      `VibeNavButton` icons, are tinted with `Color.White` . This creates a stark, high-contrast
-      aesthetic that is entirely independent of the user's wallpaper.
-    * **Implementation (`Theme.kt`):** This duality is enabled by our fallback `DarkColorScheme` .
-      When `dynamicColor` is false or unavailable, our custom `darkColorScheme` is used, which
-      explicitly defines `background` and `surface` as `Black`, and `onBackground` and `onSurface`
-      as `White` . This ensures that our core aesthetic is the default experience, not a conditional
-      one.
+* **Choreographed Screen Transitions:** To create "natural continuity across views," the application
+  uses Jetpack Compose's `SharedTransitionLayout`. When a user taps a carousel item, this system
+  animates that item into its new position and form on the detail screen. This "hero transition"
+  removes visual disruption and creates a clear narrative link between the Browse view and the
+  detail view, making the entire interface feel like a single, cohesive space.
 
-## 3. Foundational Element II: Motion as Narrative and Physics
+## 3. Foundational Element: Expressive Typography
+
 
 M3 Expressive replaces the old "easing and duration" animation model with a system based on motion
 physics, designed to make interactions feel "alive, fluid, and natural". In All24, motion is not

@@ -12,6 +12,7 @@ junitVersion = "1.3.0-rc01"
 kotlin = "2.2.0"
 googleServices = "4.4.3"
 lifecycleRuntimeKtx = "2.9.2"
+material = "1.12.0"
 material3 = "1.4.0-alpha18"
 navigationRuntimeAndroid = "2.9.2"
 quarks = "1.0.0-alpha02"
@@ -19,6 +20,7 @@ uiTestJunit4 = "1.9.0-beta03"
 firebaseMlCommon = "22.1.2"
 uiGraphics = "1.8.3" # <--- ADD THIS LINE
 parabolic-motion-animation = "v1.2"
+recyclerview = "1.4.0"
 
 
 [libraries]
@@ -47,10 +49,12 @@ google-api-client-android = { group = "com.google.api-client", name = "google-ap
 google-sheets-api = { group = "com.google.apis", name = "google-api-services-sheets", version = "v4-rev20250616-2.0.0" }
 google-play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version = "21.4.0" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationRuntimeAndroid" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
 materialIconsExtended = { group = "androidx.compose.material", name = "material-icons-extended" }
 quarks = { module = "me.nikhilchaudhari:quarks", version.ref = "quarks" }
 ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics", version.ref = "uiGraphics" } # Add this line
 parabolic-motion-animation = { group = "com.github.prathamesh-sonpatki", name = "Parabolic-Motion-Animation-in-Jetpack-Compose", version.ref = "parabolic-motion-animation" }
+androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 
 
 
