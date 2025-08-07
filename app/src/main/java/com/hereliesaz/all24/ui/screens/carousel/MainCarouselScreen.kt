@@ -10,7 +10,6 @@ import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,28 +20,27 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
-import androidx.compose.material3.carousel.HorizontalMultiBrowseCarousel
-import androidx.compose.material3.carousel.rememberCarouselState
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.hereliesaz.all24.data.Place
+import com.hereliesaz.all24.ui.components.HorizontalMultiBrowsePager
+import com.hereliesaz.all24.ui.components.ParentVerticalScrollConsumer
 import com.hereliesaz.all24.ui.navigation.Screen
-import com.hereliesaz.verticalcarousel.component.VerticalMultiBrowseCarousel
+import com.hereliesaz.all24.ui.components.verticalcarousel.component.VerticalMultiBrowseCarousel
 import kotlin.math.abs
-import com.hereliesaz.verticalcarousel.state.rememberCarouselState as rememberVerticalCarouselState
-
+import com.hereliesaz.all24.ui.components.verticalcarousel.state.rememberCarouselState as rememberVerticalCarouselState
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
 
 @Composable
 fun MainCarouselScreen(
@@ -68,6 +66,10 @@ fun MainCarouselScreen(
             modifier = Modifier.fillMaxSize(),
             preferredItemHeight = 450.dp,
             itemSpacing = 16.dp,
+            flingBehavior = verticalCarouselState.fling(0f, spring(
+                dampingRatio = Spring.DampingRatioMediumBouncy,
+                stiffness = Spring.StiffnessMedium
+            )),
         ) { categoryIndex ->
             val category = categories[categoryIndex]
             val places = placesByCategories[category] ?: emptyList()
@@ -93,74 +95,51 @@ fun CategoryView(
     sharedTransitionScope: SharedTransitionScope,
     animatedVisibilityScope: AnimatedVisibilityScope,
 ) {
-    with(sharedTransitionScope) {
-        var horizontalDragInProgress by remember { mutableStateOf(false) }
-
-        Box(
+    Box(modifier = Modifier.fillMaxSize()) {
+        // TODO: Re-implement shared element transition
+        Text(
+            text = category,
+            style = androidx.compose.material3.MaterialTheme.typography.headlineSmall,
+            fontWeight = FontWeight.Bold,
             modifier = Modifier
-                .fillMaxSize()
-                // The parent Box will only respond to vertical drags.
-                // If a horizontal drag is detected, this pointerInput does nothing,
-                // allowing the gesture to be handled by its children.
-                .pointerInput(Unit) {
-                    detectDragGestures { change, dragAmount ->
-                        change.consume()
-                        if (abs(dragAmount.x) < abs(dragAmount.y)) {
-                            // This is a vertical drag, but we cannot manually control
-                            // the parent, so we do nothing here. The parent's own
-                            // handler will deal with it if the child doesn't.
-                        } else {
-                            // This is a horizontal drag.
-                        }
-                    }
-                },
-            contentAlignment = Alignment.Center
-        ) {
-            if (places.isEmpty()) {
-                Text("Nothing to see here... yet.")
-            } else {
-                HorizontalMultiBrowseCarousel(
-                    state = rememberCarouselState { places.size },
+                .align(Alignment.TopCenter)
+                .padding(top = 64.dp)
+        )
+        if (places.isEmpty()) {
+            Text("Nothing to see here... yet.")
+        } else {
+            val pagerState = rememberPagerState(pageCount = { places.size })
+            HorizontalMultiBrowsePager(
+                state = pagerState,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(250.dp)
+                    .nestedScroll(ParentVerticalScrollConsumer)
+                    .align(Alignment.Center),
+                preferredItemWidth = 186.dp,
+                itemSpacing = 8.dp,
+                contentPadding = PaddingValues(horizontal = 16.dp),
+            ) { page ->
+                val place = places[page]
+                Card(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(250.dp),
-                    preferredItemWidth = 186.dp,
-                    itemSpacing = 8.dp,
-                    contentPadding = PaddingValues(horizontal = 16.dp),
-                ) { placeIndex ->
-                    val place = places[placeIndex]
-                    Card(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .clickable { onPlaceClicked(place) }
-                            .maskClip(androidx.compose.material3.MaterialTheme.shapes.medium)
+                        .fillMaxSize()
+                        .clickable { onPlaceClicked(place) }
+                        .maskClip(androidx.compose.material3.MaterialTheme.shapes.medium)
+                ) {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
                     ) {
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(
-                                modifier = Modifier
-                                    .padding(16.dp)
-                                    .sharedElement(
-                                        rememberSharedContentState(key = "title/${place.id}"),
-                                        animatedVisibilityScope = animatedVisibilityScope
-                                    ),
-                                text = place.name,
-                                textAlign = TextAlign.Center
-                            )
-                        }
+                        Text(
+                            modifier = Modifier
+                                .padding(16.dp),
+                            text = place.name,
+                            textAlign = TextAlign.Center
+                        )
                     }
                 }
             }
-            Text(
-                text = category,
-                style = androidx.compose.material3.MaterialTheme.typography.headlineSmall,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier
-                    .align(Alignment.TopCenter)
-                    .padding(top = 64.dp)
-            )
         }
     }
 }
