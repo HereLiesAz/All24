@@ -17,14 +17,14 @@ import com.hereliesaz.all24.ui.screens.admin.AdminDashboardScreen
 import com.hereliesaz.all24.ui.screens.admin.AdminSubmissionDetailScreen
 import com.hereliesaz.all24.ui.screens.business.BusinessDashboardScreen
 import com.hereliesaz.all24.ui.screens.business.EditPlaceScreen
-import com.hereliesaz.all24.ui.screens.carousel.MainCarouselScreen
+import com.hereliesaz.all24.ui.screens.home.HomeScreen
 import com.hereliesaz.all24.ui.screens.place.detail.PlaceDetailScreen
 import com.hereliesaz.all24.ui.screens.submit.place.SubmitPlaceScreen
 import com.hereliesaz.all24.ui.screens.top.reviews.TopReviewsScreen
 
 
 sealed class Screen(val route: String) {
-    object MainCarousel : Screen("main_carousel") // The new entry point
+    object Home : Screen("home") // The new entry point
     object PlacesList : Screen("places_list")
     object Vibe : Screen("vibe")
     object Auth : Screen("auth")
@@ -53,14 +53,10 @@ fun AppNavigation(googleSignInClient: GoogleSignInClient) {
     val navController = rememberNavController()
 
     SharedTransitionLayout {
-        NavHost(navController = navController, startDestination = Screen.MainCarousel.route) {
+        NavHost(navController = navController, startDestination = Screen.Home.route) {
 
-            composable(Screen.MainCarousel.route) {
-                MainCarouselScreen(
-                    navController = navController,
-                    sharedTransitionScope = this@SharedTransitionLayout,
-                    animatedVisibilityScope = this
-                )
+            composable(Screen.Home.route) {
+                HomeScreen()
             }
 
             composable(Screen.PlacesList.route) {
