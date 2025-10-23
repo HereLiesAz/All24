@@ -11,39 +11,20 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.hereliesaz.all24.ui.auth.AuthScreen
-import com.hereliesaz.all24.ui.screens.ProfileScreen
-import com.hereliesaz.all24.ui.screens.add.review.AddReviewScreen
-import com.hereliesaz.all24.ui.screens.admin.AdminDashboardScreen
-import com.hereliesaz.all24.ui.screens.admin.AdminSubmissionDetailScreen
-import com.hereliesaz.all24.ui.screens.business.BusinessDashboardScreen
-import com.hereliesaz.all24.ui.screens.business.EditPlaceScreen
+import com.hereliesaz.all24.ui.screens.MainScreen
+import com.hereliesaz.all24.ui.screens.onboarding.OnboardingScreen
 import com.hereliesaz.all24.ui.screens.detail.DetailScreen
-import com.hereliesaz.all24.ui.screens.home.HomeScreen
-import com.hereliesaz.all24.ui.screens.submit.place.SubmitPlaceScreen
-import com.hereliesaz.all24.ui.screens.top.reviews.TopReviewsScreen
 
 
 sealed class Screen(val route: String) {
+    object Onboarding : Screen("onboarding")
+    object Main : Screen("main")
     object Home : Screen("home")
+    object Map : Screen("map")
+    object Profile : Screen("profile")
+    object Auth : Screen("auth")
     object Detail : Screen("detail/{itemId}") {
         fun createRoute(itemId: Int) = "detail/$itemId"
-    }
-    object PlacesList : Screen("places_list")
-    object Vibe : Screen("vibe")
-    object Auth : Screen("auth")
-    object Profile : Screen("profile")
-    object TopReviews : Screen("top_reviews")
-    object SubmitPlace : Screen("submit_place")
-    object AdminDashboard : Screen("admin_dashboard")
-    object BusinessDashboard : Screen("business_dashboard")
-    object AdminSubmissionDetail : Screen("admin_submission_detail/{submissionId}") {
-        fun createRoute(submissionId: String) = "admin_submission_detail/$submissionId"
-    }
-    object AddReview : Screen("add_review/{placeId}") {
-        fun createRoute(placeId: String) = "add_review/$placeId"
-    }
-    object EditPlace : Screen("edit_place/{placeId}") {
-        fun createRoute(placeId: String) = "edit_place/$placeId"
     }
 }
 
@@ -53,13 +34,20 @@ fun AppNavigation(googleSignInClient: GoogleSignInClient) {
     val navController = rememberNavController()
 
     SharedTransitionLayout {
-        NavHost(navController = navController, startDestination = Screen.Home.route) {
+        NavHost(navController = navController, startDestination = Screen.Onboarding.route) {
 
-            composable(Screen.Home.route) {
-                HomeScreen(
+            composable(Screen.Onboarding.route) {
+                OnboardingScreen(navController = navController)
+            }
+
+            composable(Screen.Main.route) {
+                MainScreen()
+            }
+
+            composable(Screen.Auth.route) {
+                AuthScreen(
                     navController = navController,
-                    sharedTransitionScope = this@SharedTransitionLayout,
-                    animatedVisibilityScope = this
+                    googleSignInClient = googleSignInClient
                 )
             }
 
@@ -73,75 +61,6 @@ fun AppNavigation(googleSignInClient: GoogleSignInClient) {
                     animatedVisibilityScope = this
                 )
             }
-
-            composable(Screen.PlacesList.route) {
-                PlacesListScreen(navController)
-            }
-
-            composable(Screen.Vibe.route) {
-                VibeScreen(navController)
-            }
-
-            composable(Screen.Auth.route) {
-                AuthScreen(
-                    navController = navController,
-                    googleSignInClient = googleSignInClient
-                )
-            }
-
-            composable(Screen.Profile.route) {
-                ProfileScreen(
-                    navController = navController,
-                    googleSignInClient = googleSignInClient
-                )
-            }
-
-            composable(Screen.TopReviews.route) {
-                TopReviewsScreen(navController)
-            }
-
-            composable(Screen.SubmitPlace.route) {
-                SubmitPlaceScreen(navController)
-            }
-
-            composable(Screen.AdminDashboard.route) {
-                AdminDashboardScreen(navController)
-            }
-
-            composable(Screen.BusinessDashboard.route) {
-                BusinessDashboardScreen(navController)
-            }
-
-            composable(
-                route = Screen.AdminSubmissionDetail.route,
-                arguments = listOf(navArgument("submissionId") { type = NavType.StringType })
-            ) {
-                AdminSubmissionDetailScreen(navController)
-            }
-
-            composable(
-                route = Screen.AddReview.route,
-                arguments = listOf(navArgument("placeId") { type = NavType.StringType })
-            ) { backStackEntry ->
-                AddReviewScreen(navController, backStackEntry.arguments?.getString("placeId")!!)
-            }
-
-            composable(
-                route = Screen.EditPlace.route,
-                arguments = listOf(navArgument("placeId") { type = NavType.StringType })
-            ) {
-                EditPlaceScreen(navController)
-            }
         }
     }
-}
-
-@Composable
-fun VibeScreen(x0: NavHostController) {
-    TODO("Not yet implemented")
-}
-
-@Composable
-fun PlacesListScreen(x0: NavHostController) {
-    TODO("Not yet implemented")
 }

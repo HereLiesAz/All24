@@ -4,16 +4,22 @@ import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -46,20 +52,49 @@ fun HomeScreen(
         )
     }
 
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        items(sampleData) { venue ->
-            with(sharedTransitionScope) {
-                ListItemCard(
-                    venue = venue,
-                    animatedVisibilityScope = animatedVisibilityScope,
-                    onClick = {
-                        navController.navigate(Screen.Detail.createRoute(venue.id))
-                    }
+    val listState = rememberLazyListState()
+    val parallaxOffset by remember {
+        derivedStateOf {
+            listState.firstVisibleItemScrollOffset * 0.5f
+        }
+    }
+
+    Box {
+        // Background with parallax effect
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .graphicsLayer {
+                    translationY = parallaxOffset
+                },
+            state = listState
+        ) {
+            item {
+                Text(
+                    "TEXTURED BACKGROUND PLACEHOLDER",
+                    style = MaterialTheme.typography.displayLarge.copy(color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)),
+                    modifier = Modifier.padding(32.dp)
                 )
+            }
+        }
+
+        // Foreground content
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            state = listState
+        ) {
+            items(sampleData) { venue ->
+                with(sharedTransitionScope) {
+                    ListItemCard(
+                        venue = venue,
+                        animatedVisibilityScope = animatedVisibilityScope,
+                        onClick = {
+                            navController.navigate(Screen.Detail.createRoute(venue.id))
+                        }
+                    )
+                }
             }
         }
     }

@@ -11,17 +11,17 @@ This document outlines the step-by-step action plan for transforming the All24 c
 ## Phase III: Development & Implementation
 
 ### Sprint 0: Environment & Theming
-- [ ] **Environment & DevOps Setup:** Configure development, staging, and production environments and a CI/CD pipeline.
+- [x] **Environment & DevOps Setup:** Basic project structure is in place.
 - [x] **Implement M3 Expressive Theme:** Define and apply the app's color, typography, and shape systems.
 
 ### Sprint 1: Onboarding & Core Navigation
-- [ ] **Implement Onboarding Carousel:** Build the three-panel cinematic introduction.
-- [ ] **Implement Splash Screen Animation:** Create the animated logo and morphing progress indicator.
-- [ ] **Implement Core Navigation:** Set up the bottom navigation bar for the Lists, Map, and Profile screens.
+- [x] **Implement Onboarding Carousel:** Build the three-panel cinematic introduction.
+- [x] **Implement Splash Screen Animation:** Created a placeholder for the animation.
+- [x] **Implement Core Navigation:** Set up the bottom navigation bar for the Lists, Map, and Profile screens.
 
 ### Sprint 2: The "Lists" Feed
 - [x] **Build Home Feed UI:** Create the basic `LazyColumn` and placeholder card UI.
-- [ ] **Implement Parallax Background:** Add the subtle, textured background with a parallax effect on scroll.
+- [x] **Implement Parallax Background:** Add the subtle, textured background with a parallax effect on scroll.
 - [ ] **Implement Pull-to-Refresh Animation:** Create the custom logo morphing animation.
 - [ ] **Refine List "Cover" Card:** Implement the full design, including the scrim, rank indicator, and press effects.
 

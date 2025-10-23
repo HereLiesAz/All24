@@ -7,11 +7,18 @@ This document outlines the primary user task flows within the All24 application,
 This flow describes the first-time user experience.
 
 1.  **Launch App:** The user opens the app for the first time.
-2.  **View Splash Screen:** The user sees the cinematic splash screen animation.
+2.  **View Splash Screen:** The user sees the cinematic splash screen animation (placeholder).
 3.  **Interact with Welcome Carousel:** The user swipes through the three-panel carousel to learn about the app's core concepts.
-4.  **Access Auth Screen:** From the final panel of the carousel, the user can choose to sign in or create an account.
+4.  **Access Auth Screen:** From the final panel of the carousel, the user can choose to sign in or create an account. Tapping either option navigates them to the `AuthScreen`.
 
-## 2. The Authentication Flow
+## 2. The Main Navigation Flow
+
+This flow describes how a user navigates the main sections of the app after onboarding or signing in.
+
+1.  **Enter Main Screen:** After completing the onboarding or signing in, the user is navigated to the `MainScreen`.
+2.  **Use Bottom Navigation:** The user can use the `BottomAppBar` to navigate between the `HomeScreen` ("Lists"), `MapScreen` ("Map"), and `ProfileScreen` ("Profile").
+
+## 3. The Authentication Flow
 
 This flow describes how a user signs in or creates an account.
 
@@ -27,7 +34,7 @@ This flow describes how a user signs in or creates an account.
 6.  **Create Account:**
     *   The user taps the "Create Account" button (UI only).
 
-## 3. The Discovery Flow: Finding a New Experience
+## 4. The Discovery Flow: Finding a New Experience
 
 This is the primary user journey, focused on proactive and serendipitous discovery.
 
@@ -38,7 +45,7 @@ This is the primary user journey, focused on proactive and serendipitous discove
 5.  **View Detail Screen:** A shared element transition animates the card into the `DetailScreen`.
 6.  **Explore Venue Details:** The user can now explore the rich content on the `DetailScreen`.
 
-## 4. The "Vibe Check" Flow: Leaving Feedback
+## 5. The "Vibe Check" Flow: Leaving Feedback
 
 This flow describes how a user contributes to the community by leaving their own feedback.
 
@@ -47,7 +54,7 @@ This flow describes how a user contributes to the community by leaving their own
 3.  **Leave a Comment:** The user can leave a comment by filling in the Mad Libs-style prompts in the "Leave a Vibe Check" section.
 4.  **Submit Comment:** The user taps the "Submit" button to submit their comment (UI only).
 
-## 5. The Profile Engagement Flow: Reviewing Personal Activity
+## 6. The Profile Engagement Flow: Reviewing Personal Activity
 
 This flow describes how a user interacts with their personal space within the app.
 

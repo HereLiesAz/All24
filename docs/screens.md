@@ -13,6 +13,20 @@ The Onboarding Screen is the first experience for new users, designed to be a ci
     *   **Panel 3: "Meet Your Guides."** Introduces the roles of Curators and Creators, and includes sign-in options.
 *   **Animation:** The onboarding flow begins with a custom splash screen animation where the All24 logo is drawn and morphs into a progress indicator.
 
+**Implementation Notes:**
+* The `OnboardingScreen` is implemented in `app/src/main/java/com/hereliesaz/all24/ui/screens/onboarding/OnboardingScreen.kt`.
+* A placeholder for the splash screen animation is included.
+
+## Main Screen
+
+The Main Screen is the main container for the app after the user has completed onboarding or signed in.
+
+*   **Layout:** A `Scaffold` with a `BottomAppBar`.
+*   **Navigation:** The `BottomAppBar` provides navigation between the `HomeScreen`, `MapScreen`, and `ProfileScreen`.
+
+**Implementation Notes:**
+* The `MainScreen` is implemented in `app/src/main/java/com/hereliesaz/all24/ui/screens/MainScreen.kt`.
+
 ## The Home Feed (Lists Screen)
 
 The Home Feed is the primary screen of the application and the user's main entry point for discovery.
@@ -20,6 +34,10 @@ The Home Feed is the primary screen of the application and the user's main entry
 *   **Layout:** A single, uncluttered vertical column of "list item covers" with a parallax background.
 *   **Content:** Each cover represents an establishment on a "Top 24" list and features a full-bleed photograph with a scrim, the venue's name, its rank, and a witty summary line.
 *   **Interaction:** Vertical scrolling, a custom pull-to-refresh animation, and tapping a card to navigate to the Detail View.
+
+**Implementation Notes:**
+* The `HomeScreen` is implemented in `app/src/main/java/com/hereliesaz/all24/ui/screens/home/HomeScreen.kt`.
+* A parallax background effect has been implemented.
 
 ## The Detail View
 
@@ -58,6 +76,9 @@ The Map Screen is a secondary discovery tool for users who have a specific locat
 
 *   **Layout:** A traditional map-based interface.
 
+**Implementation Notes:**
+* A placeholder `MapScreen` is implemented in `app/src/main/java/com/hereliesaz/all24/ui/screens/map/MapScreen.kt`.
+
 ## The Auth Screen
 
 The Auth Screen provides a way for users to sign in or create an account.
@@ -66,8 +87,7 @@ The Auth Screen provides a way for users to sign in or create an account.
 
 ## Navigation
 
-A minimal bottom navigation bar provides access to the app's core sections with three clear icons:
+The app's navigation is orchestrated by `AppNavigation.kt`.
 
-*   **Lists:** The default home screen.
-*   **Map:** The map-based discovery tool.
-*   **Profile:** The user's personal space.
+*   **Initial Flow:** The app starts at the `OnboardingScreen`. Upon completion, it navigates to the `MainScreen`.
+*   **Main Flow:** The `MainScreen` contains a nested `NavHost` that handles navigation between the `HomeScreen`, `MapScreen`, and `ProfileScreen`.
