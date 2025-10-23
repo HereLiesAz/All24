@@ -6,36 +6,6 @@ This document outlines the user interface (UI) and user experience (UX) principl
 
 The architecture of the All24 app is a direct translation of its manifesto into a tangible user experience. It deliberately eschews the conventions of traditional review platforms to create a product that is focused on discovery, delight, and a deep, narrative-driven exploration of the city's culinary scene.
 
-### The "List" as the Primary Interface
-
-The fundamental departure from other platforms is immediately evident upon launching the app. The home screen is not a search bar or a map, but a visually rich, endlessly scrollable feed of "Top 24" lists. This design choice reframes the user's interaction from one of query to one of discovery. Instead of asking the user "What are you looking for?", All24 tells the user "Here is what you should be looking for."
-
-This proactive discovery model encourages users to browse, explore, and be surprised. The experience is less like searching a directory and more like flipping through the pages of a beautifully designed, opinionated magazine.
-
-### The Anatomy of a List Item
-
-Each of the 24 entries on a list is presented as a clean, elegant "card" that reveals layers of rich content upon interaction.
-
-*   **Collapsed State (Cover):** A stunning, full-bleed photograph, the establishment's name, its rank on the list, and a single, witty, Zagat-style summary line.
-*   **Expanded State (Article):** Tapping the cover triggers a fluid animation that expands the card into a full-screen view containing:
-    *   **The All24 Take:** A 150-word official review.
-    *   **Creator Takes:** A horizontal carousel of short-form videos and photo galleries from verified local influencers.
-    *   **The Vitals:** Address, hours, phone number, and a link to the menu.
-    *   **The People's Voice:** A curated selection of 3-4 of the most insightful user comments.
-    *   **"Know Before You Geaux":** A dedicated section for practical, insider tips (e.g., "Cash only").
-
-### The Review Model: The "Vibe Check"
-
-All24 completely discards the five-star rating system in favor of the "Vibe Check," a qualitative feedback system designed for more meaningful community input.
-
-*   **"Vouch":** Instead of a numerical score, users who love a place can tap a "Vouch" button. The total number of vouches is a transparent measure of community love.
-*   **Prompted Comments:** To leave a comment, users are engaged with creative, Mad Libs-style prompts to elicit specific, useful information, such as:
-    *   "This place is perfect for \_\_\_\_\_\_ with \_\_\_\_\_\_."
-    *   "Don't even think about leaving without trying the \_\_\_\_\_\_."
-    *   "The vibe here is \_\_\_\_\_\_."
-
-This system rewards wit and insight. Users whose comments are featured are awarded a "Tastemaker" badge, creating a virtuous cycle of high-quality, user-generated content.
-
 ## The Visual and Kinetic Language: Deceptive Minimalism in Motion
 
 The visual and interactive design of All24 is the physical embodiment of its brand soul. It is sleek, modern, and deceptively minimalistic, revealing layers of depth and personality through interaction. The technical foundation is Jetpack Compose's Material 3 (M3) design system.
@@ -63,13 +33,62 @@ Every interaction is animated using a physics-based motion engine (M3 Expressive
     *   **Micro-interactions:** Tapping the "Vouch" button triggers a satisfying "bump" and particle burst.
     *   **Shape Morphing:** A loading indicator might morph into a checkmark upon completion.
 
-### Deceptive Minimalism in Practice: The UI
+## A Granular Deep Dive: Component and Feature Design
 
-The UI appears simple at first glance but reveals depth through interaction.
+### Part 1: The Onboarding Experience – A Cinematic Introduction
 
-*   **The Home Feed:** A single, uncluttered column of list item "covers." The only interactions are vertical scrolling and tapping a card. All complexity is hidden within the cards.
-*   **The Navigation Bar:** A minimal bottom navigation bar with three icons:
-    *   **Lists:** The default home screen.
-    *   **Map:** A secondary, map-based discovery tool.
-    *   **Profile:** The user's personal space.
-*   **The Profile Screen:** A user's culinary scrapbook, featuring a grid of "Vouched" places, "Tastemaker" comments, and bookmarked lists.
+*   **Splash Screen & Initial Animation:**
+    *   The app will open on a solid "Gaslamp Black" screen.
+    *   A single, thin, neon line in the fuchsia accent color will animate, drawing the shape of the All24 logo.
+    *   The logo will pulse once with a soft glow, then fluidly morph into a circular progress indicator.
+*   **Welcome Carousel:** A three-panel, horizontally-scrolling carousel will introduce the app's core concepts.
+    *   **Panel 1: "Welcome to the Real NOLA."** Explains the "Top 24" philosophy.
+    *   **Panel 2: "Your Vibe is the New Five Stars."** Introduces the "Vibe Check" and "Vouch" system.
+    *   **Panel 3: "Meet Your Guides."** Introduces the roles of Curators and Creators.
+*   **Account Creation & Sign-In:**
+    *   The final panel will feature "Sign in with Google" and "Continue with Email" buttons.
+    *   Tapping "Continue with Email" will animate the appearance of email and password `OutlinedTextField` composables.
+
+### Part 2: The "Lists" Feed – The Heart of Discovery
+
+*   **Anatomy of the Feed:**
+    *   A Jetpack Compose `LazyColumn` with a subtle, textured background that has a parallax effect on scroll.
+    *   A custom pull-to-refresh animation where the All24 logo morphs from a circle into its full shape and back.
+*   **The List "Cover" Card (Collapsed State):**
+    *   A full-bleed image loaded with Coil, with a shimmer placeholder effect.
+    *   A dark, vertical gradient (scrim) on the bottom of the image to ensure text legibility.
+    *   The venue's name in `emphasized headlineSmall` style and the summary in `baseline bodyMedium` style.
+    *   A "cut corner" rectangle shape for the rank indicator in the top-left corner.
+    *   A bounded M3 ripple effect and a lift-and-shadow effect on press.
+
+### Part 3: The Detail View – The Expanded "Article"
+
+*   **The Shared Element Transition:**
+    *   A "hero" animation using `SharedTransitionLayout` that animates the cover image, venue title, and rank indicator from the list to the detail view.
+    *   The animation will use a custom `PathMotion` and a physics-based spring with low stiffness and damping.
+*   **Collapsing Toolbar Behavior:**
+    *   The header image will parallax scroll and shrink as the user scrolls, with the venue's name transitioning into a standard `TopAppBar`.
+*   **"Creator Takes" Carousel:**
+    *   A horizontal `LazyRow` of `AspectRatio` cards.
+    *   Creator avatars will be cropped into an organic, slightly irregular circle.
+    *   Tapping a video thumbnail will open a full-screen modal dialog with a Media3 video player.
+*   **"The Vitals" Component:**
+    *   A `Column` of `Row`s, each with an `Icon` and `Text`.
+    *   A custom animated vector drawable for the 24-hour indicator, with a subtle, slow-pulsing neon sign effect.
+*   **The "Vibe Check" Interaction Bar:**
+    *   An M3 `BottomAppBar` that is always visible.
+    *   A "Vouch" button implemented as an M3 Expressive `Split` button, with the main button showing the vouch count and the dropdown revealing "Share" and "Add to Collection" actions.
+    *   A "heartbeat" animation on the vouch icon when tapped, a "slot machine" animation for the number change, and a confetti-like particle effect.
+
+### Part 4: The Profile Screen & Community Features
+
+*   **Layout & Motion:**
+    *   A `CollapsingToolbarScaffold` with a header containing the user's avatar, display name, and "Tastemaker" badge.
+    *   The header will collapse into a simple `TopAppBar` on scroll.
+*   **"Vouches" Grid:**
+    *   A `LazyVerticalStaggeredGrid` for a masonry-style layout of vouched places.
+*   **"Collections" Feature:**
+    *   Users can create new collections from their profile or a venue's detail page.
+    *   Collections will be displayed as cards on the profile screen and can be shared with friends.
+*   **Gamification & Badges:**
+    *   A dedicated "Badges" section on the profile will showcase achievements like "Night Owl," "Specialist," and "Curator's Pick."

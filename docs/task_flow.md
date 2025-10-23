@@ -2,7 +2,16 @@
 
 This document outlines the primary user task flows within the All24 application, detailing how users will interact with the app's core features.
 
-## 1. The Authentication Flow
+## 1. The Onboarding Flow
+
+This flow describes the first-time user experience.
+
+1.  **Launch App:** The user opens the app for the first time.
+2.  **View Splash Screen:** The user sees the cinematic splash screen animation.
+3.  **Interact with Welcome Carousel:** The user swipes through the three-panel carousel to learn about the app's core concepts.
+4.  **Access Auth Screen:** From the final panel of the carousel, the user can choose to sign in or create an account.
+
+## 2. The Authentication Flow
 
 This flow describes how a user signs in or creates an account.
 
@@ -18,31 +27,33 @@ This flow describes how a user signs in or creates an account.
 6.  **Create Account:**
     *   The user taps the "Create Account" button (UI only).
 
-## 2. The Discovery Flow: Finding a New Experience
+## 3. The Discovery Flow: Finding a New Experience
 
 This is the primary user journey, focused on proactive and serendipitous discovery.
 
 1.  **Launch App:** The user opens the All24 app.
-2.  **Browse Home Feed:** The user is immediately presented with the Home Feed, a visually rich, endlessly scrollable feed of "Top 24" lists.
-3.  **Scroll and Explore:** The user scrolls vertically through the lists, browsing the "covers" of different establishments. Each cover provides a compelling image and a witty summary to entice the user.
-4.  **Select a Venue:** The user finds a venue that piques their interest and taps on its card.
-5.  **View Detail Screen:** A fluid, shared element transition expands the card into the full-screen Detail View.
-6.  **Explore Venue Details:** The user can now explore the rich content on the Detail View.
-7.  **Take Action:** From the Detail View, the user can choose to get directions, call the venue, or bookmark the list for later.
+2.  **Browse Home Feed:** The user is immediately presented with the Home Feed.
+3.  **Scroll and Explore:** The user scrolls through the list of venues.
+4.  **Select a Venue:** The user taps on a venue card.
+5.  **View Detail Screen:** A shared element transition animates the card into the `DetailScreen`.
+6.  **Explore Venue Details:** The user can now explore the rich content on the `DetailScreen`.
 
-## 3. The "Vibe Check" Flow: Leaving Feedback
+## 4. The "Vibe Check" Flow: Leaving Feedback
 
 This flow describes how a user contributes to the community by leaving their own feedback.
 
-1.  **Navigate to a Venue:** The user first navigates to the Detail View of a venue they have visited.
-2.  **Vouch for the Venue:** The user can tap the "Vouch" button to endorse the place.
+1.  **Navigate to a Venue:** The user first navigates to the `DetailScreen` of a venue they have visited.
+2.  **Vouch for the Venue:** The user can tap the "Vouch" button in the `BottomAppBar` to endorse the place.
 3.  **Leave a Comment:** The user can leave a comment by filling in the Mad Libs-style prompts in the "Leave a Vibe Check" section.
 4.  **Submit Comment:** The user taps the "Submit" button to submit their comment (UI only).
 
-## 4. The Profile Engagement Flow: Reviewing Personal Activity
+## 5. The Profile Engagement Flow: Reviewing Personal Activity
 
 This flow describes how a user interacts with their personal space within the app.
 
 1.  **Navigate to Profile:** The user taps the "Profile" icon in the bottom navigation bar.
-2.  **View Profile Screen:** The user is taken to their Profile Screen, where they can see their display name, email, "Vouched" places, and "Tastemaker" comments.
-3.  **Sign Out:** The user can tap the "Return to Ghost" button to sign out of their account.
+2.  **View Profile Screen:** The user is taken to their `ProfileScreen`, where they can see their display name, email, "Vouched" places, "Tastemaker" comments, and badges.
+3.  **Create a Collection:** The user can create a new collection of venues.
+4.  **View a Collection:** The user can view their created collections.
+5.  **Share a Collection:** The user can share a collection with friends.
+6.  **Sign Out:** The user can tap the "Return to Ghost" button to sign out of their account.

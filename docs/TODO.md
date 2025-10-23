@@ -3,54 +3,68 @@
 This document outlines the step-by-step action plan for transforming the All24 concept into a production-ready mobile application.
 
 ## Phase I: Pre-Production & Strategy (Completed)
-
-- [x] **Team Assembly & Roles Definition:** The blueprint defines the required roles.
-- [x] **Business & Legal Formalization:** The blueprint outlines the business and legal needs.
-- [x] **Monetization Strategy Finalization:** The blueprint details the monetization strategy.
-- [x] **Technical Stack & Architecture Definition:** The `data_layer.md` and `UI_UX.md` documents, derived from the blueprint, confirm the technical stack.
-- [x] **Product Roadmap & MVP Scope:** The blueprint and this TODO list define the product roadmap and MVP scope.
-
-***Note: Phase I is considered conceptually complete based on the "All24: A Conceptual Blueprint" document and the generated documentation.***
-
-### MVP Feature Set
-
-- [ ] User account creation and profile.
-- [ ] Scrollable home feed of "Top 24" lists.
-- [ ] Expandable list items with "The All24 Take" and "The Vitals."
-- [ ] The "Vibe Check" system: "Vouch" button and prompted comment submission.
-- [ ] Curator-managed "People's Voice" section.
+- [x] All pre-production and strategy tasks are considered conceptually complete.
 
 ## Phase II: Design & Prototyping (Completed)
+- [x] All design and prototyping tasks are considered conceptually complete.
 
-- [x] **Wireframing:** The blueprint's detailed descriptions of screens and UI serve as the wireframes.
-- [x] **UI/UX High-Fidelity Design:** The blueprint's "Visual and Kinetic Language" section serves as the high-fidelity design guide.
-- [x] **Interactive Prototyping & Motion Design:** The motion design is specified in the blueprint; prototyping will occur directly in the development phase.
-- [x] **Prototype User Testing:** This will be combined with the Alpha & Beta testing phases.
+## Phase III: Development & Implementation
 
-***Note: Phase II is considered conceptually complete. The blueprint provides a sufficiently detailed design specification to proceed directly to implementation in Jetpack Compose.***
+### Sprint 0: Environment & Theming
+- [ ] **Environment & DevOps Setup:** Configure development, staging, and production environments and a CI/CD pipeline.
+- [x] **Implement M3 Expressive Theme:** Define and apply the app's color, typography, and shape systems.
 
-## Phase III: Development & Implementation (Weeks 9-20)
+### Sprint 1: Onboarding & Core Navigation
+- [ ] **Implement Onboarding Carousel:** Build the three-panel cinematic introduction.
+- [ ] **Implement Splash Screen Animation:** Create the animated logo and morphing progress indicator.
+- [ ] **Implement Core Navigation:** Set up the bottom navigation bar for the Lists, Map, and Profile screens.
 
-- [ ] **Environment & DevOps Setup (Sprint 0):** Configure development, staging, and production environments and a CI/CD pipeline.
-- [ ] **Backend Development (Sprints 1-6):** Build the server-side application and APIs.
-- [ ] **Android App (Frontend) Development (Sprints 1-6):** Develop the native Android application in Kotlin using Jetpack Compose.
+### Sprint 2: The "Lists" Feed
+- [x] **Build Home Feed UI:** Create the basic `LazyColumn` and placeholder card UI.
+- [ ] **Implement Parallax Background:** Add the subtle, textured background with a parallax effect on scroll.
+- [ ] **Implement Pull-to-Refresh Animation:** Create the custom logo morphing animation.
+- [ ] **Refine List "Cover" Card:** Implement the full design, including the scrim, rank indicator, and press effects.
 
-## Phase IV: Content & Community Ignition (Weeks 9-20, parallel to development)
+### Sprint 3: The "Detail" View
+- [x] **Build Detail Screen UI:** Create the basic layout with placeholder content.
+- [x] **Implement Shared Element Transition:** Create the "hero" animation from the list to the detail view.
+- [ ] **Implement Collapsing Toolbar Behavior:** Create the parallax and shrink effect for the header image.
+- [ ] **Implement "Creator Takes" Carousel:** Build the horizontal `LazyRow` and the video playback modal.
+- [ ] **Implement "Vitals" Component:** Add the animated 24-hour indicator.
 
-- [ ] **Initial Content Seeding:** The Head Curator creates the initial batch of 10-15 "Top 24" lists.
-- [ ] **Creator Program Recruitment:** Identify and sign partnership agreements with an initial cohort of 5-10 "Founding Creators."
-- [ ] **Pre-Launch Marketing Campaign:** Launch a "coming soon" landing page and create social media profiles to begin posting teaser content.
+### Sprint 4: The "Vibe Check" System
+- [x] **Implement "Vouch" Button UI:** Add the basic button to the `DetailScreen`.
+- [x] **Implement Prompted Comment Submission UI:** Add the UI for the Mad Libs-style prompts.
+- [ ] **Implement "Vibe Check" Interaction Bar:** Build the `BottomAppBar` with the `Split` button for "Vouch," "Share," and "Add to Collection" actions.
+- [ ] **Implement "Vouch" Animations:** Create the "heartbeat," "slot machine," and confetti animations.
+- [ ] **Implement Comment Submission Logic:** Integrate with the backend to save user comments.
 
-## Phase V: Testing & Go-to-Market (Weeks 21-24)
+### Sprint 5: User Profiles & Authentication
+- [x] **Create `AuthScreen` UI:** Build the UI for email/password and Google Sign-In.
+- [x] **Integrate Firebase Authentication for Google Sign-In:** Implement the Google Sign-In logic.
+- [x] **Create `ProfileScreen` UI:** Build the basic layout with placeholder data.
+- [ ] **Implement `CollapsingToolbarScaffold`:** Create the collapsing header effect.
+- [ ] **Implement "Vouches" Grid:** Build the `LazyVerticalStaggeredGrid` for the masonry-style layout.
+- [ ] **Implement Email/Password Authentication:** Add the logic for email/password sign-in and account creation.
 
-- [ ] **Alpha & Beta Testing:** Conduct internal alpha testing, followed by a closed beta test with 50-100 users.
-- [ ] **Go-to-Market (GTM) Execution:** Prepare the Google Play Store listing, create a press kit, and coordinate a synchronized content push with Founding Creators for launch day.
+### Sprint 6: Community Features
+- [ ] **Implement "Collections" Feature:** Build the UI for creating, viewing, and sharing collections.
+- [ ] **Implement "Badges" Feature:** Build the UI for displaying gamification achievements.
+- [ ] **Integrate Collections & Badges with Backend:** Add the logic to save and retrieve user collections and badges.
+
+## Phase IV: Content & Community Ignition (Ongoing)
+- [ ] **Initial Content Seeding:** Curators to create the initial batch of "Top 24" lists.
+- [ ] **Creator Program Recruitment:** Identify and onboard "Founding Creators."
+- [ ] **Pre-Launch Marketing Campaign:** Launch a "coming soon" landing page and social media presence.
+
+## Phase V: Testing & Go-to-Market
+- [ ] **Alpha & Beta Testing:** Conduct internal and closed beta testing.
+- [ ] **Go-to-Market (GTM) Execution:** Prepare the Google Play Store listing and press kit.
 - [ ] **Deployment:** Submit the final release candidate to the Google Play Store.
-- [ ] **Launch Day:** Publish the app to the Google Play Store and announce the launch across all channels.
+- [ ] **Launch Day:** Publish the app and announce the launch.
 
 ## Phase VI: Post-Launch, Monitoring & Iteration (Ongoing)
-
-- [ ] **Performance Monitoring & Maintenance:** Continuously monitor app analytics, server performance, and crash reports.
-- [ ] **Community Management & Content Cadence:** Actively engage with the community and maintain a regular schedule for publishing new content.
-- [ ] **KPI Tracking & Analysis:** Track Key Performance Indicators (KPIs) to inform future development priorities.
-- [ ] **Iterative Development:** Begin the development cycle for version 1.1 based on the product roadmap and user feedback.
+- [ ] **Performance Monitoring & Maintenance:** Monitor app analytics, server performance, and crash reports.
+- [ ] **Community Management & Content Cadence:** Engage with the community and publish new content.
+- [ ] **KPI Tracking & Analysis:** Track KPIs to inform future development.
+- [ ] **Iterative Development:** Begin the development cycle for v1.1.

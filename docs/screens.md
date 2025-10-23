@@ -2,66 +2,67 @@
 
 This document provides an overview of the main screens in the All24 application, as defined in the conceptual blueprint.
 
+## Onboarding Screen
+
+The Onboarding Screen is the first experience for new users, designed to be a cinematic and informative introduction to the app.
+
+*   **Layout:** A three-panel, horizontally-scrolling carousel.
+*   **Content:**
+    *   **Panel 1: "Welcome to the Real NOLA."** Explains the "Top 24" philosophy.
+    *   **Panel 2: "Your Vibe is the New Five Stars."** Introduces the "Vibe Check" and "Vouch" system.
+    *   **Panel 3: "Meet Your Guides."** Introduces the roles of Curators and Creators, and includes sign-in options.
+*   **Animation:** The onboarding flow begins with a custom splash screen animation where the All24 logo is drawn and morphs into a progress indicator.
+
 ## The Home Feed (Lists Screen)
 
 The Home Feed is the primary screen of the application and the user's main entry point for discovery.
 
-*   **Layout:** A single, uncluttered vertical column of "list item covers."
-*   **Content:** Each cover represents an establishment on a "Top 24" list and features a full-bleed photograph, the venue's name, its rank, and a witty summary line.
-*   **Interaction:** The only interactions are vertical scrolling to browse the feed and tapping a card to navigate to the Detail View. All complexity is intentionally hidden within the cards themselves.
+*   **Layout:** A single, uncluttered vertical column of "list item covers" with a parallax background.
+*   **Content:** Each cover represents an establishment on a "Top 24" list and features a full-bleed photograph with a scrim, the venue's name, its rank, and a witty summary line.
+*   **Interaction:** Vertical scrolling, a custom pull-to-refresh animation, and tapping a card to navigate to the Detail View.
 
 ## The Detail View
 
-The Detail View is a full-screen "article" that provides in-depth information about a specific establishment. It is revealed through a fluid shared element transition when a user taps a card on the Home Feed.
+The Detail View is a full-screen "article" that provides in-depth information about a specific establishment.
 
-*   **Layout:** A rich, multi-faceted layout that presents a complete portrait of the venue.
+*   **Layout:** A collapsing toolbar layout where the header image parallaxes and shrinks as the user scrolls.
 *   **Content Modules:**
-    *   **The All24 Take:** The official 150-word review from the in-house curators.
-    *   **Creator Takes:** A horizontal carousel of short-form videos and photo galleries from verified local influencers.
-    *   **The Vitals:** Essential information, including address (with a link to maps), hours, phone number, and a link to the menu.
-    *   **The People's Voice:** A curated selection of 3-4 of the most insightful user comments.
-    *   **"Know Before You Geaux":** A dedicated section for practical, insider tips.
-*   **"Vouch" Button:** A button that allows users to endorse the venue.
-*   **Prompted Comment Submission:** A UI for submitting "Vibe Check" comments using Mad Libs-style prompts.
+    *   "The All24 Take"
+    *   "Creator Takes" carousel with video playback in a modal dialog.
+    *   "The Vitals" with an animated 24-hour indicator.
+    *   "The People's Voice"
+    *   "Know Before You Geaux"
+*   **Interaction Bar:** A `BottomAppBar` with a `Split` button for "Vouch," "Share," and "Add to Collection" actions.
 
-**Implementation Notes:**
-* The Detail Screen is implemented in `app/src/main/java/com/hereliesaz/all24/ui/screens/detail/DetailScreen.kt`.
-* The screen currently uses placeholder data. A ViewModel will be implemented in a future step to fetch data for a specific venue.
-* A shared element transition is implemented between the `HomeScreen` and `DetailScreen`.
+## The Profile Screen
+
+The Profile Screen is the user's personal culinary scrapbook.
+
+*   **Layout:** A `CollapsingToolbarScaffold` with a header that collapses on scroll.
+*   **Content Modules:**
+    *   User avatar, display name, and "Tastemaker" badge.
+    *   A `LazyVerticalStaggeredGrid` for a masonry-style layout of "Vouched" places.
+    *   A "Collections" section.
+    *   A "Badges" section for gamification achievements.
+
+## Collections Screen
+
+The Collections Screen displays a user-created collection of venues.
+
+*   **Layout:** A list of venues within a specific collection.
+*   **Interaction:** Users can view the venues in their collection and share the collection with friends.
 
 ## The Map Screen
 
 The Map Screen is a secondary discovery tool for users who have a specific location in mind.
 
 *   **Layout:** A traditional map-based interface.
-*   **Content:** The map will display all All24-vetted spots in the user's vicinity.
-*   **Interaction:** Users can pan and zoom the map to explore different neighborhoods and tap on a venue to see a preview of its details.
-
-## The Profile Screen
-
-The Profile Screen is the user's personal space within the app, designed to be a culinary scrapbook of their New Orleans journey.
-
-*   **Layout:** A visually engaging and personalized layout.
-*   **Content Modules:**
-    *   Display name and email of the signed-in user.
-    *   A "Sign Out" button.
-    *   A grid of "Vouched" places (with placeholder data).
-    *   A grid of "Tastemaker" comments (with placeholder data).
-
-**Implementation Notes:**
-* The `ProfileScreen` is implemented in `app/src/main/java/com/hereliesaz/all24/ui/screens/ProfileScreen.kt`.
 
 ## The Auth Screen
 
 The Auth Screen provides a way for users to sign in or create an account.
 
 *   **Layout:** A simple layout with fields for email and password, and buttons for signing in, creating an account, and signing in with Google.
-*   **Functionality:**
-    *   Email/password sign-in and account creation (UI only).
-    *   Google Sign-In with Firebase Authentication.
-
-**Implementation Notes:**
-* The `AuthScreen` is implemented in `app/src/main/java/com/hereliesaz/all24/ui/auth/AuthScreen.kt`.
 
 ## Navigation
 
