@@ -17,14 +17,17 @@ import com.hereliesaz.all24.ui.screens.admin.AdminDashboardScreen
 import com.hereliesaz.all24.ui.screens.admin.AdminSubmissionDetailScreen
 import com.hereliesaz.all24.ui.screens.business.BusinessDashboardScreen
 import com.hereliesaz.all24.ui.screens.business.EditPlaceScreen
+import com.hereliesaz.all24.ui.screens.detail.DetailScreen
 import com.hereliesaz.all24.ui.screens.home.HomeScreen
-import com.hereliesaz.all24.ui.screens.place.detail.PlaceDetailScreen
 import com.hereliesaz.all24.ui.screens.submit.place.SubmitPlaceScreen
 import com.hereliesaz.all24.ui.screens.top.reviews.TopReviewsScreen
 
 
 sealed class Screen(val route: String) {
-    object Home : Screen("home") // The new entry point
+    object Home : Screen("home")
+    object Detail : Screen("detail/{itemId}") {
+        fun createRoute(itemId: Int) = "detail/$itemId"
+    }
     object PlacesList : Screen("places_list")
     object Vibe : Screen("vibe")
     object Auth : Screen("auth")
@@ -35,9 +38,6 @@ sealed class Screen(val route: String) {
     object BusinessDashboard : Screen("business_dashboard")
     object AdminSubmissionDetail : Screen("admin_submission_detail/{submissionId}") {
         fun createRoute(submissionId: String) = "admin_submission_detail/$submissionId"
-    }
-    object PlaceDetail : Screen("place_detail/{placeId}") {
-        fun createRoute(placeId: String) = "place_detail/$placeId"
     }
     object AddReview : Screen("add_review/{placeId}") {
         fun createRoute(placeId: String) = "add_review/$placeId"
@@ -56,7 +56,22 @@ fun AppNavigation(googleSignInClient: GoogleSignInClient) {
         NavHost(navController = navController, startDestination = Screen.Home.route) {
 
             composable(Screen.Home.route) {
-                HomeScreen()
+                HomeScreen(
+                    navController = navController,
+                    sharedTransitionScope = this@SharedTransitionLayout,
+                    animatedVisibilityScope = this
+                )
+            }
+
+            composable(
+                route = Screen.Detail.route,
+                arguments = listOf(navArgument("itemId") { type = NavType.IntType })
+            ) { backStackEntry ->
+                DetailScreen(
+                    itemId = backStackEntry.arguments?.getInt("itemId"),
+                    sharedTransitionScope = this@SharedTransitionLayout,
+                    animatedVisibilityScope = this
+                )
             }
 
             composable(Screen.PlacesList.route) {
@@ -103,20 +118,6 @@ fun AppNavigation(googleSignInClient: GoogleSignInClient) {
             ) {
                 AdminSubmissionDetailScreen(navController)
             }
-
-            composable(
-                route = Screen.PlaceDetail.route,
-                arguments = listOf(navArgument("placeId") {
-                    type = NavType.StringType
-                }) // Argument is non-nullable
-            ) {
-                PlaceDetailScreen(
-                    sharedTransitionScope = this@SharedTransitionLayout,
-                    animatedVisibilityScope = this
-                )
-            }
-
-
 
             composable(
                 route = Screen.AddReview.route,

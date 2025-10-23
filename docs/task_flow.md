@@ -19,6 +19,11 @@ This is the primary user journey, focused on proactive and serendipitous discove
     *   Check the "Know Before You Geaux" tips.
 7.  **Take Action:** From the Detail View, the user can choose to get directions, call the venue, or bookmark the list for later.
 
+**Implementation Notes:**
+* The navigation from the Home Screen to the Detail Screen is implemented in `app/src/main/java/com/hereliesaz/all24/ui/navigation/AppNavigation.kt`.
+* The `HomeScreen` passes the `itemId` of the selected venue to the `DetailScreen` as a navigation argument.
+* A shared element transition is implemented for the navigation between the two screens.
+
 ## 2. The "Vibe Check" Flow: Leaving Feedback
 
 This flow describes how a user contributes to the community by leaving their own feedback.
