@@ -22,6 +22,11 @@ The Detail View is a full-screen "article" that provides in-depth information ab
     *   **The People's Voice:** A curated selection of 3-4 of the most insightful user comments.
     *   **"Know Before You Geaux":** A dedicated section for practical, insider tips.
 
+**Implementation Notes:**
+* The Detail Screen is implemented in `app/src/main/java/com/hereliesaz/all24/ui/screens/detail/DetailScreen.kt`.
+* The screen currently uses placeholder data. A ViewModel will be implemented in a future step to fetch data for a specific venue.
+* A shared element transition is implemented between the `HomeScreen` and `DetailScreen`.
+
 ## The Map Screen
 
 The Map Screen is a secondary discovery tool for users who have a specific location in mind.
