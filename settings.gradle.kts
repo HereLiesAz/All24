@@ -23,5 +23,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "All24"
 include(":app")
-include(":DevGuide")
-include(":backend")
