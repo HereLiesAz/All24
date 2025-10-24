@@ -52,16 +52,15 @@ android {
             "SPREADSHEET_ID",
             "\"${localProperties.getProperty("SPREADSHEET_ID")}\""
         )
-        buildConfigField(
-            "String",
-            "APPS_SCRIPT_URL",
-            "\"${localProperties.getProperty("APPS_SCRIPT_URL")}\""
         )
 
 
     }
 
     buildTypes {
+        getByName("debug") {
+            buildConfigField "String", "APPS_SCRIPT_URL", "\"https://script.google.com/macros/s/AKfycbx_GQ_a-3X-4-3-X-X-X-X-X-X-X/exec-dev\""
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -78,12 +77,11 @@ android {
                 "SPREADSHEET_ID",
                 "\"${localProperties.getProperty("SPREADSHEET_ID")}\""
             )
-            buildConfigField(
-                "String",
-                "APPS_SCRIPT_URL",
-                "\"${localProperties.getProperty("APPS_SCRIPT_URL")}\""
-            )
-
+            buildConfigField "String", "APPS_SCRIPT_URL", "\"https://script.google.com/macros/s/AKfycbx_GQ_a-3X-4-3-X-X-X-X-X-X-X/exec\""
+        }
+        create("staging") {
+            initWith(getByName("debug"))
+            buildConfigField "String", "APPS_SCRIPT_URL", "\"https://script.google.com/macros/s/AKfycbx_GQ_a-3X-4-3-X-X-X-X-X-X-X/exec-staging\""
         }
     }
     compileOptions {
