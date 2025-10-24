@@ -24,8 +24,6 @@ parabolic-motion-animation = "v1.2"
 recyclerview = "1.4.0"
 verticalcarousel = "0.7.6"
 
-
-
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
@@ -60,8 +58,6 @@ ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics", version.ref
 parabolic-motion-animation = { group = "com.github.prathamesh-sonpatki", name = "Parabolic-Motion-Animation-in-Jetpack-Compose", version.ref = "parabolic-motion-animation" }
 androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 verticalcarousel = { module = "com.github.HereLiesAz:VerticalCarousel", version.ref = "verticalcarousel" }
-
-
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

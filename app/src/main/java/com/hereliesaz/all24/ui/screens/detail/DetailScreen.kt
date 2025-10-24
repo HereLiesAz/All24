@@ -15,20 +15,20 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hereliesaz.all24.data.model.Venue
 import com.hereliesaz.all24.data.model.Vitals
 import com.hereliesaz.all24.ui.theme.All24Theme
 
 @Composable
 fun DetailScreen(
-    itemId: Int?
+    itemId: Int?,
+    detailViewModel: DetailViewModel = viewModel()
 ) {
     val venue = Venue(
         id = itemId ?: 0,
@@ -43,9 +43,9 @@ fun DetailScreen(
         )
     )
 
-    var comment1 by remember { mutableStateOf("") }
-    var comment2 by remember { mutableStateOf("") }
-    var comment3 by remember { mutableStateOf("") }
+    val comment1 by detailViewModel.comment1.collectAsState()
+    val comment2 by detailViewModel.comment2.collectAsState()
+    val comment3 by detailViewModel.comment3.collectAsState()
 
     Column(
         modifier = Modifier
@@ -140,27 +140,27 @@ fun DetailScreen(
             Column(modifier = Modifier.padding(16.dp)) {
                 OutlinedTextField(
                     value = comment1,
-                    onValueChange = { comment1 = it },
+                    onValueChange = { detailViewModel.onComment1Changed(it) },
                     label = { Text("This place is perfect for...") },
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 OutlinedTextField(
                     value = comment2,
-                    onValueChange = { comment2 = it },
+                    onValueChange = { detailViewModel.onComment2Changed(it) },
                     label = { Text("Don't even think about leaving without trying the...") },
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 OutlinedTextField(
                     value = comment3,
-                    onValueChange = { comment3 = it },
+                    onValueChange = { detailViewModel.onComment3Changed(it) },
                     label = { Text("The vibe here is...") },
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(
-                    onClick = { /* TODO: Implement comment submission */ },
+                    onClick = { detailViewModel.submitComments() },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text("Submit")
