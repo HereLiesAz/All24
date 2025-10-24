@@ -94,10 +94,27 @@ fun AppNavigation() {
                 )
             }
             composable(Screen.Auth.route) {
-                AuthScreen()
+                AuthScreen(
+                    onSignInSuccess = {
+                        navController.navigate(Screen.Profile.route) {
+                            popUpTo(Screen.Auth.route) {
+                                inclusive = true
+                            }
+                        }
+                    }
+                )
             }
             composable(Screen.Profile.route) {
-                ProfileScreen()
+                ProfileScreen(
+                    navController = navController,
+                    onSignOut = {
+                        navController.navigate(Screen.Auth.route) {
+                            popUpTo(Screen.Home.route) {
+                                inclusive = true
+                            }
+                        }
+                    }
+                )
             }
             composable(Screen.Map.route) {
                 MapScreen()
