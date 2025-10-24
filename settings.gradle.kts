@@ -12,6 +12,11 @@ pluginManagement {
       maven { url = uri("https://jitpack.io") } // Add JitPack here for plugins
   }
 }
+
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.4.0"
+}
+
 dependencyResolutionManagement {
   repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
   repositories {
