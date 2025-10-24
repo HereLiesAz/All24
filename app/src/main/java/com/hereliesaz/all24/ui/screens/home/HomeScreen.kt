@@ -1,8 +1,5 @@
 package com.hereliesaz.all24.ui.screens.home
 
-import androidx.compose.animation.AnimatedVisibilityScope
-import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,20 +20,14 @@ import com.hereliesaz.all24.data.model.Venue
 import com.hereliesaz.all24.data.model.Vitals
 import com.hereliesaz.all24.ui.navigation.Screen
 import com.hereliesaz.all24.ui.theme.All24Theme
-import androidx.compose.animation.SharedTransitionLayout
 
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun HomeScreen(
-    navController: NavController,
-    sharedTransitionScope: SharedTransitionScope,
-    animatedVisibilityScope: AnimatedVisibilityScope
-) {
-    val sampleData = List(24) { i ->
+fun HomeScreen(navController: NavController) {
+    val items = (1..24).map {
         Venue(
-            id = i,
-            name = "Restaurant Name ${i + 1}",
-            rank = i + 1,
+            id = it,
+            name = "Restaurant Name #$it",
+            rank = it,
             summary = "A witty, Zagat-style summary line that encapsulates its spirit.",
             all24Take = "This is a 150-word official review, written by the in-house curators in the app's signature authoritative and witty style.",
             vitals = Vitals(
@@ -51,27 +43,17 @@ fun HomeScreen(
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        items(sampleData) { venue ->
-            with(sharedTransitionScope) {
-                ListItemCard(
-                    venue = venue,
-                    animatedVisibilityScope = animatedVisibilityScope,
-                    onClick = {
-                        navController.navigate(Screen.Detail.createRoute(venue.id))
-                    }
-                )
-            }
+        items(items) { item ->
+            ListItemCard(item = item, onClick = {
+                navController.navigate(Screen.Detail.createRoute(item.id))
+            })
         }
     }
 }
 
-@OptIn(ExperimentalSharedTransitionApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListItemCard(
-    venue: Venue,
-    animatedVisibilityScope: AnimatedVisibilityScope,
-    onClick: () -> Unit
-) {
+fun ListItemCard(item: Venue, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxSize()
@@ -81,38 +63,27 @@ fun ListItemCard(
         Column(
             modifier = Modifier
                 .padding(16.dp)
-                .sharedElement(
-                    state = rememberSharedContentState(key = "item-${venue.id}"),
-                    animatedVisibilityScope = animatedVisibilityScope
-                )
         ) {
             Text(
-                text = "No. ${venue.rank} of 24",
+                text = "No. ${item.rank} of 24",
                 style = MaterialTheme.typography.labelMedium
             )
             Text(
-                text = venue.name,
+                text = item.name,
                 style = MaterialTheme.typography.headlineLarge
             )
             Text(
-                text = venue.summary,
+                text = item.summary,
                 style = MaterialTheme.typography.bodyMedium
             )
         }
     }
 }
 
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview() {
     All24Theme {
-        SharedTransitionLayout {
-            HomeScreen(
-                navController = rememberNavController(),
-                sharedTransitionScope = this,
-                animatedVisibilityScope = it
-            )
-        }
+        HomeScreen(navController = rememberNavController())
     }
 }

@@ -16,27 +16,27 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = WroughtIronGreen,
-    secondary = TerracottaMuted,
-    tertiary = BougainvilleaFuchsia,
+    primary = GaslampBlack,
+    secondary = AccentGreen,
+    tertiary = AccentTerracotta,
     background = GaslampBlack,
     surface = GaslampBlack,
     onPrimary = CreoleCream,
-    onSecondary = GaslampBlack,
-    onTertiary = GaslampBlack,
+    onSecondary = CreoleCream,
+    onTertiary = CreoleCream,
     onBackground = CreoleCream,
     onSurface = CreoleCream,
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = WroughtIronGreen,
-    secondary = TerracottaMuted,
-    tertiary = BougainvilleaFuchsia,
+    primary = CreoleCream,
+    secondary = AccentGreen,
+    tertiary = AccentTerracotta,
     background = CreoleCream,
     surface = CreoleCream,
     onPrimary = GaslampBlack,
-    onSecondary = CreoleCream,
-    onTertiary = CreoleCream,
+    onSecondary = GaslampBlack,
+    onTertiary = GaslampBlack,
     onBackground = GaslampBlack,
     onSurface = GaslampBlack,
 )
@@ -44,8 +44,8 @@ private val LightColorScheme = lightColorScheme(
 @Composable
 fun All24Theme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is supported, but the app has a strong, curated theme by default.
-    dynamicColor: Boolean = false,
+    // Dynamic color is available on Android 12+
+    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -53,7 +53,6 @@ fun All24Theme(
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
-
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
@@ -61,14 +60,14 @@ fun All24Theme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.background.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
+            window.statusBarColor = colorScheme.primary.toArgb()
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
         }
     }
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = AppTypography,
         content = content
     )
 }

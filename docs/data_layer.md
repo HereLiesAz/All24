@@ -1,38 +1,27 @@
-# All24 Data Layer and Backend Architecture
+# Data Layer
 
-This document outlines the technical architecture for the All24 backend systems, including the technology stack, database, and API structure.
+This document outlines the technical stack and data models for the All24 application.
 
-## Technology Stack
+## Technical Stack
 
-The All24 backend will be built on a modern, scalable, and robust technology stack.
+The All24 application is built on a modern Android development stack, leveraging the following technologies:
 
-*   **Backend Framework:** The server-side application will be developed using **Spring Boot**. This framework provides a powerful and efficient platform for building RESTful APIs.
-*   **Database:** The primary data store will be **PostgreSQL**, a reliable and feature-rich open-source relational database.
-*   **Cloud Hosting:** The application will be deployed on a major cloud provider such as **Amazon Web Services (AWS)** or **Microsoft Azure**. This ensures high availability, scalability, and security.
+*   **Kotlin:** The primary programming language for the Android application.
+*   **Gradle KTS:** The build system for the Android application.
+*   **Jetpack Compose:** The UI toolkit for building the native Android application.
+*   **Material 3:** The design system for the Android application.
+*   **Firebase:** The backend service for authentication and user management.
+*   **Spring Boot:** The backend framework for the server-side application.
+*   **PostgreSQL:** The database for the server-side application.
+*   **Azure/AWS:** The cloud hosting provider for the server-side application.
+*   **Google Maps:** The third-party API for location services.
 
 ## Data Models
 
-The core data models for the application will include:
+The core data models for the All24 application are as follows:
 
-*   **Users:** Stores user profile information, authentication details, and links to their contributions (Vouches, comments).
-*   **Venues:** Contains all information about the restaurants and establishments featured in the app, including name, address, hours ("The Vitals"), etc.
-*   **Lists:** Represents the curated "Top 24" lists created by the All24 Curators. Each list will contain a collection of ranked venues.
-*   **Reviews (Vibe Checks):** Stores user-generated content, including "Vouches" and the prompted comments.
-*   **Creator Content:** Stores content from the "Creator Takes," such as video clips and photo galleries.
-
-## API Structure
-
-The backend will expose a RESTful API to be consumed by the Android application. Key API endpoints will include:
-
-*   **Authentication:** Endpoints for user registration, login, and profile management.
-*   **Content:** Endpoints to fetch "Top 24" lists, venue details, and creator content.
-*   **Interaction:** Endpoints for submitting "Vouches" and comments.
-
-The API will be designed to be secure, well-documented, and efficient to ensure a smooth and responsive user experience in the mobile app.
-
-### Third-Party APIs
-
-The backend will also integrate with the following third-party services:
-
-*   **Firebase Authentication:** For handling user authentication.
-*   **Google Maps API:** To provide location data, maps, and directions in "The Vitals" section of a venue's detail page.
+*   **User:** Represents a user of the application, including their profile information, "Vouched" places, and "Tastemaker" comments.
+*   **List:** Represents a "Top 24" list, including its title, description, and a collection of list items.
+*   **ListItem:** Represents an entry on a "Top 24" list, including the venue, its rank, and a summary.
+*   **Venue:** Represents a physical establishment, including its name, address, hours, and other vital information.
+*   **Review:** Represents a user's "Vibe Check," including their "Vouch" and any comments they have submitted.

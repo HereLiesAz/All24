@@ -1,23 +1,19 @@
-# All24 Faux Pas: A Guide to What to Avoid
+# Faux Pas (Mistakes to Avoid)
 
-The All24 voice is built on authenticity, wit, and a genuine love for New Orleans. To maintain the quality and integrity of our platform, it's just as important to define what we *don't* do as what we do. This guide outlines the "faux pas"—the common pitfalls and content styles we actively avoid.
+This document outlines common pitfalls and anti-patterns to avoid during the development of the All24 application. Adhering to these principles is crucial for maintaining the app's integrity and achieving its vision of authenticity.
 
-## Content Faux Pas
+## The Press-Release Journalism Model
 
-These guidelines apply to both our in-house Curators and our community of contributors.
+A primary goal of All24 is to avoid the perception of being influenced by restaurant PR budgets. All content should be based on genuine, independent, and critical assessment. We must resist the temptation to publish content that is essentially a rewritten press release.
 
-*   **Don't Do Press Release Journalism:** All24 is not a mouthpiece for restaurant PR teams. Our content is based on genuine, in-person experiences. We avoid reciting press releases or promotional material. Authenticity is our cornerstone.
-*   **Don't Be a Gimmicky Influencer:** While we celebrate the personality and visual style of influencer culture, we steer clear of inauthentic, "gimmicky" content. Our "Creator Takes" are from verified, trusted local voices who share our passion for the city.
-*   **Don't Do Generic Reviews:** A "Vibe Check" is not a generic, five-word review. "It was great!" is not helpful. We encourage specific, evocative, and witty feedback that tells a story. Our prompt-driven comment system is designed to help you move beyond the generic.
-*   **Don't Chase Clicks with Endless Listicles:** Every list on All24 is a "Top 24." This creative constraint forces us to be confident and opinionated. We are not an algorithmically generated, endless feed of content. We value quality over quantity.
+## The Uncurated, Noisy Forum
 
-## Community Faux Pas
+Unlike platforms like Yelp, All24 is not a free-for-all forum. User-generated content is a vital part of the app, but it must be curated to maintain a high standard of quality. We must avoid the temptation to simply display all user comments without editorial oversight.
 
-These guidelines are for all users of the All24 app.
+## The Cliché Mardi Gras Palette
 
-*   **Don't Be a Troll:** We have a zero-tolerance policy for harassment, personal attacks, and trolling. This is a positive community for people who love food, not a forum for arguments.
-*   **Don't Use a Five-Star Mentality:** All24 deliberately avoids the five-star rating system. A "Vouch" is a simple, powerful endorsement. We are not here to assign arbitrary numerical scores. We are here to share our love for the places that make New Orleans special.
-*   **Don't Be a Spammer:** All24 is not a platform for self-promotion or advertising. All content should be genuine and user-driven.
-*   **Don't Be a Stranger:** All24 is a community. We encourage you to engage, to share your voice, and to help us build the most trusted and authentic guide to New Orleans.
+The app's visual identity should be sophisticated and timeless, avoiding the overused purple, green, and gold color scheme. The "Gaslamp Black" and "Creole Cream" palette is a core part of the brand and should be used consistently.
 
-By avoiding these faux pas, we can collectively maintain the unique voice and high standards that make All24 a trusted companion for exploring the Crescent City.
+## The Five-Star Rating System
+
+The "Vibe Check" system is a revolutionary departure from the traditional five-star rating system. We must not be tempted to reintroduce numerical ratings, as this would undermine the app's core philosophy of qualitative, meaningful feedback.

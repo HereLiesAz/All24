@@ -1,33 +1,35 @@
-# All24 Community Code of Conduct
+# Community Conduct & The "Vibe Check"
 
-All24 is more than a review app; it's a community of passionate food lovers dedicated to celebrating the authentic culinary spirit of New Orleans. We are building a platform on trust, taste, and a shared love for the city. To maintain this positive and respectful environment, we ask all users to adhere to the following code of conduct.
+All24 makes the deliberate and revolutionary decision to completely discard the five-star rating system. This system fails to capture the nuanced reality of a dining experience. In its place, All24 introduces the "Vibe Check," a qualitative feedback system designed to generate more meaningful and useful community input and elevate the role of the user from a simple consumer to a valued contributor.
 
-## Our Pledge
+## The "Vibe Check" System
 
-We, the creators and curators of All24, pledge to foster a welcoming, inclusive, and harassment-free environment for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation.
+The core of the Vibe Check is a simple, powerful endorsement and a guided comment system.
 
-## Our Standards
+### The "Vouch"
 
-We aim to create a space for insightful, witty, and helpful conversation. Examples of behavior that contributes to creating a positive environment include:
+Instead of assigning a numerical score, users who love a place can simply tap a "Vouch" button. This action is a powerful endorsement. The total number of vouches is displayed publicly, creating a clear and transparent measure of community love and social proof without the arbitrary nature of star ratings.
 
-*   **Being respectful and constructive:** Your feedback should be helpful to others. Focus on specific, evocative details that capture the essence of your experience.
-*   **Celebrating the authentic:** Share what makes a place special. We are here to champion the unique and memorable experiences that define New Orleans.
-*   **Writing with wit and personality:** The "Vibe Check" system is designed to encourage creative and engaging feedback. Let your unique voice shine through.
-*   **Focusing on the experience:** Keep comments relevant to the food, atmosphere, and service of the establishment.
+### Prompt-Driven Comments
 
-## Unacceptable Behavior
+When users wish to leave a comment, they are engaged with creative, Mad Libs-style prompts instead of a dauntingly empty text box. These prompts are designed to elicit specific, useful, and colorful feedback.
 
-Unacceptable behavior will not be tolerated. This includes, but is not limited to:
+**Example Prompts:**
 
-*   **Harassment, trolling, and personal attacks:** Do not engage in insults or other derogatory language. This is a space for positive engagement, not conflict.
-*   **Spam and self-promotion:** Do not post promotional content, advertisements, or other forms of spam. All content should be genuine and user-driven.
-*   **Dishonest or misleading reviews:** All contributions should be based on your own authentic experiences. Posting false or misleading information undermines the trust of the community.
-*   **Hate speech and discrimination:** Any form of discrimination or hate speech will result in an immediate and permanent ban.
+*   "This place is perfect for \_\_\_\_\_\_ with \_\_\_\_\_\_."
+*   "Don't even think about leaving without trying the \_\_\_\_\_\_. It tastes like \_\_\_\_\_\_."
+*   "The vibe here is \_\_\_\_\_\_, especially when \_\_\_\_\_\_."
 
-## Enforcement
+This system subtly coaches users to move beyond generic praise and provide specific, evocative details.
 
-The All24 Curators are responsible for enforcing this code of conduct. User-submitted comments are reviewed, and any content that violates these standards will be removed. Users who repeatedly violate the code of conduct may have their accounts suspended or permanently banned.
+## The "Tastemaker" Badge: Gamifying Quality
 
-If you encounter behavior that violates this code of conduct, please report it to our team.
+The traditional review model often incentivizes the loudest or most extreme voices. All24's model creates a system that rewards wit, insight, and helpfulness.
 
-We are all stewards of this community. Thank you for helping us make All24 a trusted and indispensable guide to the heart of New Orleans.
+Users whose comments are selected by the editorial team to be featured in the "People's Voice" section are awarded a "Tastemaker" badge on their profile. This is a mark of distinction within the All24 community.
+
+This creates a powerful, virtuous cycle:
+
+1.  Users are motivated to write better, more thoughtful comments in the hopes of being featured.
+2.  This provides the editorial team with a constant stream of high-quality, user-generated content to curate.
+3.  The overall quality and trustworthiness of the platform are enhanced for all users.

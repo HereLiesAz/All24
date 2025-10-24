@@ -1,147 +1,124 @@
 package com.hereliesaz.all24.ui.navigation
 
-import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionLayout
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.hereliesaz.all24.ui.auth.AuthScreen
-import com.hereliesaz.all24.ui.screens.ProfileScreen
-import com.hereliesaz.all24.ui.screens.add.review.AddReviewScreen
-import com.hereliesaz.all24.ui.screens.admin.AdminDashboardScreen
-import com.hereliesaz.all24.ui.screens.admin.AdminSubmissionDetailScreen
-import com.hereliesaz.all24.ui.screens.business.BusinessDashboardScreen
-import com.hereliesaz.all24.ui.screens.business.EditPlaceScreen
+import com.hereliesaz.all24.ui.screens.auth.AuthScreen
 import com.hereliesaz.all24.ui.screens.detail.DetailScreen
 import com.hereliesaz.all24.ui.screens.home.HomeScreen
-import com.hereliesaz.all24.ui.screens.submit.place.SubmitPlaceScreen
-import com.hereliesaz.all24.ui.screens.top.reviews.TopReviewsScreen
-
+import com.hereliesaz.all24.ui.screens.map.MapScreen
+import com.hereliesaz.all24.ui.screens.profile.ProfileScreen
 
 sealed class Screen(val route: String) {
     object Home : Screen("home")
     object Detail : Screen("detail/{itemId}") {
         fun createRoute(itemId: Int) = "detail/$itemId"
     }
-    object PlacesList : Screen("places_list")
-    object Vibe : Screen("vibe")
     object Auth : Screen("auth")
     object Profile : Screen("profile")
-    object TopReviews : Screen("top_reviews")
-    object SubmitPlace : Screen("submit_place")
-    object AdminDashboard : Screen("admin_dashboard")
-    object BusinessDashboard : Screen("business_dashboard")
-    object AdminSubmissionDetail : Screen("admin_submission_detail/{submissionId}") {
-        fun createRoute(submissionId: String) = "admin_submission_detail/$submissionId"
-    }
-    object AddReview : Screen("add_review/{placeId}") {
-        fun createRoute(placeId: String) = "add_review/$placeId"
-    }
-    object EditPlace : Screen("edit_place/{placeId}") {
-        fun createRoute(placeId: String) = "edit_place/$placeId"
-    }
+    object Map : Screen("map")
 }
 
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun AppNavigation(googleSignInClient: GoogleSignInClient) {
+fun AppNavigation() {
     val navController = rememberNavController()
-
-    SharedTransitionLayout {
-        NavHost(navController = navController, startDestination = Screen.Home.route) {
-
-            composable(Screen.Home.route) {
-                HomeScreen(
-                    navController = navController,
-                    sharedTransitionScope = this@SharedTransitionLayout,
-                    animatedVisibilityScope = this
+    Scaffold(
+        bottomBar = {
+            BottomAppBar {
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val currentDestination = navBackStackEntry?.destination
+                NavigationBarItem(
+                    icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
+                    label = { Text("Home") },
+                    selected = currentDestination?.hierarchy?.any { it.route == Screen.Home.route } == true,
+                    onClick = {
+                        navController.navigate(Screen.Home.route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    }
+                )
+                NavigationBarItem(
+                    icon = { Icon(Icons.Default.LocationOn, contentDescription = "Map") },
+                    label = { Text("Map") },
+                    selected = currentDestination?.hierarchy?.any { it.route == Screen.Map.route } == true,
+                    onClick = {
+                        navController.navigate(Screen.Map.route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    }
                 )
             }
-
+        }
+    ) { innerPadding ->
+        NavHost(
+            navController = navController,
+            startDestination = Screen.Home.route,
+            modifier = Modifier.padding(innerPadding)
+        ) {
+            composable(Screen.Home.route) {
+                HomeScreen(
+                    navController = navController
+                )
+            }
             composable(
-                route = Screen.Detail.route,
+                Screen.Detail.route,
                 arguments = listOf(navArgument("itemId") { type = NavType.IntType })
             ) { backStackEntry ->
                 DetailScreen(
-                    itemId = backStackEntry.arguments?.getInt("itemId"),
-                    sharedTransitionScope = this@SharedTransitionLayout,
-                    animatedVisibilityScope = this
+                    itemId = backStackEntry.arguments?.getInt("itemId")
                 )
             }
-
-            composable(Screen.PlacesList.route) {
-                PlacesListScreen(navController)
-            }
-
-            composable(Screen.Vibe.route) {
-                VibeScreen(navController)
-            }
-
             composable(Screen.Auth.route) {
                 AuthScreen(
-                    navController = navController,
-                    googleSignInClient = googleSignInClient
+                    onSignInSuccess = {
+                        navController.navigate(Screen.Profile.route) {
+                            popUpTo(Screen.Auth.route) {
+                                inclusive = true
+                            }
+                        }
+                    }
                 )
             }
-
             composable(Screen.Profile.route) {
                 ProfileScreen(
                     navController = navController,
-                    googleSignInClient = googleSignInClient
+                    onSignOut = {
+                        navController.navigate(Screen.Auth.route) {
+                            popUpTo(Screen.Home.route) {
+                                inclusive = true
+                            }
+                        }
+                    }
                 )
             }
-
-            composable(Screen.TopReviews.route) {
-                TopReviewsScreen(navController)
-            }
-
-            composable(Screen.SubmitPlace.route) {
-                SubmitPlaceScreen(navController)
-            }
-
-            composable(Screen.AdminDashboard.route) {
-                AdminDashboardScreen(navController)
-            }
-
-            composable(Screen.BusinessDashboard.route) {
-                BusinessDashboardScreen(navController)
-            }
-
-            composable(
-                route = Screen.AdminSubmissionDetail.route,
-                arguments = listOf(navArgument("submissionId") { type = NavType.StringType })
-            ) {
-                AdminSubmissionDetailScreen(navController)
-            }
-
-            composable(
-                route = Screen.AddReview.route,
-                arguments = listOf(navArgument("placeId") { type = NavType.StringType })
-            ) { backStackEntry ->
-                AddReviewScreen(navController, backStackEntry.arguments?.getString("placeId")!!)
-            }
-
-            composable(
-                route = Screen.EditPlace.route,
-                arguments = listOf(navArgument("placeId") { type = NavType.StringType })
-            ) {
-                EditPlaceScreen(navController)
+            composable(Screen.Map.route) {
+                MapScreen()
             }
         }
     }
-}
-
-@Composable
-fun VibeScreen(x0: NavHostController) {
-    TODO("Not yet implemented")
-}
-
-@Composable
-fun PlacesListScreen(x0: NavHostController) {
-    TODO("Not yet implemented")
 }

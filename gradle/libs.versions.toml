@@ -2,6 +2,7 @@
 [versions]
 activityCompose = "1.12.0-alpha04"
 agp = "8.12.0-rc01" # Android Gradle Plugin version. You can check latest stable on Google's Maven.
+coil = "3.3.0"
 composeBomVersion = "2025.07.00"
 coreKtx = "1.17.0-beta01"
 espressoCore = "3.7.0-rc01"
@@ -23,8 +24,6 @@ uiGraphics = "1.8.3" # <--- ADD THIS LINE
 parabolic-motion-animation = "v1.2"
 recyclerview = "1.4.0"
 verticalcarousel = "0.7.6"
-
-
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
@@ -53,6 +52,7 @@ google-api-client-android = { group = "com.google.api-client", name = "google-ap
 google-sheets-api = { group = "com.google.apis", name = "google-api-services-sheets", version = "v4-rev20250616-2.0.0" }
 google-play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version = "21.4.0" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationRuntimeAndroid" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
 materialIconsExtended = { group = "androidx.compose.material", name = "material-icons-extended" }
 quarks = { module = "me.nikhilchaudhari:quarks", version.ref = "quarks" }
@@ -60,8 +60,6 @@ ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics", version.ref
 parabolic-motion-animation = { group = "com.github.prathamesh-sonpatki", name = "Parabolic-Motion-Animation-in-Jetpack-Compose", version.ref = "parabolic-motion-animation" }
 androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 verticalcarousel = { module = "com.github.HereLiesAz:VerticalCarousel", version.ref = "verticalcarousel" }
-
-
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
