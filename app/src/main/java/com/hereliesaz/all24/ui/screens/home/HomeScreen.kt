@@ -6,10 +6,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,8 +27,11 @@ import com.hereliesaz.all24.data.model.Vitals
 import com.hereliesaz.all24.ui.navigation.Screen
 import com.hereliesaz.all24.ui.theme.All24Theme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(
+    navController: NavController
+) {
     val items = (1..24).map {
         Venue(
             id = it,
@@ -38,22 +47,42 @@ fun HomeScreen(navController: NavController) {
         )
     }
 
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        items(items) { item ->
-            ListItemCard(item = item, onClick = {
-                navController.navigate(Screen.Detail.createRoute(item.id))
-            })
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("All24") },
+                actions = {
+                    IconButton(onClick = { navController.navigate(Screen.Profile.route) }) {
+                        Icon(Icons.Default.Person, contentDescription = "Profile")
+                    }
+                }
+            )
+        }
+    ) { padding ->
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .padding(16.dp)
+        ) {
+            items(items) { item ->
+                ListItemCard(
+                    item = item,
+                    onClick = {
+                        navController.navigate(Screen.Detail.createRoute(item.id))
+                    }
+                )
+            }
         }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListItemCard(item: Venue, onClick: () -> Unit) {
+fun ListItemCard(
+    item: Venue,
+    onClick: () -> Unit
+) {
     Card(
         modifier = Modifier
             .fillMaxSize()
