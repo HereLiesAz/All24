@@ -4,7 +4,7 @@ Welcome to the official documentation for the All24 application. This document s
 
 ## The All24 Manifesto
 
-All24 is a new culinary companion for New Orleans, designed to be an authentic and trusted voice in the city's digital food scene. It aims to fill the void left by superficial and unsustainable media models by providing a platform that is fiercely independent, deeply knowledgeable, and written by and for the people who are the lifeblood of the New Orleans food scene.
+All24 is a new culinary companion for New Orleans, designed to be an authentic and trusted voice in the city's digital food scene. It aims to solve the crisis of authenticity by establishing a hybrid content model that marries the authority of professional in-house Curators with the passionate, on-the-ground perspectives of trusted local Creators.
 
 ### The All24 Voice
 
@@ -12,4 +12,15 @@ The app's voice is a carefully calibrated hybrid, blending the authority of a se
 
 ### The 24-Hour Philosophy
 
-The name "All24" is a declaration of the app's core philosophy, anchored in the city's vibrant 24-hour culture and the creative constraint of the "Top 24" list format. This thematic lens is used to interpret the entire city, from its greasiest spoons to its most elegant dining rooms, always searching for the 24 most worthy, most authentic, and most essentially New Orleans experiences.
+The name "All24" is a declaration of the app's core philosophy, anchored in the city's vibrant 24-hour culture and the creative constraint of the "Top 24" list format. The number 24 becomes a thematic lens to interpret the entire city, from its greasiest spoons to its most elegant dining rooms, always searching for the 24 most worthy, most authentic, and most essentially New Orleans experiences.
+
+## The Core Experience: Beyond the Five-Star Rating
+
+The architecture of the All24 app is a direct translation of its manifesto. It deliberately eschews the conventions of traditional review platforms to create a product focused on discovery, delight, and a deep, narrative-driven exploration of the city's culinary scene.
+
+*   **List-Based Interface:** The home screen is not a search bar, but a visually rich feed of "Top 24" lists, reframing the user's interaction from one of query to one of discovery.
+*   **The "Vibe Check":** A revolutionary replacement for the five-star rating system, this qualitative feedback system generates more meaningful community input through "Vouches" and creative, prompt-driven comments.
+
+## The Revolutionary Vision: A Synthesis
+
+All24 is conceived to be more than just another app. It is a curated, living, and indispensable guide to the heart of New Orleans—a digital publication with the critical voice of *Gambit*, the visual flair of a top Instagram creator, and the next-generation functionality of a platform built for the future.
