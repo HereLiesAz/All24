@@ -3,6 +3,7 @@ package com.hereliesaz.all24.ui.navigation
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -14,18 +15,20 @@ import com.hereliesaz.all24.ui.auth.AuthScreen
 import com.hereliesaz.all24.ui.screens.ProfileScreen
 import com.hereliesaz.all24.ui.screens.add.review.AddReviewScreen
 import com.hereliesaz.all24.ui.screens.admin.AdminDashboardScreen
+import com.hereliesaz.all24.ui.screens.MapScreen
 import com.hereliesaz.all24.ui.screens.admin.AdminSubmissionDetailScreen
 import com.hereliesaz.all24.ui.screens.business.BusinessDashboardScreen
 import com.hereliesaz.all24.ui.screens.business.EditPlaceScreen
-import com.hereliesaz.all24.ui.screens.carousel.MainCarouselScreen
 import com.hereliesaz.all24.ui.screens.place.detail.PlaceDetailScreen
+import com.hereliesaz.all24.ui.screens.places.PlacesListScreen
 import com.hereliesaz.all24.ui.screens.submit.place.SubmitPlaceScreen
 import com.hereliesaz.all24.ui.screens.top.reviews.TopReviewsScreen
+import com.hereliesaz.all24.ui.screens.vibe.VibeScreen
 
 
 sealed class Screen(val route: String) {
-    object MainCarousel : Screen("main_carousel") // The new entry point
     object PlacesList : Screen("places_list")
+    object Map : Screen("map")
     object Vibe : Screen("vibe")
     object Auth : Screen("auth")
     object Profile : Screen("profile")
@@ -49,22 +52,19 @@ sealed class Screen(val route: String) {
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun AppNavigation(googleSignInClient: GoogleSignInClient) {
-    val navController = rememberNavController()
-
+fun AppNavigation(
+    navController: NavHostController,
+    modifier: Modifier = Modifier,
+    googleSignInClient: GoogleSignInClient
+) {
     SharedTransitionLayout {
-        NavHost(navController = navController, startDestination = Screen.MainCarousel.route) {
-
-            composable(Screen.MainCarousel.route) {
-                MainCarouselScreen(
-                    navController = navController,
-                    sharedTransitionScope = this@SharedTransitionLayout,
-                    animatedVisibilityScope = this
-                )
-            }
-
+        NavHost(navController = navController, startDestination = Screen.PlacesList.route, modifier = modifier) {
             composable(Screen.PlacesList.route) {
                 PlacesListScreen(navController)
+            }
+
+            composable(Screen.Map.route) {
+                MapScreen()
             }
 
             composable(Screen.Vibe.route) {
@@ -137,14 +137,4 @@ fun AppNavigation(googleSignInClient: GoogleSignInClient) {
             }
         }
     }
-}
-
-@Composable
-fun VibeScreen(x0: NavHostController) {
-    TODO("Not yet implemented")
-}
-
-@Composable
-fun PlacesListScreen(x0: NavHostController) {
-    TODO("Not yet implemented")
 }

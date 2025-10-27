@@ -62,6 +62,17 @@ fun PlaceDetailScreen(
                         modifier = Modifier.padding(top = 8.dp)
                     )
                     // TODO: Display reviews from uiState.reviews
+
+                    com.hereliesaz.all24.ui.screens.detail.CreatorTake(
+                        creatorName = "Jane Doe",
+                        take = "This is the best place in town! You have to try the gumbo.",
+                        onFollowClick = {}
+                    )
+
+                    com.hereliesaz.all24.ui.screens.detail.PeoplesVoice(
+                        quote = "\"The best cocktails in the city, hands down.\"",
+                        attribution = "- The People"
+                    )
                 }
             }
         }

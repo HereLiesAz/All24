@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.hereliesaz.all24.ui.navigation.AppNavigation
+import com.hereliesaz.all24.ui.screens.MainScreen
 import com.hereliesaz.all24.ui.theme.All24Theme
 
 class MainActivity : ComponentActivity() {
@@ -34,8 +34,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    // Pass the client to the navigation host
-                    AppNavigation(googleSignInClient)
+                    MainScreen(googleSignInClient)
                 }
             }
         }

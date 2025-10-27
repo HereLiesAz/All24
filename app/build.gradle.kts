@@ -21,11 +21,16 @@ plugins {
 android {
     signingConfigs {
         getByName("debug") {
-            // Read the keystore configuration securely from local.properties
-            storeFile = file(localProperties.getProperty("KEYSTORE_FILE"))
-            storePassword = localProperties.getProperty("KEYSTORE_PASSWORD")
-            keyAlias = localProperties.getProperty("KEY_ALIAS")
-            keyPassword = localProperties.getProperty("KEY_PASSWORD")
+            storeFile = file(localProperties.getProperty("KEYSTORE_FILE") ?: "../debug.keystore")
+            storePassword = localProperties.getProperty("KEYSTORE_PASSWORD") ?: "android"
+            keyAlias = localProperties.getProperty("KEY_ALIAS") ?: "androiddebugkey"
+            keyPassword = localProperties.getProperty("KEY_PASSWORD") ?: "android"
+        }
+        create("release") {
+            storeFile = file(localProperties.getProperty("KEYSTORE_FILE")?.takeIf { it.isNotBlank() } ?: "../debug.keystore")
+            storePassword = localProperties.getProperty("KEYSTORE_PASSWORD")?.takeIf { it.isNotBlank() } ?: "android"
+            keyAlias = localProperties.getProperty("KEY_ALIAS")?.takeIf { it.isNotBlank() } ?: "androiddebugkey"
+            keyPassword = localProperties.getProperty("KEY_PASSWORD")?.takeIf { it.isNotBlank() } ?: "android"
         }
     }
     namespace = "com.hereliesaz.all24"
@@ -57,6 +62,7 @@ android {
             "APPS_SCRIPT_URL",
             "\"${localProperties.getProperty("APPS_SCRIPT_URL")}\""
         )
+        manifestPlaceholders["MAPS_API_KEY"] = localProperties.getProperty("MAPS_API_KEY")
 
 
     }
@@ -68,6 +74,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
             buildConfigField(
                 "String",
                 "SHEETS_API_KEY",
@@ -161,8 +168,8 @@ dependencies {
     implementation(libs.materialIconsExtended)
     implementation(libs.material) // Assuming libs.material = "com.google.android.material:material:1.12.0"
     implementation(libs.androidx.core.ktx)
+    implementation(libs.maps.compose)
 
-    implementation(libs.verticalcarousel)
     implementation(libs.gson)
 
 
