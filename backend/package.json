@@ -1,0 +1,10 @@
+{
+  "name": "all24-sheets-proxy",
+  "version": "1.0.0",
+  "description": "Securely writes data to a Google Sheet for the All24 app.",
+  "main": "index.js",
+  "dependencies": {
+    "google-auth-library": "^9.0.0",
+    "googleapis": "^123.0.0"
+  }
+}

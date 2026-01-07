@@ -1,0 +1,3789 @@
+﻿Android Project Backup for AI Analysis
+
+Generated on: 2025-07-28 01:35:06
+
+Included Modules/Files: app, DevGuide, backend
+
+
+
+--- PROJECT FILE TREE (Status based on module selection) ---
+
+All24
++-- app
+|  +-- build
+|  |  +-- generated [DIR EXCLUDED]
+|  |  +-- gmpAppId [DIR EXCLUDED]
+|  |  \-- intermediates [DIR EXCLUDED]
+|  +-- src
+|  |  +-- androidTest
+|  |  |  \-- java
+|  |  |     \-- com
+|  |  |        \-- hereliesaz
+|  |  |           \-- all24
+|  |  |              \-- ExampleInstrumentedTest.kt [INCLUDED]
+|  |  +-- main
+|  |  |  +-- java
+|  |  |  |  \-- com
+|  |  |  |     \-- hereliesaz
+|  |  |  |        \-- all24
+|  |  |  |           +-- data
+|  |  |  |           |  \-- models.kt [INCLUDED]
+|  |  |  |           +-- services
+|  |  |  |           |  \-- SheetsService.kt [INCLUDED]
+|  |  |  |           +-- ui
+|  |  |  |           |  +-- auth
+|  |  |  |           |  |  +-- AuthScreen.kt [INCLUDED]
+|  |  |  |           |  |  \-- AuthUiState.kt [INCLUDED]
+|  |  |  |           |  +-- navigation
+|  |  |  |           |  |  \-- AppNavigation.kt [INCLUDED]
+|  |  |  |           |  +-- screens
+|  |  |  |           |  |  +-- add
+|  |  |  |           |  |  |  \-- review
+|  |  |  |           |  |  |     +-- AddReviewScreen.kt [INCLUDED]
+|  |  |  |           |  |  |     \-- AddReviewViewModel.kt [INCLUDED]
+|  |  |  |           |  |  +-- admin
+|  |  |  |           |  |  |  +-- AdminDashboardScreen.kt [INCLUDED]
+|  |  |  |           |  |  |  +-- AdminDashboardViewModel.kt [INCLUDED]
+|  |  |  |           |  |  |  +-- AdminSubmissionDetailScreen.kt [INCLUDED]
+|  |  |  |           |  |  |  \-- AdminSubmissionDetailViewModel.kt [INCLUDED]
+|  |  |  |           |  |  +-- business
+|  |  |  |           |  |  |  +-- BusinessDashboardScreen.kt [INCLUDED]
+|  |  |  |           |  |  |  \-- EditPlaceScreen.kt [INCLUDED]
+|  |  |  |           |  |  +-- carousel
+|  |  |  |           |  |  |  +-- CarouselAdapter.kt [INCLUDED]
+|  |  |  |           |  |  |  +-- MainCarouselScreen.kt [INCLUDED]
+|  |  |  |           |  |  |  \-- MainCarouselViewModel.kt [INCLUDED]
+|  |  |  |           |  |  +-- place
+|  |  |  |           |  |  |  +-- detail
+|  |  |  |           |  |  |  |  +-- PlaceDetailScreen.kt [INCLUDED]
+|  |  |  |           |  |  |  |  \-- PlaceDetailViewModel.kt [INCLUDED]
+|  |  |  |           |  |  |  \-- list
+|  |  |  |           |  |  |     \-- PlaceListScreen.kt [INCLUDED]
+|  |  |  |           |  |  +-- submit
+|  |  |  |           |  |  |  \-- place
+|  |  |  |           |  |  |     +-- SubmitPlaceScreen.kt [INCLUDED]
+|  |  |  |           |  |  |     \-- SubmitPlaceViewModel.kt [INCLUDED]
+|  |  |  |           |  |  +-- top
+|  |  |  |           |  |  |  \-- reviews
+|  |  |  |           |  |  |     +-- TopReviewsScreen.kt [INCLUDED]
+|  |  |  |           |  |  |     \-- TopReviewsViewModel.kt [INCLUDED]
+|  |  |  |           |  |  \-- ProfileScreen.kt [INCLUDED]
+|  |  |  |           |  \-- theme
+|  |  |  |           |     +-- Color.kt [INCLUDED]
+|  |  |  |           |     +-- Theme.kt [INCLUDED]
+|  |  |  |           |     \-- Type.kt [INCLUDED]
+|  |  |  |           \-- MainActivity.kt [INCLUDED]
+|  |  |  +-- res
+|  |  |  |  +-- drawable
+|  |  |  |  |  +-- ic_launcher_background.xml [INCLUDED]
+|  |  |  |  |  \-- ic_launcher_foreground.xml [INCLUDED]
+|  |  |  |  +-- layout
+|  |  |  |  |  +-- activity_firebaseservices.xml [INCLUDED]
+|  |  |  |  |  +-- carousel_host.xml [INCLUDED]
+|  |  |  |  |  \-- cat_carousel_item.xml [INCLUDED]
+|  |  |  |  +-- mipmap-anydpi
+|  |  |  |  +-- mipmap-anydpi-v26
+|  |  |  |  |  +-- ic_launcher.xml [INCLUDED]
+|  |  |  |  |  \-- ic_launcher_round.xml [INCLUDED]
+|  |  |  |  +-- mipmap-hdpi
+|  |  |  |  |  +-- ic_launcher.webp [ASSET]
+|  |  |  |  |  +-- ic_launcher_foreground.webp [ASSET]
+|  |  |  |  |  \-- ic_launcher_round.webp [ASSET]
+|  |  |  |  +-- mipmap-mdpi
+|  |  |  |  |  +-- ic_launcher.webp [ASSET]
+|  |  |  |  |  +-- ic_launcher_foreground.webp [ASSET]
+|  |  |  |  |  \-- ic_launcher_round.webp [ASSET]
+|  |  |  |  +-- mipmap-xhdpi
+|  |  |  |  |  +-- ic_launcher.webp [ASSET]
+|  |  |  |  |  +-- ic_launcher_foreground.webp [ASSET]
+|  |  |  |  |  \-- ic_launcher_round.webp [ASSET]
+|  |  |  |  +-- mipmap-xxhdpi
+|  |  |  |  |  +-- ic_launcher.webp [ASSET]
+|  |  |  |  |  +-- ic_launcher_foreground.webp [ASSET]
+|  |  |  |  |  \-- ic_launcher_round.webp [ASSET]
+|  |  |  |  +-- mipmap-xxxhdpi
+|  |  |  |  |  +-- ic_launcher.webp [ASSET]
+|  |  |  |  |  +-- ic_launcher_foreground.webp [ASSET]
+|  |  |  |  |  \-- ic_launcher_round.webp [ASSET]
+|  |  |  |  +-- values
+|  |  |  |  |  +-- colors.xml [INCLUDED]
+|  |  |  |  |  +-- strings.xml [INCLUDED]
+|  |  |  |  |  \-- themes.xml [INCLUDED]
+|  |  |  |  \-- xml
+|  |  |  |     +-- backup_rules.xml [INCLUDED]
+|  |  |  |     \-- data_extraction_rules.xml [INCLUDED]
+|  |  |  +-- AndroidManifest.xml [INCLUDED]
+|  |  |  \-- ic_launcher-playstore.png [ASSET]
+|  |  \-- test
+|  |     \-- java
+|  |        \-- com
+|  |           \-- hereliesaz
+|  |              \-- all24
+|  |                 \-- ExampleUnitTest.kt [INCLUDED]
+|  +-- .gitignore [INCLUDED]
+|  +-- build.gradle.kts [INCLUDED]
+|  +-- google-services.json [INCLUDED]
+|  \-- proguard-rules.pro [INCLUDED]
++-- backend
+|  +-- index.js
+|  \-- package.json [INCLUDED]
++-- build
+|  \-- reports [DIR EXCLUDED]
++-- DevGuide
+|  +-- 01_Manifesto.md [INCLUDED]
+|  +-- 03_ApplicationArchitecture.md [INCLUDED]
+|  +-- Changelog.md [INCLUDED]
+|  +-- FirebaseSecurity.md [INCLUDED]
+|  +-- FirestoreSchema.md [INCLUDED]
+|  +-- M3Expressive.md [INCLUDED]
+|  +-- TestingStrategy.md [INCLUDED]
+|  +-- TODO.md [INCLUDED]
+|  +-- UIandUX.md [INCLUDED]
+|  \-- UserFlows.md [INCLUDED]
++-- gradle
+|  +-- wrapper
+|  |  +-- gradle-wrapper.jar
+|  |  \-- gradle-wrapper.properties
+|  \-- libs.versions.toml
++-- .gitignore
++-- backup_for_ai.ps1
++-- backup_for_ai_20250727_032943.txt
++-- backup_for_ai_20250727_062213.txt
++-- backup_for_ai_20250727_202339.txt
++-- backup_for_ai_20250727_203141.txt
++-- backup_for_ai_20250728_013505.txt
++-- build.gradle.kts
++-- gradle.properties
++-- gradlew
++-- gradlew.bat
++-- local.properties
++-- Prompts.txt
+\-- settings.gradle.kts
+
+
+
+--- INCLUDED FILE CONTENTS (from selected modules & root) ---
+
+Each file begins with a '--- FILE: [relative_path] ---' header.
+
+
+
+--- FILE: app/.gitignore ---
+
+/build
+
+
+--- FILE: app/build.gradle.kts ---
+
+import java.io.FileInputStream
+import java.util.Properties
+
+val localProperties = Properties().apply {
+    val localPropertiesFile = project.rootProject.file("local.properties")
+    if (localPropertiesFile.exists()) {
+        load(FileInputStream(localPropertiesFile))
+    } else {
+        // Optional: Log a warning or throw an error if local.properties is missing
+        println("Warning: local.properties file not found at ${localPropertiesFile.absolutePath}")
+    }
+}
+
+plugins {
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.org.jetbrains.kotlin.android)
+    alias(libs.plugins.googleServices)
+    alias(libs.plugins.composeCompiler)
+}
+
+android {
+    signingConfigs {
+        getByName("debug") {
+            // Read the keystore configuration securely from local.properties
+            storeFile = file(localProperties.getProperty("KEYSTORE_FILE"))
+            storePassword = localProperties.getProperty("KEYSTORE_PASSWORD")
+            keyAlias = localProperties.getProperty("KEY_ALIAS")
+            keyPassword = localProperties.getProperty("KEY_PASSWORD")
+        }
+    }
+    namespace = "com.hereliesaz.all24"
+    compileSdk = 36
+
+    defaultConfig {
+        applicationId = "com.hereliesaz.all24"
+        minSdk = 26
+        targetSdk = 36
+        versionCode = 1
+        versionName = "1.0"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary = true
+        }
+        buildConfigField(
+            "String",
+            "SHEETS_API_KEY",
+            "\"${localProperties.getProperty("SHEETS_API_KEY")}\""
+        )
+        buildConfigField(
+            "String",
+            "SPREADSHEET_ID",
+            "\"${localProperties.getProperty("SPREADSHEET_ID")}\""
+        )
+        buildConfigField(
+            "String",
+            "APPS_SCRIPT_URL",
+            "\"${localProperties.getProperty("APPS_SCRIPT_URL")}\""
+        )
+
+
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            buildConfigField(
+                "String",
+                "SHEETS_API_KEY",
+                "\"${localProperties.getProperty("SHEETS_API_KEY")}\""
+            )
+            buildConfigField(
+                "String",
+                "SPREADSHEET_ID",
+                "\"${localProperties.getProperty("SPREADSHEET_ID")}\""
+            )
+            buildConfigField(
+                "String",
+                "APPS_SCRIPT_URL",
+                "\"${localProperties.getProperty("APPS_SCRIPT_URL")}\""
+            )
+
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlin {
+        jvmToolchain(17)
+    }
+    buildFeatures {
+        compose = true
+        buildConfig = true
+
+    }
+
+    packaging {
+        resources {
+            resources.excludes += "META-INF/INDEX.LIST"
+            excludes.add("META-INF/DEPENDENCIES")
+            excludes.add("META-INF/AL2.0")
+            excludes.add("META-INF/LGPL2.1")
+        }
+    }
+    buildToolsVersion = "36.0.0"
+    ndkVersion = "29.0.13599879 rc2"
+}
+composeCompiler {
+    reportsDestination = layout.buildDirectory.dir("compose_compiler")
+}
+dependencies {
+
+    // Core Android & Jetpack
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.activity.compose)
+
+    // Jetpack Compose - M3 Expressive Design
+    implementation(platform(libs.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
+
+    // Firebase - Bill of Materials (BoM)
+    implementation(platform(libs.firebase.bom))
+
+    // Firebase Services
+    implementation(libs.firebase.firestore)
+    implementation(libs.androidx.navigation.runtime.android)
+    implementation(libs.engage.core)
+    implementation(libs.firebase.ml.common)
+    implementation(libs.ui.graphics)
+    implementation(libs.androidx.recyclerview)
+
+    // Testing
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.auth)
+
+    implementation(libs.google.api.client.android)
+    implementation(libs.google.sheets.api)
+
+    // --- NEW: Google Sign-In (OAuth) Dependency ---
+    implementation(libs.google.play.services.auth)
+
+    implementation(libs.androidx.navigation.compose) // Correct navigation dependency
+    implementation(libs.materialIconsExtended)
+    implementation(libs.material) // Assuming libs.material = "com.google.android.material:material:1.12.0"
+    implementation(libs.androidx.core.ktx)
+
+    implementation("com.github.hereliesaz:VerticalCarousel:0.6.4")
+
+
+
+}
+
+
+
+--- FILE: app/google-services.json ---
+
+{
+  "project_info": {
+    "project_number": "865243890208",
+    "project_id": "all24-8f941",
+    "storage_bucket": "all24-8f941.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:865243890208:android:1c7011c74681e642007245",
+        "android_client_info": {
+          "package_name": "com.hereliesaz.all24"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "865243890208-pekr4geenp91t4h31deke0iid8egjqto.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3ujzqPgNzemrY3fEj-pdLRLbOwqbXjeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "865243890208-pekr4geenp91t4h31deke0iid8egjqto.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
+
+
+--- FILE: app/proguard-rules.pro ---
+
+# Add project specific ProGuard rules here.
+# You can control the set of applied configuration files using the
+# proguardFiles setting in build.gradle.
+#
+# For more details, see
+#   http://developer.android.com/guide/developing/tools/proguard.html
+
+# If your project uses WebView with JS, uncomment the following
+# and specify the fully qualified class name to the JavaScript interface
+# class:
+#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+#   public *;
+#}
+
+# Uncomment this to preserve the line number information for
+# debugging stack traces.
+#-keepattributes SourceFile,LineNumberTable
+
+# If you keep the line number information, uncomment this to
+# hide the original source file name.
+#-renamesourcefileattribute SourceFile
+
+
+--- FILE: app/src/androidTest/java/com/hereliesaz/all24/ExampleInstrumentedTest.kt ---
+
+package com.hereliesaz.all24
+
+  import androidx.test.platform.app.InstrumentationRegistry
+  import androidx.test.ext.junit.runners.AndroidJUnit4
+
+  import org.junit.Test
+  import org.junit.runner.RunWith
+
+  import org.junit.Assert.*
+
+  /**
+   * Instrumented test, which will execute on an Android device.
+   *
+   * See [testing documentation](http://d.android.com/tools/testing).
+   */
+  @RunWith(AndroidJUnit4::class)
+  class ExampleInstrumentedTest {
+    @Test
+    fun useAppContext() {
+      // Context of the app under test.
+      val appContext = InstrumentationRegistry.getInstrumentation().targetContext
+      assertEquals("com.hereliesaz.all24", appContext.packageName)
+    }
+  }
+
+
+--- FILE: app/src/main/AndroidManifest.xml ---
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.All24" >
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.All24" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/data/models.kt ---
+
+package com.hereliesaz.all24.data
+
+import com.google.firebase.firestore.DocumentId
+import com.google.firebase.firestore.GeoPoint
+import com.google.firebase.firestore.ServerTimestamp
+import java.util.Date
+
+data class UserModel(
+    @DocumentId val uid: String = "",
+    val email: String = "",
+    val role: String = "user" // 'user', 'business', 'admin'
+)
+
+data class Place(
+    @DocumentId val id: String = "",
+    val name: String = "",
+    val description: String = "",
+    val location: GeoPoint? = null,
+    val category: String = "bar",
+    val ownerId: String? = null,
+    val tags: List<String> = emptyList(), // New field for categorization
+)
+
+data class Review(
+    @DocumentId val id: String = "",
+    val placeId: String = "",
+    val userId: String = "",
+    val text: String = "",
+    val vote: String = "endorse",
+    @ServerTimestamp val timestamp: Date? = null,
+    val endorsedBy: List<String> = emptyList(),
+    val avoidedBy: List<String> = emptyList(),
+    val isAdminReview: Boolean = false
+)
+
+data class Submission(
+    @DocumentId val id: String = "",
+    val name: String = "",
+    val description: String = "",
+    val address: String = "",
+    val category: String = "bar",
+    val submittedBy: String = "",
+    @ServerTimestamp val submittedAt: Date? = null,
+    val status: String = "pending"
+)
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/MainActivity.kt ---
+
+package com.hereliesaz.all24
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.ui.Modifier
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.hereliesaz.all24.ui.navigation.AppNavigation
+import com.hereliesaz.all24.ui.theme.All24Theme
+
+class MainActivity : ComponentActivity() {
+
+    lateinit var googleSignInClient: GoogleSignInClient
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Configure Google Sign-In
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken("944329350333-lmqcgnhpsi1cd0noj0o4nf9ejaj707u6.apps.googleusercontent.com") // You get this from your Google Cloud console
+            .requestEmail()
+            .build()
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
+
+
+        setContent {
+            All24Theme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    // Pass the client to the navigation host
+                    AppNavigation(googleSignInClient)
+                }
+            }
+        }
+    }
+}
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/services/SheetsService.kt ---
+
+package com.hereliesaz.all24.services
+
+import com.hereliesaz.all24.data.Place
+import com.hereliesaz.all24.data.Review
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.util.Date
+
+class SheetsService {
+
+    // --- MOCK DATA ---
+    private val mockPlaces = listOf(
+        Place(
+            id = "place_01",
+            name = "The Serpent's Coil",
+            description = "A dimly lit bar known for its potent cocktails and whispered secrets.",
+            category = "bar",
+            tags = listOf("24-Hour Bars", "Happy Hours")
+        ),
+        Place(
+            id = "place_02",
+            name = "Eulalie's Absinthe House",
+            description = "Green light spills from the windows of this timeless establishment.",
+            category = "bar",
+            tags = listOf("24-Hour Bars")
+        ),
+        Place(
+            id = "place_03",
+            name = "The Gilded Cage",
+            description = "Once an opulent theater, now a sprawling, decadent nightclub.",
+            category = "club",
+            tags = listOf("Events", "Happy Hours")
+        ),
+        Place(
+            id = "place_04",
+            name = "Midnight Grub",
+            description = "The best post-bar food you can find.",
+            category = "food",
+            tags = listOf("Late-Night Food")
+        ),
+        Place(
+            id = "place_05",
+            name = "The Wandering Chef",
+            description = "A new menu and location every week.",
+            category = "food",
+            tags = listOf("Pop-ups", "Late-Night Food")
+        )
+    )
+
+    private val mockReviews = listOf(
+        Review(
+            id = "review_01",
+            placeId = "place_01",
+            userId = "user_a",
+            text = "The Sazerac here is a religious experience.",
+            vote = "endorse",
+            timestamp = Date()
+        ),
+        Review(
+            id = "review_02",
+            placeId = "place_02",
+            userId = "user_b",
+            text = "Felt like I was stepping into another century. The green fairy is real.",
+            vote = "endorse",
+            timestamp = Date()
+        ),
+        Review(
+            id = "review_03",
+            placeId = "place_01",
+            userId = "user_c",
+            text = "Too dark, and the bartender stared at me funny.",
+            vote = "avoid",
+            timestamp = Date()
+        )
+    )
+    // --- END MOCK DATA ---
+
+
+    // --- Read Functions ---
+    suspend fun getPlaces(): List<Place> {
+        return withContext(Dispatchers.IO) {
+            // Return the mock data instead of making a network call.
+            mockPlaces
+        }
+    }
+
+    suspend fun getAllReviews(): List<Review> {
+        return withContext(Dispatchers.IO) {
+            // Return the mock data.
+            mockReviews
+        }
+    }
+
+    suspend fun getSubmissions(): List<com.hereliesaz.all24.data.Submission> {
+        return emptyList()
+    }
+
+
+    // --- Write Functions ---
+    // The write functions remain placeholders for your real implementation.
+    suspend fun submitPlace(
+        idToken: String,
+        name: String,
+        description: String,
+        address: String,
+        category: String,
+    ) {
+        println("Pretending to submit place: $name")
+    }
+}
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/auth/AuthScreen.kt ---
+
+package com.hereliesaz.all24.ui.auth
+
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.common.api.ApiException
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AuthScreen(
+    navController: NavController,
+    googleSignInClient: GoogleSignInClient,
+) {
+    val signInLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+        try {
+            val account = task.getResult(ApiException::class.java)
+            if (account != null) {
+                navController.popBackStack()
+            }
+        } catch (e: ApiException) {
+            e.printStackTrace()
+        }
+    }
+
+    Scaffold(
+        topBar = { TopAppBar(title = { Text("Become Corporeal") }) }
+    ) { padding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text("To leave your mark, you must have a soul.")
+            Spacer(Modifier.height(24.dp))
+            Button(onClick = { signInLauncher.launch(googleSignInClient.signInIntent) }) {
+                Text("Sign in with Google")
+            }
+        }
+    }
+}
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/auth/AuthUiState.kt ---
+
+package com.hereliesaz.all24.ui.auth
+
+/**
+ * Represents the state of the authentication screen.
+ */
+data class AuthUiState(
+    val isLoading: Boolean = false,
+    val email: String = "",
+    val password: String = "",
+    val isLoginMode: Boolean = true,
+    val error: String? = null,
+    val isAuthenticated: Boolean = false
+)
+
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/navigation/AppNavigation.kt ---
+
+package com.hereliesaz.all24.ui.navigation
+
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionLayout
+import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.hereliesaz.all24.ui.auth.AuthScreen
+import com.hereliesaz.all24.ui.screens.ProfileScreen
+import com.hereliesaz.all24.ui.screens.add.review.AddReviewScreen
+import com.hereliesaz.all24.ui.screens.admin.AdminDashboardScreen
+import com.hereliesaz.all24.ui.screens.admin.AdminSubmissionDetailScreen
+import com.hereliesaz.all24.ui.screens.business.BusinessDashboardScreen
+import com.hereliesaz.all24.ui.screens.business.EditPlaceScreen
+import com.hereliesaz.all24.ui.screens.carousel.MainCarouselScreen
+import com.hereliesaz.all24.ui.screens.place.detail.PlaceDetailScreen
+import com.hereliesaz.all24.ui.screens.place.list.PlaceListScreen
+import com.hereliesaz.all24.ui.screens.submit.place.SubmitPlaceScreen
+import com.hereliesaz.all24.ui.screens.top.reviews.TopReviewsScreen
+
+
+sealed class Screen(val route: String) {
+    object MainCarousel : Screen("main_carousel") // The new entry point
+    object PlacesList : Screen("places_list")
+    object Vibe : Screen("vibe")
+    object Auth : Screen("auth")
+    object Profile : Screen("profile")
+    object TopReviews : Screen("top_reviews")
+    object SubmitPlace : Screen("submit_place")
+    object AdminDashboard : Screen("admin_dashboard")
+    object BusinessDashboard : Screen("business_dashboard")
+    object AdminSubmissionDetail : Screen("admin_submission_detail/{submissionId}") {
+        fun createRoute(submissionId: String) = "admin_submission_detail/$submissionId"
+    }
+    object PlaceDetail : Screen("place_detail/{placeId}") {
+        fun createRoute(placeId: String) = "place_detail/$placeId"
+    }
+    object AddReview : Screen("add_review/{placeId}") {
+        fun createRoute(placeId: String) = "add_review/$placeId"
+    }
+    object EditPlace : Screen("edit_place/{placeId}") {
+        fun createRoute(placeId: String) = "edit_place/$placeId"
+    }
+}
+
+@OptIn(ExperimentalSharedTransitionApi::class)
+@Composable
+fun AppNavigation(googleSignInClient: GoogleSignInClient) {
+    val navController = rememberNavController()
+
+    SharedTransitionLayout {
+        NavHost(navController = navController, startDestination = Screen.MainCarousel.route) {
+
+            composable(Screen.MainCarousel.route) {
+                MainCarouselScreen(
+                    navController = navController,
+                    sharedTransitionScope = this@SharedTransitionLayout,
+                    animatedVisibilityScope = this
+                )
+            }
+
+            composable(Screen.PlacesList.route) {
+                PlacesListScreen(navController)
+            }
+
+            composable(Screen.Vibe.route) {
+                VibeScreen(navController)
+            }
+
+            composable(Screen.Auth.route) {
+                AuthScreen(
+                    navController = navController,
+                    googleSignInClient = googleSignInClient
+                )
+            }
+
+            composable(Screen.Profile.route) {
+                ProfileScreen(
+                    navController = navController,
+                    googleSignInClient = googleSignInClient
+                )
+            }
+
+            composable(Screen.TopReviews.route) {
+                TopReviewsScreen(navController)
+            }
+
+            composable(Screen.SubmitPlace.route) {
+                SubmitPlaceScreen(navController)
+            }
+
+            composable(Screen.AdminDashboard.route) {
+                AdminDashboardScreen(navController)
+            }
+
+            composable(Screen.BusinessDashboard.route) {
+                BusinessDashboardScreen(navController)
+            }
+
+            composable(
+                route = Screen.AdminSubmissionDetail.route,
+                arguments = listOf(navArgument("submissionId") { type = NavType.StringType })
+            ) {
+                AdminSubmissionDetailScreen(navController)
+            }
+
+            composable(
+                route = Screen.PlaceDetail.route,
+                arguments = listOf(navArgument("placeId") { type = NavType.StringType }) // Argument is non-nullable
+            ) {
+                PlaceDetailScreen(
+                    sharedTransitionScope = this@SharedTransitionLayout,
+                    animatedVisibilityScope = this
+                )
+            }
+
+
+
+            composable(
+                route = Screen.AddReview.route,
+                arguments = listOf(navArgument("placeId") { type = NavType.StringType })
+            ) { backStackEntry ->
+                AddReviewScreen(navController, backStackEntry.arguments?.getString("placeId")!!)
+            }
+
+            composable(
+                route = Screen.EditPlace.route,
+                arguments = listOf(navArgument("placeId") { type = NavType.StringType })
+            ) {
+                EditPlaceScreen(navController)
+            }
+        }
+    }
+}
+
+@Composable
+fun VibeScreen(x0: NavHostController) {
+    TODO("Not yet implemented")
+}
+
+@Composable
+fun PlacesListScreen(x0: NavHostController) {
+    TODO("Not yet implemented")
+}
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/screens/add/review/AddReviewScreen.kt ---
+
+package com.hereliesaz.all24.ui.screens.add.review
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AddReviewScreen(
+    navController: NavController,
+    placeId: String,
+    viewModel: AddReviewViewModel = viewModel()
+) {
+    val uiState by viewModel.uiState.collectAsState()
+
+    LaunchedEffect(uiState.isSuccess) {
+        if (uiState.isSuccess) {
+            navController.popBackStack()
+        }
+    }
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Add Your Review") },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
+            )
+        }
+    ) { padding ->
+        Column(
+            modifier = Modifier
+                .padding(padding)
+                .padding(16.dp)
+        ) {
+            OutlinedTextField(
+                value = uiState.text,
+                onValueChange = { viewModel.onTextChange(it) },
+                label = { Text("Your review...") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(150.dp)
+            )
+            Spacer(Modifier.height(16.dp))
+            // Add Endorse/Avoid toggle here
+            Spacer(Modifier.height(16.dp))
+            Button(
+                onClick = { viewModel.submitReview(placeId) },
+                modifier = Modifier.fillMaxWidth(),
+                enabled = !uiState.isLoading
+            ) {
+                if (uiState.isLoading) {
+                    CircularProgressIndicator(modifier = Modifier.size(24.dp))
+                } else {
+                    Text("Submit")
+                }
+            }
+            uiState.error?.let {
+                Text(it, color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(top = 8.dp))
+            }
+        }
+    }
+}
+
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/screens/add/review/AddReviewViewModel.kt ---
+
+package com.hereliesaz.all24.ui.screens.add.review
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.hereliesaz.all24.services.SheetsService
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+
+data class AddReviewUiState(
+    val text: String = "",
+    val vote: String = "endorse",
+    val isLoading: Boolean = false,
+    val isSuccess: Boolean = false,
+    val error: String? = null
+)
+
+class AddReviewViewModel : ViewModel() {
+    private val sheetsService = SheetsService()
+
+    private val _uiState = MutableStateFlow(AddReviewUiState())
+    val uiState = _uiState.asStateFlow()
+
+    fun onTextChange(text: String) {
+        _uiState.value = _uiState.value.copy(text = text)
+    }
+
+    fun onVoteChange(vote: String) {
+        _uiState.value = _uiState.value.copy(vote = vote)
+    }
+
+    fun submitReview(placeId: String) {
+        if (_uiState.value.text.isBlank()) {
+            _uiState.value = _uiState.value.copy(error = "Review cannot be empty.")
+            return
+        }
+
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(isLoading = true, error = null)
+            try {
+                // This now needs to be a proxied call in SheetsService
+                // sheetsService.addReview(placeId, _uiState.value.text, _uiState.value.vote)
+                _uiState.value = _uiState.value.copy(isLoading = false, isSuccess = true)
+            } catch (e: Exception) {
+                _uiState.value = _uiState.value.copy(isLoading = false, error = e.message)
+            }
+        }
+    }
+}
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/screens/admin/AdminDashboardScreen.kt ---
+
+package com.hereliesaz.all24.ui.screens.admin
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import com.hereliesaz.all24.data.Submission
+import com.hereliesaz.all24.ui.navigation.Screen
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AdminDashboardScreen(
+    navController: NavController,
+    viewModel: AdminDashboardViewModel = viewModel()
+) {
+    val submissions by viewModel.submissions.collectAsState()
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Pending Submissions") },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
+            )
+        }
+    ) { padding ->
+        if (submissions.isEmpty()) {
+            Box(
+                modifier = Modifier.fillMaxSize().padding(padding),
+                contentAlignment = Alignment.Center
+            ) {
+                Text("No pending submissions.")
+            }
+        } else {
+            LazyColumn(
+                modifier = Modifier.padding(padding),
+                contentPadding = PaddingValues(16.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                items(submissions) { submission ->
+                    SubmissionCard(submission = submission, onClick = {
+                        navController.navigate(Screen.AdminSubmissionDetail.createRoute(submission.id))
+                    })
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun SubmissionCard(submission: Submission, onClick: () -> Unit) {
+    Card(onClick = onClick) {
+        ListItem(
+            headlineContent = { Text(submission.name) },
+            supportingContent = { Text(submission.address) },
+            overlineContent = { Text(submission.category.uppercase()) }
+        )
+    }
+}
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/screens/admin/AdminDashboardViewModel.kt ---
+
+package com.hereliesaz.all24.ui.screens.admin
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.hereliesaz.all24.data.Submission
+import com.hereliesaz.all24.services.SheetsService
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+
+class AdminDashboardViewModel : ViewModel() {
+
+    private val sheetsService = SheetsService()
+
+    private val _submissions = MutableStateFlow<List<Submission>>(emptyList())
+    val submissions: StateFlow<List<Submission>> = _submissions.asStateFlow()
+
+    init {
+        fetchSubmissions()
+    }
+
+    fun fetchSubmissions() {
+        viewModelScope.launch {
+            try {
+                _submissions.value = sheetsService.getSubmissions()
+            } catch (e: Exception) {
+                // Handle error
+                println("Failed to fetch submissions: ${e.message}")
+            }
+        }
+    }
+}
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/screens/admin/AdminSubmissionDetailScreen.kt ---
+
+package com.hereliesaz.all24.ui.screens.admin
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AdminSubmissionDetailScreen(
+    navController: NavController,
+    viewModel: AdminSubmissionDetailViewModel = viewModel()
+) {
+    val uiState by viewModel.uiState.collectAsState()
+    val submission = uiState.submission
+
+    // Navigate back automatically after approval/denial
+    LaunchedEffect(submission) {
+        if (submission == null && !uiState.isLoading) {
+            navController.popBackStack()
+        }
+    }
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text(submission?.name ?: "Loading...") },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
+            )
+        }
+    ) { padding ->
+        when {
+            uiState.isLoading -> {
+                Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator()
+                }
+            }
+            submission != null -> {
+                Column(
+                    modifier = Modifier
+                        .padding(padding)
+                        .padding(16.dp)
+                ) {
+                    Text("Name: ${submission.name}", style = MaterialTheme.typography.titleMedium)
+                    Text("Address: ${submission.address}")
+                    Text("Description: ${submission.description}")
+                    Spacer(Modifier.weight(1f))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        Button(
+                            onClick = {
+                                viewModel.deny()
+                            },
+                            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)
+                        ) {
+                            Text("Deny")
+                        }
+                        Button(onClick = {
+                            viewModel.approve()
+                        }) {
+                            Text("Approve")
+                        }
+                    }
+                }
+            }
+            else -> {
+                Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Text(uiState.error ?: "Submission not found.")
+                }
+            }
+        }
+    }
+}
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/screens/admin/AdminSubmissionDetailViewModel.kt ---
+
+package com.hereliesaz.all24.ui.screens.admin
+
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
+import com.hereliesaz.all24.data.Submission
+import com.hereliesaz.all24.services.SheetsService
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+
+data class AdminSubmissionDetailState(
+    val submission: Submission? = null,
+    val isLoading: Boolean = true,
+    val error: String? = null
+)
+
+class AdminSubmissionDetailViewModel(
+    application: Application,
+    savedStateHandle: SavedStateHandle,
+) : AndroidViewModel(application) {
+
+    private val sheetsService = SheetsService()
+    private val submissionId: String = savedStateHandle.get<String>("submissionId")!!
+    private val _uiState = MutableStateFlow(AdminSubmissionDetailState())
+    val uiState = _uiState.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            try {
+                // val submission = sheetsService.getSubmissionById(submissionId)
+                // _uiState.value = _uiState.value.copy(submission = submission, isLoading = false)
+            } catch (e: Exception) {
+                _uiState.value = _uiState.value.copy(error = e.message, isLoading = false)
+            }
+        }
+    }
+
+    fun approve() {
+        viewModelScope.launch {
+            _uiState.value.submission?.let {
+                try {
+                    // sheetsService.approveSubmission(it, getApplication())
+                } catch (e: Exception) {
+                    _uiState.value = _uiState.value.copy(error = "Action failed: ${e.message}")
+                }
+            }
+        }
+    }
+
+    fun deny() {
+        viewModelScope.launch {
+            try {
+                // sheetsService.denySubmission(submissionId)
+            } catch (e: Exception) {
+                // Handle error
+            }
+        }
+    }
+}
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/screens/business/BusinessDashboardScreen.kt ---
+
+package com.hereliesaz.all24.ui.screens.business
+
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import com.hereliesaz.all24.data.Place
+import com.hereliesaz.all24.services.SheetsService
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+
+class BusinessDashboardViewModel : ViewModel() {
+    private val sheetsService = SheetsService()
+
+    private val _ownedPlaces = MutableStateFlow<List<Place>>(emptyList())
+    val ownedPlaces: StateFlow<List<Place>> = _ownedPlaces.asStateFlow()
+
+    fun fetchOwnedPlaces(ownerId: String) {
+        viewModelScope.launch {
+            // _ownedPlaces.value = sheetsService.getPlacesForOwner(ownerId)
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun BusinessDashboardScreen(
+    navController: NavController,
+    viewModel: BusinessDashboardViewModel = viewModel()
+) {
+    val places by viewModel.ownedPlaces.collectAsState()
+
+    // You would need to get the current user's ID from Google Sign-In to pass to the ViewModel
+    // LaunchedEffect(Unit) {
+    //     viewModel.fetchOwnedPlaces("current_user_id")
+    // }
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Your Businesses") },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
+            )
+        }
+    ) { padding ->
+        LazyColumn(modifier = Modifier.padding(padding)) {
+            items(places) { place ->
+                ListItem(
+                    headlineContent = { Text(place.name) },
+                    supportingContent = { Text(place.description) },
+                    modifier = Modifier.clickable {
+                        // Navigate to an edit screen
+                    }
+                )
+            }
+        }
+    }
+}
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/screens/business/EditPlaceScreen.kt ---
+
+package com.hereliesaz.all24.ui.screens.business
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import com.hereliesaz.all24.data.Place
+import com.hereliesaz.all24.services.SheetsService
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+
+class EditPlaceViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
+    private val sheetsService = SheetsService()
+    private val placeId: String = savedStateHandle.get<String>("placeId")!!
+
+    private val _place = MutableStateFlow<Place?>(null)
+    val place = _place.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            // This logic needs to be adapted for SheetsService
+            // _place.value = sheetsService.getPlaceById(placeId)
+        }
+    }
+
+    fun onNameChange(name: String) {
+        _place.value = _place.value?.copy(name = name)
+    }
+
+    fun onDescriptionChange(description: String) {
+        _place.value = _place.value?.copy(description = description)
+    }
+
+    fun saveChanges() {
+        viewModelScope.launch {
+            val currentPlace = _place.value
+            if (currentPlace != null) {
+                // This would now call a proxy function in SheetsService
+                // sheetsService.updatePlace(placeId, currentPlace.name, currentPlace.description)
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun EditPlaceScreen(navController: NavController, viewModel: EditPlaceViewModel = viewModel()) {
+    val place by viewModel.place.collectAsState()
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Edit ${place?.name ?: "..."}") },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
+            )
+        }
+    ) { padding ->
+        place?.let {
+            Column(modifier = Modifier
+                .padding(padding)
+                .padding(16.dp)) {
+                OutlinedTextField(
+                    value = it.name,
+                    onValueChange = viewModel::onNameChange,
+                    label = { Text("Place Name") }
+                )
+                Spacer(Modifier.height(16.dp))
+                OutlinedTextField(
+                    value = it.description,
+                    onValueChange = viewModel::onDescriptionChange,
+                    label = { Text("Description") }
+                )
+                Spacer(Modifier.height(24.dp))
+                Button(onClick = {
+                    viewModel.saveChanges()
+                    navController.popBackStack()
+                }) {
+                    Text("Save Changes")
+                }
+            }
+        }
+    }
+}
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/screens/carousel/CarouselAdapter.kt ---
+
+package com.hereliesaz.all24.ui.screens.carousel
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.hereliesaz.all24.R
+import com.hereliesaz.all24.data.Place
+
+class CarouselAdapter(private val items: List<Place>) :
+    RecyclerView.Adapter<CarouselAdapter.ViewHolder>() {
+
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val title: TextView = view.findViewById(R.id.carousel_item_title_text)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.cat_carousel_item, parent, false)
+        return ViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = items[position]
+        holder.title.text = item.name
+    }
+
+    override fun getItemCount() = items.size
+}
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/screens/carousel/MainCarouselScreen.kt ---
+
+@file:OptIn(ExperimentalFoundationApi::class, ExperimentalSharedTransitionApi::class,
+    ExperimentalMaterial3Api::class
+)
+
+package com.hereliesaz.all24.ui.screens.carousel
+
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import com.hereliesaz.all24.data.Place
+import com.hereliesaz.all24.ui.navigation.Screen
+import com.hereliesaz.verticalcarousel.component.VerticalMultiBrowseCarousel
+import com.hereliesaz.verticalcarousel.state.rememberCarouselState
+
+@Composable
+fun MainCarouselScreen(
+    navController: NavController,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
+    viewModel: MainCarouselViewModel = viewModel()
+) {
+    val uiState by viewModel.uiState.collectAsState()
+
+    if (uiState.isLoading) {
+        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            CircularProgressIndicator()
+        }
+    } else {
+        val categories = uiState.categories
+        val placesByCategories = uiState.placesByCategories
+
+        // Use the new, correct rememberCarouselState from the library
+        val verticalCarouselState = rememberCarouselState(itemCount = { categories.size })
+
+        // Use the new VerticalMultiBrowseCarousel component
+        VerticalMultiBrowseCarousel(
+            state = verticalCarouselState,
+            modifier = Modifier.fillMaxSize(),
+            preferredItemHeight = 450.dp,
+            itemSpacing = 16.dp
+        ) { categoryIndex ->
+            val category = categories[categoryIndex]
+            val places = placesByCategories[category] ?: emptyList()
+
+            CategoryView(
+                category = category,
+                places = places,
+                onPlaceClicked = { place ->
+                    navController.navigate(Screen.PlaceDetail.createRoute(place.id))
+                },
+                sharedTransitionScope = sharedTransitionScope,
+                animatedVisibilityScope = animatedVisibilityScope
+            )
+        }
+    }
+}
+
+@Composable
+fun CategoryView(
+    category: String,
+    places: List<Place>,
+    onPlaceClicked: (Place) -> Unit,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
+) {
+    with(sharedTransitionScope) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            if (places.isEmpty()) {
+                Text("Nothing to see here... yet.")
+            } else {
+                // The horizontal carousel remains the official M3 component
+                val horizontalState = rememberCarouselState(itemCount = { places.size })
+                com.hereliesaz.verticalcarousel.component.VerticalMultiBrowseCarousel(
+                    state = horizontalState,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(250.dp),
+                    preferredItemHeight = 180.dp,
+                    itemSpacing = 8.dp,
+                ) { placeIndex ->
+                    val place = places[placeIndex]
+                    Card(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clickable { onPlaceClicked(place) }
+                            // Apply the maskClip from the provided CarouselItemScope
+                            .maskClip(MaterialTheme.shapes.medium)
+                    ) {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                modifier = Modifier
+                                    .padding(16.dp)
+                                    .sharedElement(
+                                        rememberSharedContentState(key = "title/${place.id}"),
+                                        animatedVisibilityScope = animatedVisibilityScope
+                                    ),
+                                text = place.name,
+                                textAlign = TextAlign.Center
+                            )
+                        }
+                    }
+                }
+            }
+            Text(
+                text = category,
+                style = MaterialTheme.typography.headlineSmall,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .padding(top = 64.dp)
+            )
+        }
+    }
+}
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/screens/carousel/MainCarouselViewModel.kt ---
+
+package com.hereliesaz.all24.ui.screens.carousel
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.hereliesaz.all24.data.Place
+import com.hereliesaz.all24.services.SheetsService
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+
+data class MainCarouselUiState(
+    val categories: List<String> = emptyList(),
+    val placesByCategories: Map<String, List<Place>> = emptyMap(),
+    val isLoading: Boolean = true,
+)
+
+class MainCarouselViewModel : ViewModel() {
+
+    private val sheetsService = SheetsService()
+    private val _uiState = MutableStateFlow(MainCarouselUiState())
+    val uiState = _uiState.asStateFlow()
+
+    init {
+        loadContent()
+    }
+
+    private fun loadContent() {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true) }
+            val places = sheetsService.getPlaces()
+            val categories =
+                listOf("Happy Hours", "24-Hour Bars", "Late-Night Food", "Pop-ups", "Events")
+            val placesByCategories = categories.associateWith { category ->
+                places.filter { it.tags.contains(category) }
+            }
+
+            _uiState.update {
+                it.copy(
+                    isLoading = false,
+                    categories = categories,
+                    placesByCategories = placesByCategories
+                )
+            }
+        }
+    }
+}
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/screens/place/detail/PlaceDetailScreen.kt ---
+
+@file:OptIn(ExperimentalSharedTransitionApi::class)
+
+package com.hereliesaz.all24.ui.screens.place.detail
+
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+
+@Composable
+fun PlaceDetailScreen(
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
+    viewModel: PlaceDetailViewModel = viewModel()
+) {
+    val uiState by viewModel.uiState.collectAsState()
+
+    with(sharedTransitionScope) {
+        when {
+            uiState.isLoading -> {
+                Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator()
+                }
+            }
+            uiState.error != null -> {
+                Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Text(uiState.error ?: "An unknown error occurred.")
+                }
+            }
+            uiState.place != null -> {
+                val place = uiState.place!!
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp)
+                ) {
+                    Text(
+                        modifier = Modifier.sharedElement(
+                            rememberSharedContentState(key = "title/${place.id}"),
+                            animatedVisibilityScope = animatedVisibilityScope
+                        ),
+                        text = place.name,
+                        style = MaterialTheme.typography.headlineMedium
+                    )
+                    Text(
+                        text = place.description,
+                        modifier = Modifier.padding(top = 8.dp)
+                    )
+                    // TODO: Display reviews from uiState.reviews
+                }
+            }
+        }
+    }
+}
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/screens/place/detail/PlaceDetailViewModel.kt ---
+
+package com.hereliesaz.all24.ui.screens.place.detail
+
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.hereliesaz.all24.data.Place
+import com.hereliesaz.all24.data.Review
+import com.hereliesaz.all24.services.SheetsService
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+
+data class PlaceDetailUiState(
+    val place: Place? = null,
+    val reviews: List<Review> = emptyList(),
+    val isLoading: Boolean = true,
+    val error: String? = null,
+)
+
+class PlaceDetailViewModel(
+    savedStateHandle: SavedStateHandle,
+) : ViewModel() {
+
+    private val placeId: String = checkNotNull(savedStateHandle["placeId"])
+    private val sheetsService = SheetsService()
+
+    private val _uiState = MutableStateFlow(PlaceDetailUiState())
+    val uiState = _uiState.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            try {
+                // In a Sheets-based world, we fetch everything at once.
+                val allPlaces = sheetsService.getPlaces()
+                val allReviews = sheetsService.getAllReviews()
+
+                val place = allPlaces.find { it.id == placeId }
+                if (place != null) {
+                    val reviews = allReviews.filter { it.placeId == placeId }
+
+                    _uiState.value = _uiState.value.copy(
+                        place = place,
+                        reviews = reviews,
+                        isLoading = false
+                    )
+                } else {
+                    _uiState.value = _uiState.value.copy(
+                        isLoading = false,
+                        error = "Place not found."
+                    )
+                }
+            } catch (e: Exception) {
+                _uiState.value = _uiState.value.copy(isLoading = false, error = e.message)
+            }
+        }
+    }
+
+    // Add functions for verifying reviews, etc., which would call the SheetsService proxy.
+}
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/screens/place/list/PlaceListScreen.kt ---
+
+package com.hereliesaz.all24.ui.screens.place.list
+
+class PlaceListScreen {
+}
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/screens/ProfileScreen.kt ---
+
+package com.hereliesaz.all24.ui.screens
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.hereliesaz.all24.ui.navigation.Screen
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ProfileScreen(
+    navController: NavController,
+    googleSignInClient: GoogleSignInClient,
+) {
+    val account: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(LocalContext.current)
+
+    val signOut = {
+        googleSignInClient.signOut().addOnCompleteListener {
+            navController.navigate(Screen.Profile.route) {
+                popUpTo(navController.graph.startDestinationId)
+                launchSingleTop = true
+            }
+        }
+    }
+
+    Scaffold(
+        topBar = { TopAppBar(title = { Text("Your State of Being") }) }
+    ) { padding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            if (account != null) {
+                Text("Signed in as:")
+                Spacer(Modifier.height(8.dp))
+                Text(account.displayName ?: "N/A", style = MaterialTheme.typography.titleLarge)
+                Text(account.email ?: "N/A", style = MaterialTheme.typography.bodyMedium)
+                Spacer(Modifier.height(32.dp))
+                Button(
+                    onClick = { signOut() },
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)
+                ) {
+                    Text("Return to Ghost")
+                }
+            } else {
+                Text("You are a ghost, a silent observer.")
+                Spacer(Modifier.height(16.dp))
+                Button(onClick = { navController.navigate(Screen.Auth.route) }) {
+                    Text("Login / Sign Up")
+                }
+            }
+        }
+    }
+}
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/screens/submit/place/SubmitPlaceScreen.kt ---
+
+package com.hereliesaz.all24.ui.screens.submit.place
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SubmitPlaceScreen(
+    navController: NavController,
+    viewModel: SubmitPlaceViewModel = viewModel()
+) {
+    val uiState by viewModel.uiState.collectAsState()
+    val context = LocalContext.current
+
+    LaunchedEffect(uiState.isSuccess) {
+        if (uiState.isSuccess) {
+            navController.popBackStack()
+        }
+    }
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Submit a Place") },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
+            )
+        }
+    ) { padding ->
+        Column(
+            modifier = Modifier
+                .padding(padding)
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState())
+        ) {
+            OutlinedTextField(
+                value = uiState.name,
+                onValueChange = viewModel::onNameChange,
+                label = { Text("Place Name") },
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(Modifier.height(16.dp))
+            OutlinedTextField(
+                value = uiState.description,
+                onValueChange = viewModel::onDescriptionChange,
+                label = { Text("Description") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(120.dp)
+            )
+            Spacer(Modifier.height(16.dp))
+            OutlinedTextField(
+                value = uiState.address,
+                onValueChange = viewModel::onAddressChange,
+                label = { Text("Address") },
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(Modifier.height(24.dp))
+            Button(
+                onClick = { viewModel.submit(context) },
+                modifier = Modifier.fillMaxWidth(),
+                enabled = !uiState.isLoading
+            ) {
+                if (uiState.isLoading) {
+                    CircularProgressIndicator(modifier = Modifier.size(24.dp))
+                } else {
+                    Text("Submit for Review")
+                }
+            }
+            uiState.error?.let {
+                Text(it, color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(top = 8.dp))
+            }
+        }
+    }
+}
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/screens/submit/place/SubmitPlaceViewModel.kt ---
+
+package com.hereliesaz.all24.ui.screens.submit.place
+
+import android.content.Context
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.hereliesaz.all24.services.SheetsService
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+
+data class SubmitPlaceUiState(
+    val name: String = "",
+    val description: String = "",
+    val address: String = "",
+    val category: String = "bar",
+    val isLoading: Boolean = false,
+    val isSuccess: Boolean = false,
+    val error: String? = null
+)
+
+class SubmitPlaceViewModel : ViewModel() {
+    private val sheetsService = SheetsService()
+
+    private val _uiState = MutableStateFlow(SubmitPlaceUiState())
+    val uiState = _uiState.asStateFlow()
+
+    fun onNameChange(name: String) {
+        _uiState.value = _uiState.value.copy(name = name)
+    }
+
+    fun onDescriptionChange(description: String) {
+        _uiState.value = _uiState.value.copy(description = description)
+    }
+
+    fun onAddressChange(address: String) {
+        _uiState.value = _uiState.value.copy(address = address)
+    }
+
+    fun onCategoryChange(category: String) {
+        _uiState.value = _uiState.value.copy(category = category)
+    }
+
+    fun submit(context: Context) {
+        val account = GoogleSignIn.getLastSignedInAccount(context)
+        if (account == null || account.idToken == null) {
+            _uiState.value =
+                _uiState.value.copy(error = "Authentication error. Please sign in again.")
+            return
+        }
+        val idToken = account.idToken!!
+
+        if (_uiState.value.name.isBlank() || _uiState.value.description.isBlank() || _uiState.value.address.isBlank()) {
+            _uiState.value = _uiState.value.copy(error = "All fields are required.")
+            return
+        }
+
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(isLoading = true, error = null)
+            try {
+                sheetsService.submitPlace(
+                    idToken = idToken,
+                    name = _uiState.value.name,
+                    description = _uiState.value.description,
+                    address = _uiState.value.address,
+                    category = _uiState.value.category
+                )
+                _uiState.value = _uiState.value.copy(isLoading = false, isSuccess = true)
+            } catch (e: Exception) {
+                _uiState.value = _uiState.value.copy(isLoading = false, error = e.message)
+            }
+        }
+    }
+}
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/screens/top/reviews/TopReviewsScreen.kt ---
+
+package com.hereliesaz.all24.ui.screens.top.reviews
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import com.hereliesaz.all24.data.Place
+import com.hereliesaz.all24.data.Review
+import com.hereliesaz.all24.ui.navigation.Screen
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopReviewsScreen(navController: NavController, viewModel: TopReviewsViewModel = viewModel()) {
+    val reviews by viewModel.adminReviews.collectAsState()
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Top 24 Reviews") },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
+            )
+        }
+    ) { padding ->
+        if (reviews.isEmpty()) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding),
+                contentAlignment = Alignment.Center
+            ) {
+                Text("No admin reviews posted yet.")
+            }
+        } else {
+            LazyColumn(
+                modifier = Modifier.padding(padding),
+                contentPadding = PaddingValues(16.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                items(reviews) { review ->
+                    AdminReviewListItem(
+                        review = review,
+                        getPlace = { viewModel.getPlaceForReview(review) },
+                        onClick = { placeId ->
+                            navController.navigate(Screen.PlaceDetail.createRoute(placeId))
+                        }
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun AdminReviewListItem(
+    review: Review,
+    getPlace: suspend () -> Place?,
+    onClick: (String) -> Unit
+) {
+    var place by remember { mutableStateOf<Place?>(null) }
+
+    LaunchedEffect(review.id) {
+        place = getPlace()
+    }
+
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        onClick = { place?.id?.let { onClick(it) } },
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+    ) {
+        Column(Modifier.padding(16.dp)) {
+            Text(
+                text = place?.name ?: "Loading...",
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.primary
+            )
+            Spacer(Modifier.height(8.dp))
+            Text(
+                text = review.text,
+                style = MaterialTheme.typography.bodyMedium,
+                maxLines = 3,
+                overflow = TextOverflow.Ellipsis
+            )
+        }
+    }
+}
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/screens/top/reviews/TopReviewsViewModel.kt ---
+
+package com.hereliesaz.all24.ui.screens.top.reviews
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.hereliesaz.all24.data.Place
+import com.hereliesaz.all24.data.Review
+import com.hereliesaz.all24.services.SheetsService
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+
+class TopReviewsViewModel : ViewModel() {
+
+    private val sheetsService = SheetsService()
+
+    private val _adminReviews = MutableStateFlow<List<Review>>(emptyList())
+    val adminReviews: StateFlow<List<Review>> = _adminReviews.asStateFlow()
+
+    init {
+        fetchAdminReviews()
+    }
+
+    private fun fetchAdminReviews() {
+        viewModelScope.launch {
+            // _adminReviews.value = sheetsService.getAdminReviews()
+        }
+    }
+
+    suspend fun getPlaceForReview(review: Review): Place? {
+        // return sheetsService.getPlaceById(review.placeId)
+        return null
+    }
+}
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/theme/Color.kt ---
+
+package com.hereliesaz.all24.ui.theme
+
+import androidx.compose.ui.graphics.Color
+
+val Purple80 = Color(0xFFD0BCFF)
+val PurpleGrey80 = Color(0xFFCCC2DC)
+val Pink80 = Color(0xFFEFB8C8)
+
+val Purple40 = Color(0xFF6650a4)
+val PurpleGrey40 = Color(0xFF625b71)
+val Pink40 = Color(0xFF7D5260)
+
+// ADDED MISSING COLORS
+val Purple20 = Color(0xFF381E72)
+val PurpleGrey20 = Color(0xFF332D41)
+val Pink20 = Color(0xFF492532)
+
+
+val Black = Color(0xFF000000)
+val White = Color(0xFFFFFFFF)
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/theme/Theme.kt ---
+
+package com.hereliesaz.all24.ui.theme
+
+import android.app.Activity
+import android.os.Build
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.material3.lightColorScheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
+import androidx.core.view.WindowCompat
+
+private val DarkColorScheme = darkColorScheme(
+    primary = Purple80,
+    secondary = PurpleGrey80,
+    tertiary = Pink80,
+    background = Black,
+    surface = Black,
+    onPrimary = Purple20,
+    onSecondary = PurpleGrey20,
+    onTertiary = Pink20,
+    onBackground = White,
+    onSurface = White,
+)
+
+private val LightColorScheme = lightColorScheme(
+    primary = Purple40,
+    secondary = PurpleGrey40,
+    tertiary = Pink40,
+    background = White,
+    surface = White,
+    onPrimary = White,
+    onSecondary = White,
+    onTertiary = White,
+    onBackground = Black,
+    onSurface = Black,
+)
+
+@Composable
+fun All24Theme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    // Dynamic color is available on Android 12+
+    dynamicColor: Boolean = true,
+    content: @Composable () -> Unit
+) {
+    val colorScheme = when {
+        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+            val context = LocalContext.current
+            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        }
+
+        darkTheme -> DarkColorScheme
+        else -> LightColorScheme
+    }
+    val view = LocalView.current
+    if (!view.isInEditMode) {
+        SideEffect {
+            val window = (view.context as Activity).window
+            window.statusBarColor = colorScheme.primary.toArgb()
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+        }
+    }
+
+    MaterialTheme(
+        colorScheme = colorScheme,
+        typography = Typography,
+        content = content
+    )
+}
+
+
+
+--- FILE: app/src/main/java/com/hereliesaz/all24/ui/theme/Type.kt ---
+
+package com.hereliesaz.all24.ui.theme
+
+import androidx.compose.material3.Typography
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
+
+// Set of Material typography styles to start with
+// Changed the default font to a serif font for a more elegant, classic feel.
+val Typography = Typography(
+    bodyLarge = TextStyle(
+        fontFamily = FontFamily.Serif,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp,
+        lineHeight = 24.sp,
+        letterSpacing = 0.5.sp
+    ),
+    titleLarge = TextStyle(
+        fontFamily = FontFamily.Serif,
+        fontWeight = FontWeight.Normal,
+        fontSize = 22.sp,
+        lineHeight = 28.sp,
+        letterSpacing = 0.sp
+    ),
+    bodyMedium = TextStyle(
+        fontFamily = FontFamily.Serif,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+        lineHeight = 20.0.sp,
+        letterSpacing = 0.2.sp,
+    )
+    /* Other default text styles to override
+    labelSmall = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Medium,
+        fontSize = 11.sp,
+        lineHeight = 16.sp,
+        letterSpacing = 0.5.sp
+    )
+    */
+)
+
+
+--- FILE: app/src/main/res/drawable/ic_launcher_background.xml ---
+
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="108dp"
+    android:width="108dp"
+    android:viewportHeight="108"
+    android:viewportWidth="108"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#3DDC84"
+          android:pathData="M0,0h108v108h-108z"/>
+    <path android:fillColor="#00000000" android:pathData="M9,0L9,108"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M19,0L19,108"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M29,0L29,108"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M39,0L39,108"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M49,0L49,108"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M59,0L59,108"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M69,0L69,108"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M79,0L79,108"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M89,0L89,108"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M99,0L99,108"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M0,9L108,9"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M0,19L108,19"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M0,29L108,29"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M0,39L108,39"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M0,49L108,49"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M0,59L108,59"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M0,69L108,69"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M0,79L108,79"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M0,89L108,89"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M0,99L108,99"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M19,29L89,29"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M19,39L89,39"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M19,49L89,49"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M19,59L89,59"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M19,69L89,69"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M19,79L89,79"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M29,19L29,89"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M39,19L39,89"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M49,19L49,89"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M59,19L59,89"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M69,19L69,89"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M79,19L79,89"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+</vector>
+
+
+
+--- FILE: app/src/main/res/drawable/ic_launcher_foreground.xml ---
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:pathData="M31,63.928c0,0 6.4,-11 12.1,-13.1c7.2,-2.6 26,-1.4 26,-1.4l38.1,38.1L107,108.928l-32,-1L31,63.928z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startY="49.59793"
+                android:startX="42.9492"
+                android:endY="92.4963"
+                android:endX="85.84757"
+                android:type="linear">
+                <item
+                    android:color="#44000000"
+                    android:offset="0.0" />
+                <item
+                    android:color="#00000000"
+                    android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <path
+        android:pathData="M65.3,45.828l3.8,-6.6c0.2,-0.4 0.1,-0.9 -0.3,-1.1c-0.4,-0.2 -0.9,-0.1 -1.1,0.3l-3.9,6.7c-6.3,-2.8 -13.4,-2.8 -19.7,0l-3.9,-6.7c-0.2,-0.4 -0.7,-0.5 -1.1,-0.3C38.8,38.328 38.7,38.828 38.9,39.228l3.8,6.6C36.2,49.428 31.7,56.028 31,63.928h46C76.3,56.028 71.8,49.428 65.3,45.828zM43.4,57.328c-0.8,0 -1.5,-0.5 -1.8,-1.2c-0.3,-0.7 -0.1,-1.5 0.4,-2.1c0.5,-0.5 1.4,-0.7 2.1,-0.4c0.7,0.3 1.2,1 1.2,1.8C45.3,56.528 44.5,57.328 43.4,57.328L43.4,57.328zM64.6,57.328c-0.8,0 -1.5,-0.5 -1.8,-1.2s-0.1,-1.5 0.4,-2.1c0.5,-0.5 1.4,-0.7 2.1,-0.4c0.7,0.3 1.2,1 1.2,1.8C66.5,56.528 65.6,57.328 64.6,57.328L64.6,57.328z"
+        android:fillColor="#FFFFFF"
+        android:fillType="nonZero"
+        android:strokeWidth="1"
+        android:strokeColor="#00000000"/>
+</vector>
+
+
+--- FILE: app/src/main/res/layout/activity_firebaseservices.xml ---
+
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+</FrameLayout>
+
+
+--- FILE: app/src/main/res/layout/carousel_host.xml ---
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/carousel_recycler_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false" />
+
+
+--- FILE: app/src/main/res/layout/cat_carousel_item.xml ---
+
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.carousel.MaskableFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimaryContainer"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/carousel_item_title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+</com.google.android.material.carousel.MaskableFrameLayout>
+
+
+--- FILE: app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml ---
+
+<?xml version="1.0" encoding="utf-8"?>
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@drawable/ic_launcher_background" />
+    <foreground android:drawable="@mipmap/ic_launcher_foreground" />
+    <monochrome android:drawable="@mipmap/ic_launcher_foreground" />
+</adaptive-icon>
+
+
+--- FILE: app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml ---
+
+<?xml version="1.0" encoding="utf-8"?>
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@drawable/ic_launcher_background" />
+    <foreground android:drawable="@mipmap/ic_launcher_foreground" />
+    <monochrome android:drawable="@mipmap/ic_launcher_foreground" />
+</adaptive-icon>
+
+
+--- FILE: app/src/main/res/values/colors.xml ---
+
+<?xml version="1.0" encoding="utf-8"?>
+  <resources>
+      <color name="purple_200">#FFBB86FC</color>
+      <color name="purple_500">#FF6200EE</color>
+      <color name="purple_700">#FF3700B3</color>
+      <color name="teal_200">#FF03DAC5</color>
+      <color name="teal_700">#FF018786</color>
+      <color name="black">#FF000000</color>
+      <color name="white">#FFFFFFFF</color>
+  </resources>
+
+
+--- FILE: app/src/main/res/values/strings.xml ---
+
+<resources>
+    <string name="app_name">All24</string>
+</resources>
+
+
+--- FILE: app/src/main/res/values/themes.xml ---
+
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.All24" parent="Theme.Material3.DayNight.NoActionBar" />
+</resources>
+
+
+--- FILE: app/src/main/res/xml/backup_rules.xml ---
+
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Sample backup rules file; uncomment and customize as necessary.
+   See https://developer.android.com/guide/topics/data/autobackup
+   for details.
+   Note: This file is ignored for devices older than API 31
+   See https://developer.android.com/about/versions/12/backup-restore
+-->
+<full-backup-content>
+<!--
+   <include domain="sharedpref" path="."/>
+   <exclude domain="sharedpref" path="device.xml"/>
+-->
+</full-backup-content>
+
+
+--- FILE: app/src/main/res/xml/data_extraction_rules.xml ---
+
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Sample data extraction rules file; uncomment and customize as necessary.
+   See https://developer.android.com/about/versions/12/backup-restore#xml-changes
+   for details.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <!-- TODO: Use <include> and <exclude> to control what is backed up.
+        <include .../>
+        <exclude .../>
+        -->
+    </cloud-backup>
+    <!--
+    <device-transfer>
+        <include .../>
+        <exclude .../>
+    </device-transfer>
+    -->
+</data-extraction-rules>
+
+
+--- FILE: app/src/test/java/com/hereliesaz/all24/ExampleUnitTest.kt ---
+
+package com.hereliesaz.all24
+
+  import org.junit.Test
+
+  import org.junit.Assert.*
+
+  /**
+   * Example local unit test, which will execute on the development machine (host).
+   *
+   * See [testing documentation](http://d.android.com/tools/testing).
+   */
+  class ExampleUnitTest {
+      @Test
+      fun addition_isCorrect() {
+          assertEquals(4, 2 + 2)
+      }
+  }
+
+
+--- FILE: backend/package.json ---
+
+{
+  "name": "all24-sheets-proxy",
+  "version": "1.0.0",
+  "description": "Securely writes data to a Google Sheet for the All24 app.",
+  "main": "index.js",
+  "dependencies": {
+    "google-auth-library": "^9.0.0",
+    "googleapis": "^123.0.0"
+  }
+}
+
+
+--- FILE: DevGuide/01_Manifesto.md ---
+
+# Project Manifesto
+
+## 1. Core Philosophy & Mission Statement
+
+The foundational principle of the All24 application is the creation of a tangible, fluid, and
+expressive interface for discovering curated content. The project's mission is to provide an
+antidote to sterile, list-based Browse by transforming navigation into a tactile and visually
+engaging experience.
+
+Where contemporary apps often rely on simple taps and vertical lists, All24 uses a dual-axis,
+multi-browse carousel grid as its primary interaction model. This approach treats content categories
+and items not as a database to be queried, but as a physical space to be explored. The application's
+core purpose is to guide the user toward discoveries through intuitive, gesture-driven navigation
+that prioritizes motion and a sense of place over raw informational density.
+
+## 2. Key Goals
+
+To clarify the project's direction, it is crucial to define its goals:
+
+* **A Curated Canon:** The application is a curated, not encyclopedic, collection of places, events,
+  and happenings. The content is the core of the experience.
+* **Expressive Navigation:** The primary interface will be a gesture-driven, physics-based carousel
+  that embodies the principles of Material 3 Expressive design. Discovery is meant to be a fluid and
+  satisfying interaction.
+* **Not a Social Network:** While users have identities and can contribute, the application avoids
+  features common to social networks. Interactions are mediated through content, not between users
+  directly.
+* **Minimalist Detail:** Detail screens provide focused information, avoiding the cognitive overload
+  of unrelated links, ads, or navigation paths.
+
+## 3. Interface & Design Principles
+
+The application's interface design is governed by a strict set of rules derived from the core
+philosophy:
+
+* **Primacy of the Carousel:** The main screen, `MainCarouselScreen`, is the heart of the
+  application. The dual-axis carousel is the primary and exclusive method for Browse content
+  categories. Text-based search bars are explicitly forbidden as a primary discovery tool.
+* **Motion as Meaning:** All transitions and micro-interactions follow M3 Expressive principles. The
+  motion of the carousel and the choreographed transitions between screens are not decorative; they
+  are fundamental to making the interface feel responsive and intuitive.
+* **Gated Interaction:** Access to features that allow content creation or modification is strictly
+  gated based on the user's authentication state and role. This reinforces the value of contribution
+  and creates a clear distinction between passive consumption and active participation.
+
+
+--- FILE: DevGuide/03_ApplicationArchitecture.md ---
+
+# Application Architecture
+
+The All24 application is constructed using a modern, hybrid architecture designed for
+maintainability, testability, and the use of the best tool for each specific UI task. It combines
+the declarative power of Jetpack Compose with the targeted strengths of the traditional Android View
+system.
+
+## 1. Hybrid UI Architecture (Compose + Views)
+
+While the application's overall structure, navigation, and static screens are built with Jetpack
+Compose, the core Browse experience utilizes a critical component from the Material Components for
+Android library (the View system):
+
+* **`com.google.android.material.carousel.CarouselLayoutManager`**
+
+This decision was made because `CarouselLayoutManager` provides the exact, physics-based,
+multi-browse carousel behavior specified by the Material 3 Expressive guidelines. To integrate this
+View-based component into the Compose UI, the application uses the **`AndroidView`** composable.
+
+This hybrid approach allows the app to benefit from the rapid development and declarative nature of
+Compose while still leveraging powerful, pre-built components from the mature View ecosystem.
+
+## 2. Data Flow Overview
+
+The standard data flow for a read operation is as follows:
+
+**Data Source (Mock Service/Firestore) -> `ViewModel` -> `StateFlow` -> UI
+Composable -> `AndroidView` -> `RecyclerView.Adapter`**
+
+For a write operation initiated from a Compose screen, the flow is:
+
+**UI Composable -> `ViewModel` -> Service -> Data Source**
+
+This unidirectional flow ensures that the state of the application is predictable and easy to debug.
+
+## 3. Detailed Component Breakdown
+
+### ViewModels (Presentation Logic Layer)
+
+Each screen or complex, stateful composable has a dedicated `ViewModel` that extends
+`androidx.lifecycle.ViewModel`. They expose UI state via `StateFlow` and are responsible for calling
+services to fetch or mutate data.
+
+### Navigation Layer (`AppNavigation.kt`)
+
+The navigation layer is built with Navigation Compose and is responsible for defining all paths
+through the application.
+
+* **`SharedTransitionLayout`:** The entire `NavHost` is wrapped in `SharedTransitionLayout` to
+  enable choreographed, shared element transitions between composable screens, a key feature of the
+  M3 Expressive motion system.
+* **Scope Passing:** The `SharedTransitionScope` and `AnimatedVisibilityScope` are passed down from
+  the navigation graph to the screen composables that participate in transitions.
+
+### Carousel Integration (`MainCarouselScreen.kt`)
+
+The main screen uses a `VerticalPager` (Compose) to manage the different content categories. Each
+page of this pager contains an `AndroidView` composable.
+
+* **`AndroidView` Factory:** Inside the `factory` block of the `AndroidView`, the app inflates an
+  XML layout containing a `RecyclerView`. It then programmatically creates an instance of
+  `CarouselLayoutManager` and a `CarouselAdapter` and attaches them to the `RecyclerView`.
+* **Data Binding:** The `ViewModel`'s state is passed to the `CarouselAdapter` to populate the
+  `RecyclerView` with the correct items for that category.
+
+
+--- FILE: DevGuide/Changelog.md ---
+
+# Changelog
+
+### v2.0.0 - 2025-07-27
+
+**The Gyroscopic Reformation**
+
+This is a complete philosophical and architectural overhaul of the application, moving from a
+minimalist, deconstructionist model to a fluid, expressive, and more conventional Browse experience.
+
+- **UI/UX Overhaul:**
+    - **DEPRECATED**: The abstract `VibeScreen` and its particle system have been completely
+      removed. The core philosophy of "annihilating convention" has been abandoned.
+    - **NEW**: The primary interface is now the `MainCarouselScreen`, a dual-axis, multi-browse
+      carousel grid. Users navigate vertically between curated categories and horizontally through
+      items within each category.
+- **Architectural Shift:**
+    - The project has shifted from a pure Jetpack Compose architecture to a **hybrid model** that
+      utilizes both Compose and the traditional Android View system.
+    - This was done to incorporate the official
+      `com.google.android.material.carousel.CarouselLayoutManager` for `RecyclerView`, which
+      provides the exact M3 Expressive carousel behavior.
+    - Jetpack Compose's `AndroidView` is now used to host the `RecyclerView`-based carousels within
+      the larger Compose UI.
+- **Animation System:**
+    - **NEW**: Implemented M3 Expressive "Choreographed Transitions" using Jetpack Compose's
+      `SharedTransitionLayout`. Tapping a carousel item now initiates a seamless transition to the
+      detail screen.
+    - **NEW**: Added M3 Expressive "Responsive Micro-interactions" with tap-and-scale animations on
+      carousel items.
+- **Data Model:**
+    - The `Place` data model has been updated with a `tags: List<String>` field to facilitate the
+      new category-based Browse system.
+
+### v1.0.0 - 2025-07-26
+
+**Initial Publication: The Forging of the Canon**
+
+- **Part 1: A Manifesto Against the Tyranny of Choice**
+    - **Core Philosophy Established:** Deconstructed the flawed premise of contemporary
+      recommendation apps ("The Lie of Rational Choice").
+- **Part 2: The Digital Seance - Backend & Data Models**
+    - **Theological Backend Choice:** Solidified Firebase as the "Silent God."
+- **Part 3: The Ghost in the Machine - User Interface & Experience**
+    - **Screen Blueprints:** Outlined the philosophical and functional design for all primary
+      screens, centered on the `VibeScreen`.
+- **Part 4: The Divine Machinery - Services & Logic**
+    - **Architectural Dogma:** Canonized the app's core architectural patterns based on pure Jetpack
+      Compose and ViewModels.
+- **Part 5: The Sacred Rituals - Core User Flows**
+    - **Narrative Logic Defined:** Provided detailed narrative descriptions for app interactions.
+
+
+--- FILE: DevGuide/FirebaseSecurity.md ---
+
+# Firebase Security Rules
+
+## 1. Introduction & Core Principles
+
+This document defines the security strategy for the Firestore database. **This is the most critical
+server-side component of the application's security model.** Client-side checks can always be
+bypassed; Firestore Security Rules are enforced on Google's servers and are non-negotiable.
+
+The guiding principle is the **principle of least privilege**: a user should only have the exact
+permissions required to perform their legitimate actions, and no more. By default, access to all
+data should be denied.
+
+**Default Rule (Unsafe):**
+A common starting point is to deny all access by default:
+rules_version = '2';
+service cloud.firestore {
+match /databases/{database}/documents {
+// Deny all reads and writes by default.
+match /{document=**} {
+allow read, write: if false;
+}
+}
+}
+
+We then open up access on a collection-by-collection basis.
+
+## 2. Authentication Context
+
+The `request.auth` object is available in security rules and contains the information of the
+authenticated user making the request. `request.auth.uid` is the user's unique ID. If `request.auth`
+is `null`, the user is not authenticated.
+
+## 3. Collection-by-Collection Rule Definitions
+
+Below are the detailed security rules required for each collection, designed to enforce the
+application's business logic on the backend.
+
+### `users/{userId}`
+
+Users should only be able to read and modify their own data, and they must not be able to elevate
+their own privileges.
+
+match /users/{userId} {
+// READ: A user can only read their own document.
+allow read: if request.auth != null && request.auth.uid == userId;
+
+// CREATE: A user can only create their own document.
+// The incoming document's 'uid' must match the user's auth uid.
+// The role must be 'user' on creation.
+allow create: if request.auth != null && request.auth.uid == userId
+&& request.resource.data.uid == request.auth.uid
+&& request.resource.data.role == 'user';
+
+// UPDATE: A user can only update their own document.
+// They cannot change their role. An admin must do that.
+allow update: if request.auth != null && request.auth.uid == userId
+&& request.resource.data.role == resource.data.role;
+
+// DELETE: Disallow deleting user documents.
+allow delete: if false;
+}
+
+### `places/{placeId}`
+
+Places are publicly readable but highly controlled in terms of writes. Only admins can create/delete
+them, and only owners or admins can update them.
+
+match /places/{placeId} {
+// READ: All users, including anonymous ones, can read place data.
+allow read: if true;
+
+// CREATE: Only an authenticated admin can create a new place.
+allow create: if isAdmin();
+
+// UPDATE: Only the business owner or an admin can update a place.
+allow update: if isOwner(resource.data.ownerId) || isAdmin();
+
+// DELETE: Only an admin can delete a place.
+allow delete: if isAdmin();
+}
+
+### `reviews/{reviewId}`
+
+Reviews are publicly readable. Creation is restricted to authenticated users. Updates are heavily
+restricted.
+
+match /reviews/{reviewId} {
+// READ: All users can read reviews.
+allow read: if true;
+
+// CREATE: An authenticated user can create a review if...
+// 1. The userId on the new review matches their own uid.
+// 2. They are not trying to create an admin review.
+allow create: if request.auth != null
+&& request.resource.data.userId == request.auth.uid
+&& request.resource.data.isAdminReview == false;
+
+// UPDATE: Allow if an authenticated user is only changing the
+// 'endorsedBy' or 'avoidedBy' fields. All other fields must remain the same.
+allow update: if request.auth != null &&
+request.resource.data.diff(resource.data).affectedKeys()
+.hasOnly(['endorsedBy', 'avoidedBy']);
+
+// DELETE: Only an admin can delete a review.
+allow delete: if isAdmin();
+}
+
+### `place_submissions/{submissionId}`
+
+Submissions are highly confidential. Only the creator can create one, and only admins can read or
+delete them.
+
+match /place_submissions/{submissionId} {
+// READ: Only admins can read submissions.
+allow read: if isAdmin();
+
+// CREATE: An authenticated user can create a submission if the
+// 'submittedBy' field matches their own uid.
+allow create: if request.auth != null
+&& request.resource.data.submittedBy == request.auth.uid;
+
+// UPDATE: Disallow updates. Submissions are immutable until deleted.
+allow update: if false;
+
+// DELETE: Only an admin can delete (approve/deny) a submission.
+allow delete: if isAdmin();
+}
+
+## 4. Helper Functions & Deployment
+
+To keep rules clean and reusable, helper functions should be used.
+
+// Placed at the top level of the rules file
+function isAdmin() {
+// Check if the user's document in the 'users' collection has the 'admin' role.
+return request.auth != null &&
+get(/databases/(database)/documents/users/(request.auth.uid)).data.role == 'admin';
+}
+
+function isOwner(ownerId) {
+return request.auth != null && request.auth.uid == ownerId;
+}
+
+These rules must be deployed to the Firebase project using the Firebase CLI (`firebase deploy --on
+
+
+--- FILE: DevGuide/FirestoreSchema.md ---
+
+# Firestore Data Schema
+
+The application's backend persistence layer is Google Firestore. The database is structured around
+four root collections.
+
+## 1. Collection: `places`
+
+* **Purpose:** This collection stores the canonical records for all approved, publicly visible
+  locations in the app. Documents in this collection are the "destinations" that can be recommended
+  to users.
+* **Data Model:** `com.hereliesaz.all24.data.Place`
+
+| Field         | Data Type              | Nullable | Description                                                                                                     |
+|:--------------|:-----------------------|:---------|:----------------------------------------------------------------------------------------------------------------|
+| `id`          | `String` (@DocumentId) | No       | The unique document ID generated by Firestore. Serves as the primary key.                                       |
+| `name`        | `String`               | No       | The public name of the establishment.                                                                           |
+| `description` | `String`               | No       | A curated description of the place. This is intended to be evocative rather than purely informational.          |
+| `location`    | `GeoPoint`             | Yes      | The physical coordinates of the establishment. Intended for admin reference only.                               |
+| `category`    | `String`               | No       | A simple classification string (e.g., "bar", "popUp").                                                          |
+| `ownerId`     | `String`               | Yes      | The `uid` of the user who owns this place. Acts as a foreign key to the `users` collection.                     |
+| `tags`        | `List<String>`         | No       | A list of strings used to assign this place to one or more UI categories (e.g., "Happy Hours", "24-Hour Bars"). |
+
+## 2. Collection: `reviews`
+
+* **Purpose:** This collection aggregates all user- and admin-generated reviews for the locations in
+  the `places` collection. It is the primary mechanism for user-generated content and opinion.
+* **Data Model:** `com.hereliesaz.all24.data.Review`
+
+| Field           | Data Type                      | Nullable | Description                                                                                                                                                                         |
+|:----------------|:-------------------------------|:---------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `id`            | `String` (@DocumentId)         | No       | The unique document ID for the review.                                                                                                                                              |
+| `placeId`       | `String`                       | No       | A foreign key linking to a document in the `places` collection.                                                                                                                     |
+| `userId`        | `String`                       | No       | The `uid` of the user who created the review.                                                                                                                                       |
+| `text`          | `String`                       | No       | The textual content of the review.                                                                                                                                                  |
+| `vote`          | `String`                       | No       | A required binary choice: must be either `"endorse"` or `"avoid"`. The system intentionally disallows nuanced or star-based ratings to enforce a strong opinion.                    |
+| `timestamp`     | `Timestamp` (@ServerTimestamp) | Yes      | A server-generated timestamp indicating when the review was created. It's nullable in the model to accommodate latency before the server value is set.                              |
+| `endorsedBy`    | `List<String>`                 | No       | A list of `uid`s from users who have endorsed this review. This is managed via `FieldValue.arrayUnion` and `arrayRemove` operations.                                                |
+| `avoidedBy`     | `List<String>`                 | No       | A list of `uid`s from users who have disputed this review.                                                                                                                          |
+| `isAdminReview` | `Boolean`                      | No       | A flag indicating if the review was created by an admin. If `true`, the UI must give this review visual priority and sort it to the top of its respective `PlaceDetailScreen` list. |
+
+## 3. Collection: `users`
+
+* **Purpose:** This collection stores data for registered (non-anonymous) users, mapping their
+  Firebase Authentication `uid` to application-specific data like their role.
+* **Data Model:** `com.hereliesaz.all24.data.UserModel`
+
+| Field   | Data Type              | Nullable | Description                                                                                                                              |
+|:--------|:-----------------------|:---------|:-----------------------------------------------------------------------------------------------------------------------------------------|
+| `uid`   | `String` (@DocumentId) | No       | The user's `uid` from Firebase Authentication, which serves as the primary key for this collection.                                      |
+| `email` | `String`               | No       | The email address the user registered with.                                                                                              |
+| `role`  | `String`               | No       | The user's role, determining their permissions. Must be one of `"user"`, `"business"`, or `"admin"`. Defaults to `"user"` upon creation. |
+
+## 4. Collection: `place_submissions`
+
+* **Purpose:** This collection serves as a temporary holding area or "purgatory" for new place
+  submissions from users. Documents here are not publicly visible and exist only to be reviewed by
+  an admin.
+* **Data Model:** `com.hereliesaz.all24.data.Submission`
+
+| Field         | Data Type                      | Nullable | Description                                                                                                                                                   |
+|:--------------|:-------------------------------|:---------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `id`          | `String` (@DocumentId)         | No       | The unique document ID for the submission.                                                                                                                    |
+| `name`        | `String`                       | No       | The proposed name of the new place.                                                                                                                           |
+| `description` | `String`                       | No       | The user's submitted description for the place.                                                                                                               |
+| `address`     | `String`                       | No       | The submitted physical address. This is a simple string that the admin must manually parse or verify; there is no automatic geocoding at submission time.     |
+| `category`    | `String`                       | No       | The user's suggested category for the place.                                                                                                                  |
+| `submittedBy` | `String`                       | No       | The `uid` of the user who submitted the request.                                                                                                              |
+| `submittedAt` | `Timestamp` (@ServerTimestamp) | Yes      | A server-generated timestamp of when the submission was created.                                                                                              |
+| `status`      | `String`                       | No       | The current state of the submission. This is always `"pending"` by default. Upon admin action, the document is deleted rather than having its status updated. |
+
+
+--- FILE: DevGuide/M3Expressive.md ---
+
+# Deconstructing M3: A Manifesto on Expressive Design
+
+## 1. Introduction: The System as a Language
+
+For the All24 project, we treat Google's Material Design 3 (M3) not as a restrictive rulebook, but
+as a rich design language. M3 Expressive is the practice of using that language to create a unique,
+branded, and atmospheric application. We use M3's foundational components and motion system to build
+an interface that feels tangible, fluid, and alive.
+
+This document deconstructs how we leverage the "fundamental parts of expressive design"—color,
+shape, size, and motion—to build the application's core interface.
+
+## 2. Foundational Element: Motion as Narrative and Physics
+
+In All24, motion is not decorative; it is the primary language for communicating with the user. Our
+implementation of M3 Expressive motion focuses on two key areas:
+
+* **Physics-Based Carousel Motion:** The core of the app's interaction is the multi-browse carousel.
+  We use the official `com.google.android.material.carousel.CarouselLayoutManager` from the Material
+  Components library. This component has a sophisticated, physics-based scrolling and flinging
+  model. The way items mask, scale, and settle into place provides a tangible and satisfying feel
+  that is central to the app's user experience.
+
+* **Choreographed Screen Transitions:** To create "natural continuity across views," the application
+  uses Jetpack Compose's `SharedTransitionLayout`. When a user taps a carousel item, this system
+  animates that item into its new position and form on the detail screen. This "hero transition"
+  removes visual disruption and creates a clear narrative link between the Browse view and the
+  detail view, making the entire interface feel like a single, cohesive space.
+
+## 3. Foundational Element: Expressive Typography
+
+
+M3 Expressive replaces the old "easing and duration" animation model with a system based on motion
+physics, designed to make interactions feel "alive, fluid, and natural". In All24, motion is not
+decorative; it is the primary language for communicating the app's core philosophical concepts: the
+underlying chaos of the Vibe, the orchestrated revelation of prophecy, and the responsive feedback
+of interaction.
+
+* **Ambient Motion & The Physics of the Vibe (`VibeScreen.kt`):** The particle system is the most
+  significant implementation of expressive motion in the app. It is a procedural, ambient animation
+  that communicates a sense of living chaos.
+    * **The Engine:** The animation is driven by a `LaunchedEffect` that animates a float value from
+      0f to 1f within an `infiniteRepeatable` loop . Crucially, the animated value itself doesn't
+      directly control the particles. Its only purpose is to force the `Canvas` to recompose on
+      every frame of the animation, creating a rendering loop.
+    * **The Physics Simulation:** On each recomposition, the `particle.update()` method is called
+      for every particle . This function implements a rudimentary physics engine:
+      `position = position.plus(velocity)` . This simple line transforms a static composition into a
+      dynamic system. Furthermore, the `update` function includes logic to wrap particles around the
+      screen edges , creating a seamless, toroidal space. This is not just an animation; it is a
+      simulation of an endless, chaotic system, which is precisely what the "Vibe" represents.
+
+* **Choreographed Motion & The Act of Revelation:** The appearance of the recommendation panel is a
+  choreographed narrative moment, leveraging M3's principles for meaningful transitions.
+    * **The Tool:** `AnimatedVisibility` is the Jetpack Compose component used to orchestrate this
+      entrance and exit.
+    * **The Animation Spec:** The spec,
+      `enter = slideInVertically(initialOffsetY = { it }) + fadeIn()`, is deliberate . The panel
+      doesn't simply appear; it *arrives*. It slides up from an off-screen position, as if emerging
+      from a void, and fades in, as if coalescing from the ether. The `exit` animation is a direct
+      reversal. This aligns with M3 Expressive's goal of creating "smoother transitions" and "
+      natural continuity across views", reinforcing the idea that the recommendations are transient,
+      ephemeral visions granted by the oracle.
+
+* **Responsive Motion & Micro-interactions:** While the app is minimalist, there are opportunities
+  to use M3's responsive motion. The `verifyReview` action on the `PlaceDetailScreen` is a prime
+  candidate. When a user taps "Endorse," the icon could use `animate*AsState` to subtly scale up and
+  change color, providing immediate, "spirited" feedback that the interaction was registered, even
+  before the database confirms the change. This kind of responsive micro-animation adds a layer of
+  polish and makes the interface feel more tangible and alive, a core tenet of the M3 Expressive
+  evolution.
+
+## 4. Foundational Element III: Expressive Typography
+
+In a minimalist, text-heavy application, typography is not merely for readability; it is the primary
+architectural element of the content itself. M3 Expressive encourages using typography to "guide
+attention" and create "editorial-like moments". All24 adopts this by using a highly limited,
+high-contrast type scale to establish a clear hierarchy and an authoritative, almost scriptural,
+voice.
+
+* **A Deliberately Limited Scale (`Type.kt`):** The `Typography.kt` file defines the Material
+  `Typography` object . While M3 provides a rich type scale (Display, Headline, Title, Body, Label,
+  each with multiple sizes), All24 intentionally uses only a small subset. This expressive
+  minimalism rejects a complex typographic palette in favor of an opinionated, monastic voice,
+  fitting the "sacred scripture" metaphor for the app's content screens.
+    * `titleLarge`: Reserved for the highest level of the hierarchy: the name of a `Place` . It is
+      the subject, the thesis statement of the screen.
+    * `bodyLarge`: The default text style, used for all descriptive content and review text . Its
+      careful sizing and line height are optimized for readability in a content-first context.
+    * `labelSmall`: Used sparingly for metadata, such as a category tag or an "ADMIN" badge . Its
+      smaller size and different weight provide context without competing with the primary content.
+
+* **Hierarchy in Practice (`TopReviewsScreen.kt`):** The `AdminReviewListItem` composable is a
+  masterclass in applying this typographic hierarchy. The `place?.name` is set in `titleLarge` with
+  a `color` of `MaterialTheme.colorScheme.primary`, making it the clear entry point . The
+  `review.text` is set in `bodyMedium`, the standard for readable content . This clear separation of
+  roles, defined by the M3 type scale, allows the user to parse the information instantly. The
+  content is not just presented; it is architected.
+
+## 5. Subverting M3 Component Semantics
+
+All24 uses standard M3 components but frequently subverts their default styling and semantic purpose
+to serve its own aesthetic.
+
+* **`TopAppBar`: The Vanishing Container:** Across most screens, the `TopAppBar`'s container color
+  is explicitly set to `Color.Transparent` . This is a direct rejection of M3's default behavior,
+  which applies a `surface` or `surface-container` color, visually separating the app bar from the
+  content below. By making it transparent, we dissolve this boundary, allowing the `ParticleCanvas`
+  on the `VibeScreen` or the scrolling content on other screens to extend into the status bar area.
+  This creates a more layered, immersive, and less "boxed-in" feeling, breaking the standard
+  component metaphor.
+
+* **`Card`: Surfaces as Subtle Signifiers:** M3's `Card` component comes in three styles: Elevated,
+  Filled, and Outlined. All24 primarily uses the default elevated style but manipulates its surface
+  color to communicate hierarchy. On the `TopReviewsScreen`, the `AdminReviewListItem` `Card` has
+  its `containerColor` explicitly set to `MaterialTheme.colorScheme.surfaceVariant` . In the M3
+  color system, `surfaceVariant` is a neutral tone used for differentiation. This subtle shift is a
+  quiet visual cue that marks the card as special without using loud colors or icons. It respects
+  the user's intelligence to notice the nuance, a core principle of minimalist design.
+
+* **`Button`: Expressing Priority:** The `ProfileScreen` demonstrates an expressive use of button
+  styling to convey intent. The "Login / Sign Up" button is a standard, filled `Button`, the
+  highest-emphasis button type in M3, indicating it is the primary and most important action on the
+  screen for an anonymous user . Conversely, the "Sign Out" button for a logged-in user uses
+  `ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)` . This leverages
+  M3's semantic color roles. Using the `error` color for a non-error state is a deliberate choice;
+  it communicates that this is a "destructive" action in the context of the user's session, giving
+  them a moment's pause before they sign out. This is using the M3 system's language to add a layer
+  of expressive meaning.
+
+
+--- FILE: DevGuide/TestingStrategy.md ---
+
+# Comprehensive Testing Strategy
+
+## 1. Introduction & Testing Philosophy
+
+This document outlines the comprehensive testing strategy for the All24 application, designed to
+ensure code quality, stability, and maintainability. The strategy is based on the "Testing Pyramid"
+concept, which advocates for a large base of fast, isolated unit tests, a smaller layer of more
+complex integration tests, and a minimal set of slow, end-to-end UI tests.
+
+This approach ensures rapid feedback during development (from unit tests), validates interactions
+between components (from integration tests), and guarantees that critical user flows function as
+expected from the user's perspective (from UI tests).
+
+## 2. Unit Testing
+
+Unit tests are the foundation of the testing pyramid. They are responsible for testing individual
+classes or functions in complete isolation from their dependencies (like the Android framework,
+Firebase services, etc.).
+
+* **Scope:** The primary candidates for unit testing in this project are the ViewModels. Each
+  ViewModel's public methods, state transformations, and interactions with its dependencies (
+  specifically `FirebaseService`) should be thoroughly tested.
+* **Tools:**
+    * **JUnit 4:** The standard test runner for local JVM tests.
+    * **Turbine:** A small library for testing `kotlinx.coroutines.flow.Flow` objects, essential for
+      verifying `StateFlow` emissions from the ViewModels.
+    * **MockK:** A powerful mocking library for Kotlin, used to create mock objects for dependencies
+      like `FirebaseService`. This allows us to define the behavior of the service for a given test
+      and verify that the ViewModel interacts with it as expected.
+    * **Main-Dispatcher-Rule:** A custom JUnit rule to replace the main coroutine dispatcher in
+      tests, allowing for immediate execution of coroutines launched on `viewModelScope`.
+
+* **Detailed Example: Testing `SubmitPlaceViewModel`**
+
+    ```kotlin
+    // Located in: app/src/test/java/com/hereliesaz/all24/ui/screens/submit_place/SubmitPlaceViewModelTest.kt
+
+    import app.cash.turbine.test
+    import com.hereliesaz.all24.services.FirebaseService
+    import io.mockk.coEvery
+    import io.mockk.coVerify
+    import io.mockk.mockk
+    import kotlinx.coroutines.Dispatchers
+    import kotlinx.coroutines.ExperimentalCoroutinesApi
+    import kotlinx.coroutines.test.StandardTestDispatcher
+    import kotlinx.coroutines.test.resetMain
+    import kotlinx.coroutines.test.runTest
+    import kotlinx.coroutines.test.setMain
+    import org.junit.After
+    import org.junit.Assert.assertEquals
+    import org.junit.Assert.assertFalse
+    import org.junit.Assert.assertNull
+    import org.junit.Assert.assertTrue
+    import org.junit.Before
+    import org.junit.Test
+
+    @ExperimentalCoroutinesApi
+    class SubmitPlaceViewModelTest {
+
+        // The dependency to be mocked
+        private lateinit var firebaseService: FirebaseService
+        // The class under test
+        private lateinit var viewModel: SubmitPlaceViewModel
+
+        private val testDispatcher = StandardTestDispatcher()
+
+        @Before
+        fun setUp() {
+            // Set the main dispatcher to a test dispatcher
+            Dispatchers.setMain(testDispatcher)
+            // Create a mock instance of the FirebaseService
+            firebaseService = mockk()
+            // Instantiate the ViewModel with the mock service
+            viewModel = SubmitPlaceViewModel(firebaseService) // Assuming constructor injection
+        }
+
+        @After
+        fun tearDown() {
+            // Reset the main dispatcher after the test
+            Dispatchers.resetMain()
+        }
+
+        @Test
+        fun `submit with blank name fails and sets error state`() = runTest {
+            // When the submit function is called with a blank name
+            viewModel.onDescriptionChange("A valid description")
+            viewModel.onAddressChange("A valid address")
+            viewModel.submit()
+
+            // Then assert that the UI state reflects the error
+            val expectedState = SubmitPlaceUiState(
+                description = "A valid description",
+                address = "A valid address",
+                error = "All fields are required."
+            )
+            assertEquals(expectedState, viewModel.uiState.value)
+
+            // And verify that the service was never called
+            coVerify(exactly = 0) { firebaseService.submitPlace(any(), any(), any(), any()) }
+        }
+
+        @Test
+        fun `submit with valid data calls service and sets success state`() = runTest {
+            // Given a successful response from the service
+            coEvery { firebaseService.submitPlace(any(), any(), any(), any()) } returns Unit
+
+            // When valid data is entered and submit is called
+            viewModel.onNameChange("Test Place")
+            viewModel.onDescriptionChange("Test Description")
+            viewModel.onAddressChange("123 Test St")
+            viewModel.submit()
+
+            // Then use Turbine to test the sequence of state emissions
+            viewModel.uiState.test {
+                // Initial state upon collection
+                var item = awaitItem()
+                assertTrue(item.name.isNotEmpty())
+
+                // State during submission (isLoading = true)
+                item = awaitItem()
+                assertTrue(item.isLoading)
+                assertNull(item.error)
+
+                // Final state after success (isSuccess = true, isLoading = false)
+                item = awaitItem()
+                assertFalse(item.isLoading)
+                assertTrue(item.isSuccess)
+
+                // Cancel the flow to prevent leaks
+                cancelAndIgnoreRemainingEvents()
+            }
+
+            // And verify that the service was called exactly once with the correct data
+            coVerify(exactly = 1) {
+                firebaseService.submitPlace(
+                    name = "Test Place",
+                    description = "Test Description",
+                    address = "123 Test St",
+                    category = "bar" // Default category
+                )
+            }
+        }
+
+        @Test
+        fun `submit when service throws exception sets error state`() = runTest {
+            // Given the service will throw an exception
+            val exception = Exception("Network error")
+            coEvery { firebaseService.submitPlace(any(), any(), any(), any()) } throws exception
+
+            // When submit is called with valid data
+            viewModel.onNameChange("Test Place")
+            viewModel.onDescriptionChange("Test Description")
+            viewModel.onAddressChange("123 Test St")
+            viewModel.submit()
+
+            // Then assert that the final UI state reflects the error message from the exception
+            val finalState = viewModel.uiState.value
+            assertFalse(finalState.isLoading)
+            assertFalse(finalState.isSuccess)
+            assertEquals("Network error", finalState.error)
+        }
+    }
+    ```
+
+## 3. Integration Testing
+
+Integration tests verify the interaction between different parts of the application, specifically
+the `FirebaseService` and the live Firebase backend (via the Firebase Emulator Suite).
+
+* **Scope:** These tests will focus exclusively on the `FirebaseService.kt` class. They will confirm
+  that the service correctly serializes data to Firestore and deserializes data from it.
+* **Tools:**
+    * **Firebase Emulator Suite:** A local-only version of Firebase services. The Firestore Emulator
+      allows us to run tests against a real, but local, Firestore instance, providing high-fidelity
+      testing without incurring costs or polluting a production database. The emulator must be
+      running before these tests are executed.
+    * **Android Test Runner (`AndroidJUnit4`):** These tests require an Android context and will run
+      on an emulator or physical device.
+* **Setup:**
+    1. Before the tests run, the client `Firebase.firestore` must be pointed to the local emulator
+       host and port (e.g., `10.0.2.2:8080`).
+    2. After each test, the emulator's data should be cleared to ensure tests are hermetic and do
+       not influence one another.
+
+## 4. UI Testing (End-to-End)
+
+UI tests are at the top of the pyramid. They simulate a real user's journey through the application,
+ensuring that the UI, ViewModels, Service, and backend all work together correctly.
+
+* **Scope:** Test the "happy path" of critical user flows. For All24, this includes:
+    * The authentication flow (anonymous -> login -> authenticated).
+    * The place submission flow.
+    * Navigation between key screens.
+* **Tools:**
+    * **Espresso:** For interacting with UI components and making assertions.
+    * **UI Automator:** For interactions that may span across different apps (less common in this
+      project but available).
+    * **Jetpack Compose Test APIs:** `createAndroidComposeRule` provides access to the
+      `ComposeTestRule`, which is used to find composables, perform actions (clicks, text input),
+      and assert their state.
+    * **Hilt/Dagger for Dependency Injection (Recommended):** For a testable app, a dependency
+      injection framework is recommended to replace real dependencies (like `FirebaseService`) with
+      fake or mock versions in UI tests. This allows UI tests to run without a live network
+      connection, making them faster and more reliable.
+
+---
+
+### **File: `DevGuide/BuildConfiguration.md`**
+
+```markdown
+# Build Configuration and Dependency Management
+
+## 1. Overview
+
+This document provides a detailed explanation of the project's build system, which is based on Gradle with Kotlin DSL (`.kts` files). It covers the structure of the build scripts, the dependency management strategy using a Version Catalog (`libs.versions.toml`), and the purpose of each key configuration.
+
+## 2. Gradle Build Scripts
+
+The project utilizes a modern Gradle setup with version catalogs and Kotlin scripting.
+
+### `settings.gradle.kts`
+
+* **Purpose:** This script is executed during the initialization phase of a Gradle build. It defines which modules are included in the build.
+* **Key Sections:**
+    * `pluginManagement`: Configures repositories for Gradle plugins themselves (e.g., `google()`, `mavenCentral()`).
+    * `dependencyResolutionManagement`: Configures repositories for project dependencies and enables the version catalog feature by declaring the use of the `libs.versions.toml` file.
+    * `include(":app", ":DevGuide")`: Declares the modules that are part of the project build.
+
+### `build.gradle.kts` (Project-level)
+
+* **Purpose:** This top-level build script defines configurations that are common to all modules in the project.
+* **Key Sections:**
+    * `plugins`: Applies plugins using aliases defined in `libs.versions.toml`. This includes setting up the Android Application plugin, Kotlin Android plugin, and Google Services plugin, but with `apply false`, meaning they are made available to sub-modules but not applied at the root level.
+
+### `app/build.gradle.kts` (App-level)
+
+* **Purpose:** This is the most critical build script, defining the specific build configuration and dependencies for the main `app` module.
+* **Detailed Breakdown:**
+    * **`plugins` block:** Applies the necessary plugins for an Android application using Compose and Firebase.
+        * `id("com.android.application")`: Identifies this module as the main application.
+        * `id("org.jetbrains.kotlin.android")`: Enables Kotlin support for Android.
+        * `id("com.google.gms.google-services")`: Processes the `google-services.json` file to add Firebase configurations to the app.
+    * **`android` block:** This extensive block configures all Android-specific build parameters.
+        * [cite_start]`signingConfigs`: Configures the keystore used to sign the debug APK[cite: 40]. The configuration points to a local `.jks` file and includes credentials. For a production build, a separate `release` signing config would be added and credentials would be loaded securely (e.g., from environment variables or a secure properties file) rather than being hardcoded.
+        * [cite_start]`namespace`: The unique application package name used in the generated `R` class[cite: 41].
+        * [cite_start]`compileSdk`: The API level the app is compiled against (currently 36)[cite: 41].
+        * `defaultConfig`:
+            * [cite_start]`applicationId`: The unique ID for publishing to the Play Store[cite: 41].
+            * [cite_start]`minSdk` / `targetSdk`: Defines the minimum and target Android API levels the app supports[cite: 41].
+            * [cite_start]`versionCode` / `versionName`: Internal and public version identifiers for the app[cite: 41].
+            * [cite_start]`testInstrumentationRunner`: Specifies the test runner for instrumented tests[cite: 41].
+            * [cite_start]`vectorDrawables.useSupportLibrary = true`: Enables support for vector drawables on pre-Lollipop devices[cite: 42].
+        * `buildTypes`: Defines build variants. [cite_start]The `release` block configures code shrinking (`isMinifyEnabled`) and ProGuard rules[cite: 43].
+        * [cite_start]`compileOptions`: Sets the Java language compatibility to version 17[cite: 43].
+        * [cite_start]`kotlinOptions`: Sets the JVM target for Kotlin to version 17[cite: 43].
+        * [cite_start]`buildFeatures.compose = true`: Enables Jetpack Compose for the project[cite: 43].
+        * [cite_start]`composeOptions.kotlinCompilerExtensionVersion`: Specifies the version of the Kotlin compiler plugin for Compose[cite: 43].
+        * [cite_start]`packagingOptions`: Excludes certain meta-inf files to prevent build conflicts from duplicate files in dependencies[cite: 44].
+
+## 3. Dependency Management with Version Catalog
+
+[cite_start]The project uses a Gradle Version Catalog, defined in `gradle/libs.versions.toml`[cite: 39], to centralize and manage all dependencies. This provides a single source of truth for versions and offers type-safe accessors in build scripts.
+
+* **`[versions]` section:** Declares version numbers as variables (e.g., `composeBom = "2025.07.00"`). This allows multiple libraries to share a version and simplifies updates.
+* **`[libraries]` section:** Declares the dependencies themselves, giving them a memorable alias (e.g., `firebase-auth-ktx`) and linking them to their group, name, and version variable.
+* **`[plugins]` section:** Declares Gradle plugins, similar to libraries.
+* **Usage in `build.gradle.kts`:**
+    * Dependencies are added using the type-safe accessors generated by Gradle: `implementation(platform(libs.compose.bom))`.
+    * The Bill of Materials (BoM) for Compose (`compose-bom`) and Firebase (`firebase-bom`) are used to manage the versions of related libraries, ensuring they are compatible. The `platform()` keyword enforces this.
+
+* **Key Dependency Groups:**
+    * **Core Android & Jetpack:** `core-ktx`, `lifecycle-runtime-ktx`, `activity-compose`. These are essential for a modern Android app with Kotlin and Compose.
+    * **Jetpack Compose:** The `compose-bom` and individual artifacts for UI, Graphics, Tooling, and Material 3 design.
+    * **Firebase:** The `firebase-bom` and specific dependencies for Authentication (`firebase-auth-ktx`) and Firestore (`firebase-firestore-ktx`).
+    * **Testing:** Dependencies for unit tests (`junit`) and instrumented/UI tests (`androidx.test.ext:junit`, `espresso-core`, `compose-ui-test-junit4`).
+
+---
+
+
+
+--- FILE: DevGuide/TODO.md ---
+
+# Development Roadmap & Architectural Corrections
+
+This document outlines pending development tasks and critical architectural issues that must be resolved to ensure application stability and functionality.
+
+***
+
+### Architectural & Navigational Refactoring
+
+-   **Task: Decouple `PlaceDetailScreen` from `MainCarouselViewModel`**
+    -   **Objective**: To correct the architectural flaw where the detail screen depends on the carousel's ViewModel.
+    -   **Requirements**:
+        1.  [cite_start]Modify `PlaceDetailScreen.kt` to instantiate and use its dedicated `PlaceDetailViewModel`[cite: 178, 181].
+        2.  [cite_start]Ensure the `PlaceDetailViewModel` correctly fetches all data for a given `placeId` from the `SheetsService`[cite: 184].
+        3.  [cite_start]The `placeId` navigation argument must be made non-nullable in `AppNavigation.kt` to prevent silent failures[cite: 96].
+
+-   **Task: Prune Dead Navigation Routes**
+    -   **Objective**: To remove non-functional and deprecated routes from the navigation graph.
+    -   **Requirements**:
+        1.  [cite_start]Delete the composable routes for `VibeScreen` and `PlacesListScreen` from `AppNavigation.kt` to prevent runtime crashes[cite: 92].
+
+-   **Task: Refactor Authentication Flow**
+    -   **Objective**: To decouple the UI from the `GoogleSignInClient` and improve testability.
+    -   **Requirements**:
+        1.  [cite_start]Remove the `googleSignInClient` parameter from `AppNavigation` and all child composables[cite: 93].
+        2.  Create a dedicated authentication state holder or ViewModel that manages the sign-in process and exposes only the necessary state (e.g., `isSignedIn`, `idToken`) to the UI.
+
+-   **Task: Correct Shared Element Transition Implementation**
+    -   **Objective**: To align the navigation implementation with the standard Jetpack Compose patterns.
+    -   **Requirements**:
+        1.  [cite_start]Refactor `AppNavigation.kt` to remove the manual passing of `SharedTransitionScope` and `AnimatedVisibilityScope` as parameters[cite: 153, 179].
+        2.  Define the composable destinations within the `NavHost` to use the implicitly provided scopes.
+
+***
+
+### Feature Implementation & Bug Fixes
+
+-   **Task: Implement Missing ViewModel Logic**
+    -   **Objective**: To make all user-facing features fully functional.
+    -   **Requirements**:
+        1.  [cite_start]In `TopReviewsViewModel.kt`, uncomment and implement the `getPlaceForReview` function to correctly fetch place data from the `SheetsService`[cite: 221].
+        2.  [cite_start]In `AddReviewViewModel.kt`, implement the service call within `submitReview` so that users can successfully post reviews[cite: 108].
+        3.  Complete all other placeholder service calls across the ViewModels for admin and business logic.
+
+-   **Task: Implement Dynamic Category Generation**
+    -   **Objective**: To make the main carousel robust and data-driven.
+    -   **Requirements**:
+        1.  [cite_start]Modify `MainCarouselViewModel` to dynamically generate the list of categories from the unique `tags` found in the `Place` objects returned by the `SheetsService`[cite: 175]. The hardcoded list should be removed.
+
+-   **Task: Replace Mock Data Source**
+    -   **Objective**: To connect the application to a live backend.
+    -   **Requirements**:
+        1.  [cite_start]Replace the mock data in `SheetsService` with live calls to the production Google Sheets or Firestore database[cite: 576, 577].
+        2.  [cite_start]Ensure all ViewModels correctly handle loading, error, and empty states from the live data source[cite: 578].
+
+
+--- FILE: DevGuide/UIandUX.md ---
+
+# UI/UX Documentation
+
+This document details the design, layout, and interaction logic for the key screens in the All24
+application.
+
+## 1. `MainCarouselScreen`
+
+* **Purpose**: The main entry point and primary interaction screen. It allows users to browse
+  curated content through a fluid, dual-axis carousel grid.
+* **Layout & Theming**:
+  * The screen is built around a vertical `VerticalPager` in Jetpack Compose. Each page of the pager
+    represents a content category.
+  * The pager is configured as a "multi-browse" carousel, with a large, focused central item and
+    smaller items for the previous/next categories peeking in from the top and bottom.
+  * Each vertical page hosts a horizontal, multi-browse carousel built using `RecyclerView` and
+    `CarouselLayoutManager`, which is embedded using the `AndroidView` composable.
+* **Interaction**:
+  * **Vertical Swipe**: The user swipes up or down to cycle through the main content categories (
+    e.g., "Happy Hours", "24-Hour Bars").
+  * **Horizontal Swipe**: Within a category, the user swipes left or right to browse the individual
+    places or events.
+  * **Tap**: Tapping the focused item in the horizontal carousel initiates a shared element
+    transition to the `PlaceDetailScreen`.
+* **State Handling**:
+  * `MainCarouselViewModel` fetches all places and organizes them into a map of
+    `Map<String, List<Place>>`.
+  * This data is passed to the `VerticalPager`. Each page then uses its subset of the data to
+    configure its `CarouselAdapter`.
+
+## 2. `PlaceDetailScreen`
+
+* **Purpose**: To display all relevant information for a single `Place`.
+* **Layout**:
+  * A simple, vertical `Column` layout in Jetpack Compose.
+  * The screen participates in a shared element transition with `MainCarouselScreen`, with the
+    `Place` name animating seamlessly between the two screens.
+* **Content Hierarchy & Logic**:
+  * The screen prominently displays the place's name, which serves as the "hero" element of the
+    transition.
+  * Below the name, it shows the description, reviews, and other relevant metadata.
+
+
+--- FILE: DevGuide/UserFlows.md ---
+
+# Core User Flows
+
+This document provides a detailed, step-by-step breakdown of the primary user-system interactions,
+including error handling and sequence diagrams.
+
+## 1. Flow: Generating Recommendations
+
+This flow describes the process from a user's tap on the `VibeScreen` to the display of new
+recommendations.
+
+* **Sequence Diagram**:
+    ```
+    User        UI (VibeScreen)   ViewModel (VibeVM)   Service (FirebaseService)   Firestore DB
+     |                |                    |                       |                    |
+     |--- Tap Canvas ->|                    |                       |                    |
+     |                |-- conjureRecomms() ->|                       |                    |
+     |                |                    |---- getPlaces() ------>|                    |
+     |                |                    |                       |---- GET /places -->|
+     |                |                    |                       |<--- List<Place> ---|
+     |                |                    |<---- List<Place> ------|                    |
+     |                |                    |-----------------------.                    |
+     |                |                    | (Shuffle, take 3)     |                    |
+     |                |                    | Update StateFlow      |                    |
+     |                |<-- Recompose w/ Recs|-----------------------'                    |
+     |<-- See Recs ---|                    |                       |                    |
+    ```
+* **Step-by-Step Breakdown**:
+    1. [cite_start]**UI Event (Invocation)**: The user taps anywhere on the `VibeScreen`'s
+       `Canvas`[cite: 465].
+    2. [cite_start]**ViewModel Call**: The `onClick` lambda in the UI calls the
+       `VibeViewModel.conjureRecommendations()` function[cite: 465].
+    3. [cite_start]**Service Call**: The `VibeViewModel` launches a coroutine in `viewModelScope`
+       and
+       calls the `suspend` function `FirebaseService.getPlaces()`[cite: 466].
+    4. **Data Retrieval**: The `FirebaseService` performs a `db.collection("places").get().await()`,
+       which returns a `QuerySnapshot`. [cite_start]The service maps the documents to a
+       `List<Place>`
+       and returns it[cite: 467, 65].
+    5. **Logic**: The `VibeViewModel` receives the `List<Place>`. [cite_start]It shuffles the list,
+       selects a random subset (up to three), and updates its `_uiState` `MutableStateFlow` with the
+       new list, setting `showRecommendations = true`[cite: 468, 469, 183].
+    6. **UI Update**: The `VibeScreen`, collecting the `uiState` `StateFlow`,
+       recomposes. [cite_start]
+       The `AnimatedVisibility` composable animates the recommendation panel into
+       view[cite: 470, 410].
+* **Error Scenarios & Edge Cases**:
+    * **No Places Available**: If `firebaseService.getPlaces()` returns an empty list, the
+      `VibeViewModel` should not change the `showRecommendations` flag, effectively doing nothing. A
+      log message should be recorded.
+    * **Firestore Exception**: If `getPlaces()` throws an exception (e.g.,
+      `FirebaseFirestoreException` due to being offline), the `catch` block in the `VibeViewModel`
+      will capture it. [cite_start]The `UiState`'s `error` property should be updated, which could
+      trigger a `Snackbar` to inform the user of the network issue[cite: 417, 418, 419].
+
+## 2. Flow: Verifying an Existing Review
+
+This flow details how a user's endorsement of a review is recorded in real-time.
+
+* **Sequence Diagram**:
+    ```
+    User        UI (PlaceDetail)   ViewModel (PlaceDetailVM) Service (FirebaseService)   Firestore DB
+     |                 |                      |                       |                    |
+     |--- Tap Endorse ->|                      |                       |                    |
+     |                 |--- verifyReview() --->|                       |                    |
+     |                 |                      |--- verifyReview() ---->|                    |
+     |                 |                      |                       |---- TRANSACTION -->|
+     |                 |                      |                       | (arrayUnion/Remove)|
+     |                 |                      |                       |<---- SUCCESS ------|
+     |                 |                      |<----------------------|                    |
+     |                 |                      |                       |                    |
+     |                 |<------------------------------------------------------------------| (Realtime Push)
+     |<-- See Updated --| (Recompose w/ Count)  |                       |                    |
+    ```
+* **Step-by-Step Breakdown**:
+    1. [cite_start]**UI Event (Declaration)**: On the `PlaceDetailScreen`, a user taps the "Endorse"
+       `IconButton` on a review card[cite: 471].
+    2. [cite_start]**ViewModel Call**: The `onClick` lambda calls
+       `PlaceDetailViewModel.verifyReview(reviewId, "endorse")`[cite: 472].
+    3. [cite_start]**Service Call**: The `PlaceDetailViewModel` calls
+       `FirebaseService.verifyReview(reviewId, vote)`[cite: 473].
+    4. **Database Transaction**: The `FirebaseService` executes a `db.runTransaction`. [cite_start]
+       It
+       atomically adds the `userId` to the `endorsedBy` array via `FieldValue.arrayUnion` and
+       removes
+       it from the `avoidedBy` array via `FieldValue.arrayRemove`[cite: 69, 474].
+    5. **Real-time Push (Echo)**: The `PlaceDetailViewModel` is observing a `Flow` of reviews via
+       `getReviewsForPlaceStream`. [cite_start]When the transaction completes, Firestore's listener
+       pushes the updated document to the client[cite: 475].
+    6. [cite_start]**UI Update (Confirmation)**: The `Flow` emits the new list, and the
+       `PlaceDetailScreen` recomposes, showing the updated verification count on the review card
+       instantly[cite: 476].
+* **Error Scenarios & Edge Cases**:
+    * **User Not Authenticated**: The `verifyReview` function in the `FirebaseService` first checks
+      `currentUser?.uid`. [cite_start]If it's null, it throws an
+      `Exception("User not authenticated")`, which is caught by the ViewModel and propagated to the
+      UI
+      as an error state[cite: 69].
+    * **Transaction Failure**: If the transaction fails after multiple retries (e.g., heavy
+      contention), Firestore will throw an exception. This is caught by the ViewModel and displayed
+      as
+      an error to the user, who may need to try again.
+
+*(This same level of detail would be applied to the Submission and Approval flows)*
+
+
+--- NON-TEXT ASSET FILE LIST (from selected modules & root) ---
+
+- app/src/main/ic_launcher-playstore.png
+
+- app/src/main/res/mipmap-hdpi/ic_launcher.webp
+
+- app/src/main/res/mipmap-hdpi/ic_launcher_foreground.webp
+
+- app/src/main/res/mipmap-hdpi/ic_launcher_round.webp
+
+- app/src/main/res/mipmap-mdpi/ic_launcher.webp
+
+- app/src/main/res/mipmap-mdpi/ic_launcher_foreground.webp
+
+- app/src/main/res/mipmap-mdpi/ic_launcher_round.webp
+
+- app/src/main/res/mipmap-xhdpi/ic_launcher.webp
+
+- app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.webp
+
+- app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp
+
+- app/src/main/res/mipmap-xxhdpi/ic_launcher.webp
+
+- app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.webp
+
+- app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp
+
+- app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp
+
+- app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.webp
+
+- app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp
+
+
+
+
+--- END OF BACKUP ---
+
