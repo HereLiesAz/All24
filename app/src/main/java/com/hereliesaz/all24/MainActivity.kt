@@ -3,6 +3,14 @@ package com.hereliesaz.all24
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.ui.Modifier
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.hereliesaz.all24.ui.screens.MainScreen
 import com.hereliesaz.all24.ui.navigation.AppNavigation
 import com.hereliesaz.all24.ui.theme.All24Theme
 
@@ -12,6 +20,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             All24Theme {
                 AppNavigation()
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    MainScreen(googleSignInClient)
+                }
             }
         }
     }

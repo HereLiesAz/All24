@@ -6,6 +6,20 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file(localProperties.getProperty("KEYSTORE_FILE") ?: "../debug.keystore")
+            storePassword = localProperties.getProperty("KEYSTORE_PASSWORD") ?: "android"
+            keyAlias = localProperties.getProperty("KEY_ALIAS") ?: "androiddebugkey"
+            keyPassword = localProperties.getProperty("KEY_PASSWORD") ?: "android"
+        }
+        create("release") {
+            storeFile = file(localProperties.getProperty("KEYSTORE_FILE")?.takeIf { it.isNotBlank() } ?: "../debug.keystore")
+            storePassword = localProperties.getProperty("KEYSTORE_PASSWORD")?.takeIf { it.isNotBlank() } ?: "android"
+            keyAlias = localProperties.getProperty("KEY_ALIAS")?.takeIf { it.isNotBlank() } ?: "androiddebugkey"
+            keyPassword = localProperties.getProperty("KEY_PASSWORD")?.takeIf { it.isNotBlank() } ?: "android"
+        }
+    }
     namespace = "com.hereliesaz.all24"
     compileSdk = 36
 
@@ -20,6 +34,24 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        buildConfigField(
+            "String",
+            "SHEETS_API_KEY",
+            "\"${localProperties.getProperty("SHEETS_API_KEY")}\""
+        )
+        buildConfigField(
+            "String",
+            "SPREADSHEET_ID",
+            "\"${localProperties.getProperty("SPREADSHEET_ID")}\""
+        )
+        buildConfigField(
+            "String",
+            "APPS_SCRIPT_URL",
+            "\"${localProperties.getProperty("APPS_SCRIPT_URL")}\""
+        )
+        manifestPlaceholders["MAPS_API_KEY"] = localProperties.getProperty("MAPS_API_KEY")
+
+
     }
 
     buildTypes {
@@ -29,6 +61,23 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
+            buildConfigField(
+                "String",
+                "SHEETS_API_KEY",
+                "\"${localProperties.getProperty("SHEETS_API_KEY")}\""
+            )
+            buildConfigField(
+                "String",
+                "SPREADSHEET_ID",
+                "\"${localProperties.getProperty("SPREADSHEET_ID")}\""
+            )
+            buildConfigField(
+                "String",
+                "APPS_SCRIPT_URL",
+                "\"${localProperties.getProperty("APPS_SCRIPT_URL")}\""
+            )
+
         }
     }
     compileOptions {
@@ -78,4 +127,26 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.auth)
+
+    implementation(libs.google.api.client.android)
+    implementation(libs.google.sheets.api)
+
+    // --- NEW: Google Sign-In (OAuth) Dependency ---
+    implementation(libs.google.play.services.auth)
+
+    implementation(libs.androidx.navigation.compose) // Correct navigation dependency
+    implementation(libs.materialIconsExtended)
+    implementation(libs.material) // Assuming libs.material = "com.google.android.material:material:1.12.0"
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.maps.compose)
+
+    implementation(libs.gson)
+
+
+
+
 }
