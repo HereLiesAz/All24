@@ -27,6 +27,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.hereliesaz.all24.ui.theme.All24Theme
 import androidx.compose.runtime.LaunchedEffect
+import com.hereliesaz.all24.BuildConfig
 
 @Composable
 fun AuthScreen(
@@ -85,7 +86,7 @@ fun AuthScreen(
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(onClick = {
                     val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                        .requestIdToken("YOUR_WEB_CLIENT_ID") // Replace with your web client ID
+                        .requestIdToken(BuildConfig.GOOGLE_WEB_CLIENT_ID)
                         .requestEmail()
                         .build()
                     val googleSignInClient = GoogleSignIn.getClient(context, gso)
