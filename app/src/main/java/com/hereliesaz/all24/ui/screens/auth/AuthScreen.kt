@@ -76,10 +76,10 @@ fun AuthScreen(
                     label = { Text("Password") }
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                Button(onClick = { /* TODO: Sign in with email/password */ }) {
+                Button(onClick = { authViewModel.signIn(email, password) }) {
                     Text("Sign In")
                 }
-                Button(onClick = { /* TODO: Create account with email/password */ }) {
+                Button(onClick = { authViewModel.createAccount(email, password) }) {
                     Text("Create Account")
                 }
                 Spacer(modifier = Modifier.height(16.dp))
