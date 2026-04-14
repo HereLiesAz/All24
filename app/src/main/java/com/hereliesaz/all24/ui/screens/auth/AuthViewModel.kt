@@ -29,6 +29,30 @@ class AuthViewModel : ViewModel() {
             }
         }
     }
+
+    fun signIn(email: String, password: String) {
+        viewModelScope.launch {
+            _authState.value = AuthState.Loading
+            try {
+                auth.signInWithEmailAndPassword(email, password).await()
+                _authState.value = AuthState.Authenticated
+            } catch (e: Exception) {
+                _authState.value = AuthState.Error(e.message ?: "Unknown error")
+            }
+        }
+    }
+
+    fun createAccount(email: String, password: String) {
+        viewModelScope.launch {
+            _authState.value = AuthState.Loading
+            try {
+                auth.createUserWithEmailAndPassword(email, password).await()
+                _authState.value = AuthState.Authenticated
+            } catch (e: Exception) {
+                _authState.value = AuthState.Error(e.message ?: "Unknown error")
+            }
+        }
+    }
 }
 
 sealed class AuthState {
