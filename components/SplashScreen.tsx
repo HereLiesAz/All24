@@ -19,7 +19,7 @@ export const SplashScreen: React.FC<{ onComplete: () => void }> = ({ onComplete 
              <div className="absolute inset-0 bg-[var(--accent-c)] blur-[40px] opacity-20"></div>
              <PixelAlligatorIcon size={120} className="text-[var(--accent-c)] glitch-text relative z-10" />
            </div>
-           <h1 className="font-glitch text-6xl text-white glitch-text tracking-widest z-10">NEON OCCULT</h1>
+           <h1 className="font-glitch text-6xl text-white glitch-text tracking-widest z-10">All504</h1>
            <span className="font-mono text-[10px] tracking-[0.5em] text-[var(--accent-p)] uppercase mt-4 z-10">Guide to the Glitch</span>
         </div>
       </div>

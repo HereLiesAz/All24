@@ -17,9 +17,9 @@ export default defineConfig(({ mode }) => {
           registerType: 'autoUpdate',
           includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
           manifest: {
-            name: 'Neon Occult Nola Guide',
-            short_name: 'Nola Guide',
-            description: 'A neon occult guide to New Orleans',
+            name: 'All504',
+            short_name: 'All504 Guide',
+            description: 'All504 Guide',
             theme_color: '#000000',
             icons: [
               {
