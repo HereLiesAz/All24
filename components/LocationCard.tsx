@@ -101,7 +101,7 @@ export const LocationCard: React.FC<LocationCardProps> = ({ location, revealed =
                   disabled={loading}
                   className="w-full flex items-center justify-center gap-2 text-[11px] font-mono py-3 bg-black/50 border border-white/20 hover:bg-[var(--accent-c)] hover:text-black hover:font-bold text-white/70 transition-all uppercase"
                 >
-                  {loading ? 'CHASING GHOSTS...' : <><Eye size={16} className="pixel-icon" strokeWidth={2}/> { ["Acquire the Void", "Subsidize the Glitch", "Extort this Asset"][Math.floor(Math.random() * 3)] }</>}
+                  {loading ? 'CHASING GHOSTS...' : <><Eye size={16} className="pixel-icon" strokeWidth={2}/> {buttonText}</>}
                 </button>
               )}
             </div>
