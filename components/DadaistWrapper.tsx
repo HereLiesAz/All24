@@ -3,6 +3,7 @@ import React, { ReactNode, useEffect, useState } from 'react';
 interface DadaistWrapperProps {
   children: ReactNode;
   className?: string;
+  onClick?: () => void;
 }
 
 const DISCORDANT_HUES = [
