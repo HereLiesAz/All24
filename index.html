@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <title>Neon Occult NOLA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Rubik+Glitch&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Palette extracted from the "Woman with Alligators" image */
+            --bg-teal: #0d2b2a; /* Deep Teal */
+            --neon-cyan: #2dd4bf; /* Bright Teal/Cyan */
+            --blood-red: #ef4444; /* Red from wine/lips */
+            --charcoal: #020617;
+
+            --bg-color: var(--charcoal);
+            --text-color: #ffffff;
+            --card-bg: rgba(13, 43, 42, 0.85); /* Glassmorphism Teal */
+            --accent-p: var(--blood-red); /* Primary Accent */
+            --accent-c: var(--neon-cyan); /* Secondary Accent */
+            --muted-text: #cbd5e1;
+            --input-bg: rgba(0, 0, 0, 0.6);
+        }
+
+        /* Force dark mode for this aesthetic */
+        html {
+            color-scheme: dark;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            /* Placeholder for the "Woman on Balcony" image.
+               In a real deployment, this would be the uploaded image URL. */
+            background-image: linear-gradient(rgba(2, 6, 23, 0.7), rgba(13, 43, 42, 0.8)), url('https://images.unsplash.com/photo-1543501799-a3c306d28dd9?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-color);
+            font-family: 'Space Mono', monospace; /* Monotype for copy */
+            overflow-x: hidden;
+        }
+
+        .font-glitch { font-family: 'Rubik Glitch', cursive; }
+        .font-mono { font-family: 'Space Mono', monospace; }
+        .font-gothic { font-family: 'Crimson Text', serif; }
+
+        .glitch-text {
+            position: relative;
+            animation: glitch-anim 2.5s infinite;
+        }
+
+        @keyframes glitch-anim {
+            0% { text-shadow: 2px 0 var(--accent-p), -2px 0 var(--accent-c); }
+            2% { text-shadow: 2px 0 var(--accent-p), -2px 0 var(--accent-c); }
+            4% { text-shadow: 2px 0 var(--accent-p), -2px 0 var(--accent-c); }
+            5% { text-shadow: -2px 0 var(--accent-p), 2px 0 var(--accent-c); }
+            95% { text-shadow: 2px 0 var(--accent-p), -2px 0 var(--accent-c); }
+            96% { text-shadow: -2px 0 var(--accent-p), 2px 0 var(--accent-c); }
+            100% { text-shadow: 2px 0 var(--accent-p), -2px 0 var(--accent-c); }
+        }
+
+        /* Icon Filter */
+        .pixel-icon {
+            filter: url(#pixelate-icon);
+        }
+
+        /* Image Filter - Strong Pixelation for "Google Maps" vibe */
+        .pixel-image {
+            filter: url(#pixelate-image) contrast(1.2) saturate(0.8);
+            image-rendering: pixelated;
+        }
+
+        .border-neon {
+            border: 1px solid var(--accent-c);
+            box-shadow: 0 0 5px var(--accent-c), inset 0 0 10px rgba(45, 212, 191, 0.1);
+        }
+
+        .border-red {
+            border: 1px solid var(--accent-p);
+            box-shadow: 0 0 5px var(--accent-p);
+        }
+
+        @keyframes dissolve-glitch {
+          0% { opacity: 1; filter: url(#pixelate-image) brightness(1); clip-path: inset(0 0 0 0); }
+          20% { clip-path: inset(10% 0 80% 0); }
+          40% { clip-path: inset(50% 0 10% 0); }
+          60% { clip-path: inset(0 10% 0 70%); }
+          80% { clip-path: inset(80% 0 0 0); }
+          100% { opacity: 0; filter: url(#pixelate-image) brightness(2) blur(10px); }
+        }
+
+        .animate-dissolve {
+          animation: dissolve-glitch 1.2s forwards ease-in-out;
+        }
+
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+    <!-- SVG Pixelate Filters -->
+    <svg width="0" height="0" style="position:absolute">
+      <filter id="pixelate-icon" x="0" y="0">
+        <feFlood x="4" y="4" height="2" width="2" />
+        <feComposite width="10" height="10" />
+        <feTile result="a" />
+        <feComposite in="SourceGraphic" in2="a" operator="in" />
+        <feMorphology operator="dilate" radius="1" />
+      </filter>
+      <filter id="pixelate-image" x="0" y="0">
+        <feFlood x="4" y="4" height="4" width="4" />
+        <feComposite width="8" height="8" />
+        <feTile result="a" />
+        <feComposite in="SourceGraphic" in2="a" operator="in" />
+        <feMorphology operator="dilate" radius="2" />
+      </filter>
+    </svg>
+</head>
+<body>
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script></body>
+</html>
