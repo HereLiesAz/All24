@@ -5,6 +5,7 @@ import { Compass, Settings, Sparkles } from 'lucide-react';
 import { NorthStar } from './NorthStar';
 import { IsolatedStarIcon, TarotCardIcon } from './CustomIcons';
 import { SplashScreen } from './SplashScreen';
+import { SpasmodicText } from './SpasmodicText';
 
 interface LayoutProps { children: ReactNode; }
 
@@ -28,11 +29,13 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       {/* Background is handled by body to ensure coverage */}
 
       {/* Header */}
-      <header className="w-full p-6 flex justify-between items-center z-10">
-        <h1 className="font-glitch text-4xl tracking-widest text-[var(--accent-c)] glitch-text uppercase">NEON OCCULT</h1>
+      <header className="w-full p-6 flex justify-between items-center z-10 preserve-3d animate-float">
+        <h1 className="font-glitch text-4xl tracking-widest text-[var(--accent-c)] glitch-text uppercase drop-shadow-[0_0_15px_var(--accent-c)]">
+            <SpasmodicText text="All504" />
+        </h1>
         <div className="flex items-center gap-3">
-          <NavLink to="/settings" className="p-2 text-[var(--accent-p)] hover:text-white transition-colors">
-            <Settings size={22} className="pixel-icon" strokeWidth={2} />
+          <NavLink to="/settings" className="p-2 text-[var(--accent-p)] hover:text-white transition-all hover:scale-125 hover:rotate-12 hover:drop-shadow-[0_0_10px_var(--accent-p)]">
+            <Settings size={22} className="pixel-icon animate-spin-slow" strokeWidth={2} />
           </NavLink>
         </div>
       </header>

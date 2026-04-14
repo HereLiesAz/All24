@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .animate-float {
+        animation: float 6s ease-in-out infinite;
+    }
+    .animate-breathe {
+        animation: breathe 8s ease-in-out infinite;
+    }
+    .animate-pulse-glow {
+        animation: pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    .preserve-3d {
+        transform-style: preserve-3d;
+    }
+    .animate-spin-slow {
+        animation: spin 8s linear infinite;
+    }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(1deg) scale(1.02); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes breathe {
+    0% { transform: scale(1); filter: brightness(1); }
+    50% { transform: scale(1.05); filter: brightness(1.2) contrast(1.1); }
+    100% { transform: scale(1); filter: brightness(1); }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 10px var(--accent-p), 0 0 20px var(--accent-p); }
+    50% { box-shadow: 0 0 25px var(--accent-p), 0 0 50px var(--accent-p); }
+}

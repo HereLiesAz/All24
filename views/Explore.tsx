@@ -5,6 +5,7 @@ import { Search, X } from 'lucide-react';
 import { LOCATIONS } from '../constants';
 import { Arcana } from '../types';
 import { LocationCard } from '../components/LocationCard';
+import { SpasmodicText } from '../components/SpasmodicText';
 
 export const Explore: React.FC = () => {
   const { arcana } = useParams<{ arcana: string }>();
@@ -37,11 +38,11 @@ export const Explore: React.FC = () => {
   });
 
   return (
-    <div className="py-8 space-y-12 animate-in fade-in duration-700">
-      <div className="sticky top-0 bg-[var(--bg-color)]/95 backdrop-blur-md z-30 py-6 -mx-4 px-4 border-b border-[var(--accent-c)]/30 transition-colors landscape:static landscape:border-none landscape:bg-transparent landscape:p-0">
+    <div className="py-8 space-y-12 animate-in fade-in duration-700 preserve-3d">
+      <div className="sticky top-0 bg-[var(--bg-color)]/95 backdrop-blur-md z-30 py-6 -mx-4 px-4 border-b border-[var(--accent-c)]/30 transition-colors landscape:static landscape:border-none landscape:bg-transparent landscape:p-0 shadow-[0_10px_30px_rgba(45,212,191,0.1)]">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4">
-          <h2 className="font-glitch text-2xl text-[var(--accent-c)] uppercase tracking-widest text-center landscape:text-left">
-              {selectedArcana === 'ALL' ? 'FULL DECK' : selectedArcana}
+          <h2 className="font-glitch text-2xl text-[var(--accent-c)] uppercase tracking-widest text-center landscape:text-left animate-float">
+              <SpasmodicText text={selectedArcana === 'ALL' ? 'FULL DECK' : selectedArcana} />
           </h2>
 
           <div className="relative group max-w-sm w-full mx-auto md:mx-0">
