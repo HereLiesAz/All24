@@ -9,7 +9,7 @@ const ARCANA_IMAGE_MAP = LOCATIONS.reduce((acc, loc) => {
         acc[loc.arcana] = loc.image;
     }
     return acc;
-}, {} as Record<string, string>);
+}, {} as Record<Arcana, string>);
 
 const getCategoryImage = (arcana: Arcana) => {
     return ARCANA_IMAGE_MAP[arcana] || "https://images.unsplash.com/photo-1543501799-a3c306d28dd9?q=80&w=600&auto=format&fit=crop";

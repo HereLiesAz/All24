@@ -32,8 +32,7 @@ export const NHEN_PICK_NAMES = [
   "Gimme",
   "Natty Adam's",
   "Keye's",
-  "Cabaret",
-  "Vice & Graft"
+  "Cabaret"
 ];
 
 export const LOCATIONS: NolaLocation[] = [

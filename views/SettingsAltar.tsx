@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Home, Save } from 'lucide-react';
+import { UserSettings } from '../types';
 
 export const SettingsAltar: React.FC = () => {
   const [hotelAddress, setHotelAddress] = useState('');
@@ -10,14 +11,15 @@ export const SettingsAltar: React.FC = () => {
   useEffect(() => {
     const settingsStr = localStorage.getItem('neon_occult_settings');
     if (settingsStr) {
-      const settings = JSON.parse(settingsStr);
+      const settings: UserSettings = JSON.parse(settingsStr);
       setHotelAddress(settings.hotelAddress || '');
       setGeminiApiKey(settings.geminiApiKey || '');
     }
   }, []);
 
   const handleSave = () => {
-    localStorage.setItem('neon_occult_settings', JSON.stringify({ hotelAddress, geminiApiKey }));
+    const newSettings: UserSettings = { hotelAddress, geminiApiKey };
+    localStorage.setItem('neon_occult_settings', JSON.stringify(newSettings));
     setIsSaved(true);
     setTimeout(() => setIsSaved(false), 3000);
   };

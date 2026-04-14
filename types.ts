@@ -28,4 +28,5 @@ export interface NolaLocation {
 
 export interface UserSettings {
   hotelAddress: string;
+  geminiApiKey: string;
 }

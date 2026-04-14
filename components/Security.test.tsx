@@ -23,7 +23,7 @@ describe('Security: Reverse Tabnabbing', () => {
   });
 
   it('NorthStar opens Google Maps with noopener,noreferrer', () => {
-    localStorage.setItem('neon_occult_settings', JSON.stringify({ hotelAddress: '123 Ghost St' }));
+    localStorage.setItem('neon_occult_settings', JSON.stringify({ hotelAddress: '123 Ghost St', geminiApiKey: '' }));
     const { getByTitle } = render(<NorthStar />);
     fireEvent.click(getByTitle('Return to Sanctuary'));
 

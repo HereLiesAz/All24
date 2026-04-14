@@ -22,6 +22,8 @@ export const LocationCard: React.FC<LocationCardProps> = ({ location, revealed =
     setLoading(false);
   };
 
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
   const handleShare = async (e: React.MouseEvent) => {
     e.stopPropagation();
     const shareData = {
@@ -40,7 +42,8 @@ export const LocationCard: React.FC<LocationCardProps> = ({ location, revealed =
       // Fallback: Copy to clipboard
       try {
         await navigator.clipboard.writeText(`${shareData.text}`);
-        alert('Prophecy details copied to clipboard.');
+        setToastMessage('Prophecy details copied to clipboard.');
+        setTimeout(() => setToastMessage(null), 3000);
       } catch (err) {
         console.error('Clipboard failed', err);
       }
@@ -49,6 +52,11 @@ export const LocationCard: React.FC<LocationCardProps> = ({ location, revealed =
 
   return (
     <div className={`relative w-full aspect-[2/3] max-w-[320px] mx-auto group perspective-1000 ${revealed ? '' : 'cursor-pointer'}`}>
+      {toastMessage && (
+        <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-[var(--accent-p)] text-white text-xs font-mono py-2 px-4 shadow-lg z-50 whitespace-nowrap border border-[var(--accent-c)] animate-in fade-in slide-in-from-bottom-2">
+          {toastMessage}
+        </div>
+      )}
       <div className={`relative w-full h-full duration-700 transition-all transform-style-3d ${revealed ? '' : 'hover:scale-105'}`}>
 
         {/* Card Body - Glassmorphism */}

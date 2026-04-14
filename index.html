@@ -7,7 +7,6 @@
     <meta name="theme-color" content="#0f172a">
     <link rel="manifest" href="/manifest.webmanifest">
     <title>Neon Occult NOLA</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Rubik+Glitch&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -127,16 +126,6 @@
         <feMorphology operator="dilate" radius="2" />
       </filter>
     </svg>
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      // Basic SW registration for Offline App Shell support
-      navigator.serviceWorker.register('data:application/javascript;base64,InVzZSBzdHJpY3QiO3NlbGYuYWRkRXZlbnRMaXN0ZW5lcigiaW5zdGFsbCIsZXZlbnQ9PmV2ZW50LndhaXRVbnRpbChzZWxmLnNraXBXYWl0aW5nKCkpKTtzZWxmLmFkZEV2ZW50TGlzdGVuZXIoImZldGNoIixldmVudD0+e30pOw==')
-      .then(reg => console.log('SW registered'))
-      .catch(err => console.log('SW registration failed', err));
-    });
-  }
-</script>
 </head>
 <body>
     <div id="root"></div>
