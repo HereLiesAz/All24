@@ -8,8 +8,7 @@ function getClient(apiKey: string) {
   if (aiClient && lastApiKey === apiKey) {
     return aiClient;
   }
-  // @ts-ignore - The constructor expects an object with apiKey property, but the original code passed string directly
-  aiClient = new GoogleGenAI({ apiKey });
+  aiClient = new GoogleGenAI(apiKey);
   lastApiKey = apiKey;
   return aiClient;
 }
