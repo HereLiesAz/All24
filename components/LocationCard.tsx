@@ -52,6 +52,7 @@ export const LocationCard: React.FC<LocationCardProps> = ({ location, revealed =
   };
 
   const [isAbsurd] = useState(() => Math.random() < 0.05);
+  const [buttonText] = useState(() => ["Acquire the Void", "Subsidize the Glitch", "Extort this Asset"][Math.floor(Math.random() * 3)]);
 
   return (
     <DadaistWrapper className={`relative w-full aspect-[2/3] max-w-[320px] mx-auto group perspective-1000 ${revealed ? '' : 'cursor-pointer animate-float'}`}>
