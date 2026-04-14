@@ -32,8 +32,8 @@ export const CategoryScroll: React.FC = () => {
                     <DadaistWrapper
                         key={arcana}
                         className={`group relative overflow-hidden rounded-2xl h-[60vh] transition-all duration-[800ms] ease-in-out will-change-transform cursor-pointer border border-white/10 preserve-3d animate-float ${isActive ? 'scale-[1.05] z-50 border-[var(--accent-c)] shadow-[0_20px_50px_rgba(45,212,191,0.5)] -translate-y-4' : 'scale-100 hover:scale-[1.03] hover:border-white/30 hover:shadow-2xl hover:-translate-y-2'}`}
+                        onClick={() => setActiveIndex(isActive ? null : index)}
                     >
-                        <div onClick={() => setActiveIndex(isActive ? null : index)} className="absolute inset-0 z-20"></div>
                         <img
                             src={image}
                             alt={arcana}

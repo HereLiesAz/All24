@@ -16,19 +16,18 @@ const FONTS = [
 
 export const SpasmodicText: React.FC<SpasmodicTextProps> = ({ text, className = '' }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [charStyles, setCharStyles] = useState<React.CSSProperties[]>([]);
 
-  useEffect(() => {
-    const styles = text.split('').map(() => ({
+  const charStyles = React.useMemo(() =>
+    text.split('').map(() => ({
       fontFamily: FONTS[Math.floor(Math.random() * FONTS.length)],
       fontSize: `${Math.random() * 0.4 + 0.8}em`,
       fontWeight: Math.random() > 0.5 ? 'bold' : 'normal',
       transform: `rotate(${(Math.random() * 20) - 10}deg)`,
       display: 'inline-block',
       transition: 'all 0.2s ease-out'
-    }));
-    setCharStyles(styles);
-  }, [text]);
+    })),
+    [text]
+  );
 
   return (
     <span
@@ -46,6 +45,7 @@ export const SpasmodicText: React.FC<SpasmodicTextProps> = ({ text, className = 
         return (
           <span
             key={i}
+            aria-hidden="true"
             style={isHovered ? {
                 display: 'inline-block',
                 transition: 'all 0.2s ease-out'

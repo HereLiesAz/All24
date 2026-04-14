@@ -52,10 +52,9 @@ export const LocationCard: React.FC<LocationCardProps> = ({ location, revealed =
   };
 
   const [isAbsurd] = useState(() => Math.random() < 0.05);
-  const [buttonText] = useState(() => ["Acquire the Void", "Subsidize the Glitch", "Extort this Asset"][Math.floor(Math.random() * 3)]);
 
   return (
-    <DadaistWrapper className={`relative w-full aspect-[2/3] max-w-[320px] mx-auto group perspective-1000 ${revealed ? '' : 'cursor-pointer animate-float'}`}>
+    <DadaistWrapper className={`relative w-full aspect-[2/3] sm:aspect-[3/4] md:aspect-[4/5] lg:aspect-[2/3] mx-auto group perspective-1000 ${revealed ? '' : 'cursor-pointer animate-float'}`}>
       {toastMessage && (
         <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-[var(--accent-p)] text-white text-xs font-mono py-2 px-4 shadow-lg z-50 whitespace-nowrap border border-[var(--accent-c)] animate-in fade-in slide-in-from-bottom-2">
           {toastMessage}
@@ -102,7 +101,7 @@ export const LocationCard: React.FC<LocationCardProps> = ({ location, revealed =
                   disabled={loading}
                   className="w-full flex items-center justify-center gap-2 text-[11px] font-mono py-3 bg-black/50 border border-white/20 hover:bg-[var(--accent-c)] hover:text-black hover:font-bold text-white/70 transition-all uppercase"
                 >
-                  {loading ? 'CHASING GHOSTS...' : <><Eye size={16} className="pixel-icon" strokeWidth={2}/> {buttonText}</>}
+                  {loading ? 'CHASING GHOSTS...' : <><Eye size={16} className="pixel-icon" strokeWidth={2}/> { ["Acquire the Void", "Subsidize the Glitch", "Extort this Asset"][Math.floor(Math.random() * 3)] }</>}
                 </button>
               )}
             </div>
