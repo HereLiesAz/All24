@@ -1,8 +1,19 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.plugin.compose")
     id("com.google.gms.google-services")
+    id("kotlin-kapt")
+}
+
+val localProperties = Properties()
+val localPropertiesFile = project.rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    FileInputStream(localPropertiesFile).use {
+        localProperties.load(it)
+    }
 }
 
 android {
@@ -89,13 +100,14 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
-    composeCompiler {
-        version = "1.4.3"
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.14"
     }
     packaging {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/{AL2.0,LGPL2.1,DEPENDENCIES}"
         }
     }
 }
@@ -146,7 +158,9 @@ dependencies {
 
     implementation(libs.gson)
 
-
-
+    // Room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    kapt(libs.androidx.room.compiler)
 
 }

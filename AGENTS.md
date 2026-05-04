@@ -1,61 +1,53 @@
-# Geministrator Agent Guide
+# All24 Agent Guide
 
-This document provides guidance for AI agents working on the Geministrator project.
+This document provides guidance for AI agents working on the All24 project.
 
 ## Project Overview
 
-Geministrator is an AI-powered development assistant built on a team of collaborative agents. It can deconstruct high-level tasks into a detailed, multi-step execution plan and then execute that plan.
+All24 is a New Orleans culinary companion app. It features curated "Top 24" lists, a "Vibe Check" review system, and is built with a focus on authenticity and a 24-hour city culture.
 
 ## Architecture
 
-The project is a multi-module Gradle project with the following structure:
+The project is a multi-module Gradle project:
 
--   `:cli`: The core logic of the application, including the `Orchestrator` and the council of agents. It is used as a library by the other modules.
--   `:app_android`: The Android app front-end.
--   `:plugin_android_studio`: The Android Studio plugin front-end.
--   `:plugin_vscode`: The VSCode extension front-end.
--   `:prompts`: Contains the JSON files that define the behavior of the AI agents.
-
-### The Council of Agents
-
-Geministrator operates not as a single monolithic AI, but as a team of specialists with distinct roles, managed by a central `Orchestrator`.
-
--   **Orchestrator**: Manages the master plan and deploys agents based on a triage assessment.
--   **Manager**: Executes the step-by-step workflow for a single task.
--   **Architect**: Analyzes existing code to provide context.
--   **Researcher**: Scours the web for best practices and documentation.
--   **Designer**: Creates specifications and updates changelogs.
--   **Antagonist**: Critiques plans to find flaws before execution.
--   **Tech Support**: Analyzes merge conflicts and other technical failures.
-
-### `AbstractCommand` and `ExecutionAdapter`
-
-The system uses a set of universal commands called `AbstractCommand`s, defined in `cli/src/main/kotlin/com/hereliesaz/geministrator/common/AbstractCommand.kt`. These commands are the only way the agents can interact with the environment (file system, Git, etc.).
-
-Each front-end (CLI, Android, plugins) has its own implementation of the `ExecutionAdapter` interface, which is responsible for executing the `AbstractCommand`s in that specific environment.
+-   `app/`: The Android application (Kotlin, Jetpack Compose, Material 3).
+-   `backend/`:
+    -   A Node.js project acting as a Google Sheets proxy.
+    -   A Kotlin Spring Boot application.
 
 ## Development Conventions
 
-### Adding New Features
+### Jetpack Compose
+- Use standard `for` loops over `forEach` in `@Composable` functions to reduce overhead.
+- Prioritize `LazyColumn` for lists.
+- Follow "Deceptive Minimalism": keep UI simple at first glance, reveal depth through animation.
+- Use Material 3 Expressive motion (physics-based springs).
 
-To add a new feature, you will likely need to:
+### Data Management
+- Use `BuildConfig` (enabled in `app/build.gradle.kts`) to access API keys from `local.properties`.
+- Use Room for local caching to ensure the app works optimally offline.
 
-1.  Add a new `AbstractCommand` to `AbstractCommand.kt`.
-2.  Implement the execution of the new command in the relevant `ExecutionAdapter`s (`CliAdapter`, `AndroidExecutionAdapter`, `AndroidStudioAdapter`).
-3.  Modify the `Orchestrator` or one of the agents to use the new command.
+### Testing
+- Unit tests should be placed in `app/src/test`.
+- Instrumented UI tests should be placed in `app/src/androidTest`.
+- Run tests using `./gradlew test` or `./gradlew connectedAndroidTest`.
 
-### `CHANGELOG.md`
+## TODO List
 
-The `CHANGELOG.md` file is the source of truth for the project's history and the TODO list for future development. All changes should be reflected in this file. When you are asked to complete a task, you should look for it in the `CHANGELOG.md` TODO list and mark it as complete when you are done.
-
-### Running Tests
-
-The project has unit tests in the `app_android` module. To run them, use the following command from the root of the project:
-
-```bash
-./gradlew :app_android:test
-```
-
-### Version Catalogs
-
-The project uses a Gradle Version Catalog (`gradle/libs.versions.toml`) to manage dependencies. All dependencies should be added to this file.
+1.  **Project Structure & Cleanup**:
+    - [x] Remove misplaced dot-notated files.
+    - [x] Update `AGENTS.md` with project-specific instructions.
+2.  **Database & Data Persistence**:
+    - [ ] Implement Room database for offline caching of venue data.
+    - [ ] Ensure smooth synchronization with the Google Sheets backend.
+3.  **UI/UX Refinement (Mobile Optimization)**:
+    - [ ] Transition to Material 3 Expressive components.
+    - [ ] Implement shared element transitions for the "Top 24" list items.
+    - [ ] Add physics-based animations (springs) for a more fluid feel.
+    - [ ] Implement the "Vibe Check" system (Vouch + Mad Libs prompts).
+4.  **Testing Framework**:
+    - [ ] Create `app/src/test` and `app/src/androidTest` directories.
+    - [ ] Add baseline tests for navigation and data fetching.
+5.  **Environment & Deployment**:
+    - [ ] Verify `local.properties` integration and `BuildConfig` generation.
+    - [ ] Ensure `google-services.json` is correctly handled.
